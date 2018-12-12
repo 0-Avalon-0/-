@@ -114,10 +114,6 @@ get请求报文：无
 	失败则返回错误的状态码及错误原因
 		404：项目不存在
 		406：格式不正确
-	4.5添加权限
-post /projectsettings/{pid}/user/{name} post请求报文：{    "authority":""}成功状态码201data为{    "pid":"",    "name":"",    "authority":""}
-失败则返回错误的状态码及错误原因
-		406：格式不正确
 	4.4查看用户参与的所有工程：GET / projectsettings /user
 		get请求报文：无
 		响应报文：状态码200data为
@@ -133,6 +129,32 @@ post /projectsettings/{pid}/user/{name} post请求报文：{    "authority":"
 }
 		失败则返回错误的状态码及错误原因
 		404：项目不存在
+	4.5添加权限
+post /projectsettings/{pid}/user/{name} 
+post请求报文：
+{
+    "authority":""
+}
+成功状态码201
+data为
+{
+    "pid":"",
+    "name":"",
+    "authority":""
+}
+失败则返回错误的状态码及错误原因
+		406：格式不正确
+	4.6删除工程
+	DELETE/ projectsettings /{pid}
+delete请求报文：无
+响应报文
+	成功 状态码204data为
+		{
+		"pid"=" "
+		}
+	失败 则返回错误的状态码及错误原因
+		404：项目不存在
+		403：无权限
 5文档管理：
 注意：fname均为当前文件/文件夹的名字，path为所在文件夹的完整路径，所有文件的根目录均为root
 5.1查看文档：GET / filemanagers / {fname} / file / {path} /project / {pid}
