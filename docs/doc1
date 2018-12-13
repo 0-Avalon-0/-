@@ -103,7 +103,6 @@ get请求报文：无
 	成功 状态码201data为
 {"pid"=" "
 ,"project_pname"="  "
-		,"project_establisher"="   "
 		,"project_describe"=" "
 ,”project_property”=” ”
 		,"content":[{"project_member"="   "	
