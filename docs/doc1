@@ -67,7 +67,6 @@ PATCH / datamanagers / {name}
 post请求报文：
 	{
 		"project_pname"="  "
-		,"project_establisher"="   "
 		,"project_describe"=" "
 ,”project_property”=” ”
 	}
@@ -78,7 +77,7 @@ post请求报文：
 			,"project_pname"="  "
 			,"project_establisher"="   "
 			,"project_describe"=" "
-,”project_property”=” ”
+                        ,”project_property”=” ”
 		}
 	失败则返回错误的状态码及错误原因
 	4.2查看某一工程配置：GET/ projectsettings /{pid}
@@ -87,7 +86,6 @@ get请求报文：无
 	成功 状态码200data为
 		{"pid"=" "
 ,"project_pname"="  "
-		,"project_establisher"="   "
 		,"project_describe"=" "
 ,”project_property”=” ”
 		,"content":[{"project_member"="   "	
@@ -97,7 +95,6 @@ get请求报文：无
 	4.3工程配置更改PATCH / projectsettings / {pid} 
 			patch请求报文：若不需要更改某一项更改为空即可
 				{"project_pname"="  "
-		,"project_establisher"="   "
 		,"project_describe"=" "
 ,”project_property”=” ”
 		,"content":[{"project_member"="   "	
@@ -124,11 +121,11 @@ post /projectsettings/{pid}/user/{name} post请求报文：{    "authority":"
 {
 “projects”: [“pid”=””
 ,"project_pname"="  "
-		,"project_establisher"="   "
-		,"project_describe"=" "
+,"project_establisher"="   "
+,"project_describe"=" "
 ,”project_property”=” ”
-		,"content":[{"project_member"="   "	
-		,project_authority="  "}….]}
+,"content":[{"project_member"="   "	
+,project_authority="  "}….]}
 ,….]
 }
 		失败则返回错误的状态码及错误原因
@@ -220,3 +217,5 @@ PATCH请求报文：不需要修改则为空
 			404：无该项目
 			 403：无权限
 			406：格式不正确
+
+
