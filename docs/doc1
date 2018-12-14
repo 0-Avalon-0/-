@@ -85,9 +85,10 @@ get请求报文：无
 响应报文
 	成功 状态码200data为
 		{"pid"=" "
-,"project_pname"="  "
+		,"project_pname"="  "
 		,"project_describe"=" "
-,”project_property”=” ”
+		,”project_property”=” ”
+		,"project_establisher"=" "
 		,"content":[{"project_member"="   "	
 		,project_authority="  "}….]}
 	失败 则返回错误的状态码及错误原因
@@ -97,7 +98,7 @@ get请求报文：无
 				{"project_pname"="  "
 		,"project_describe"=" "
 ,”project_property”=” ”
-		,"content":[{"project_member"="   "	
+		,"content":[{"member_name"="   "	
 		,project_authority="  "}….]}
 响应报文
 	成功 状态码201data为
@@ -119,7 +120,7 @@ get请求报文：无
 ,"project_establisher"="   "
 ,"project_describe"=" "
 ,”project_property”=” ”
-,"content":[{"project_member"="   "	
+,"content":[{"member_name"="   "	
 ,project_authority="  "}….]}
 ,….]
 }
@@ -129,7 +130,7 @@ get请求报文：无
 post /projectsettings/{pid}/user/{name} 
 post请求报文：
 {
-    "authority":""
+    "authority":""s
 }
 成功状态码201
 data为
@@ -153,7 +154,7 @@ delete请求报文：无
 		403：无权限
 5文档管理：
 注意：fname均为当前文件/文件夹的名字，path为所在文件夹的完整路径，所有文件的根目录均为root
-5.1查看文档：GET / filemanagers / {fname} / file / {path} /project / {pid}
+5.1查看文档：GET / filemanagers / {fname} / project / {pid} / file?path=...
 get请求报文：无
 GET响应报文：
  成功
@@ -165,7 +166,7 @@ GET响应报文：
 	404：数据库中无该项目
 	403：无权限
 	406：格式不正确
-5.2修改文档： PUT / filemanagers / {fname} / file / {path}  /project / {pid}
+5.2修改文档： PUT / filemanagers / {fname} / project / {pid} / file?path=...
 
 PUT请求报文：
 	{"file_text":" "}
@@ -181,7 +182,7 @@ Data
 		403：无权限
 		404：数据库中无该文档
 		406：格式不正确
-5.3新建文档：POST / filemanagers / {fname} / file / {parent_node} /project / {pid}
+5.3新建文档：POST / filemanagers / {fname} / project / {pid} / file?path=...
 
 POST请求报文:
 	{"file_property"=" "
@@ -197,7 +198,7 @@ POST请求报文:
 		403：无权限
 		404：数据库中无该项目
 		406：格式不正确
-5.4删除文档：DELETE / filemanagers / {fname} / file / {path} /project / {pid}
+5.4删除文档：DELETE / filemanagers / {fname} / project / {pid} / file?path=...
 
 DELETE请求报文：空
 响应报文：
@@ -212,7 +213,9 @@ DELETE请求报文：空
 		406：格式不正确
 6目录管理：
 注意：fname均为当前文件/文件夹的名字，path为所在文件夹的完整路径
-查看目录下所有文件：GET / menus / {path} / project / {pid}
+6.1 查看目录下所有文件：GET menus / project / {pid} / path?path=...
+由于技术原因，此处的url暂无法实现restful风格
+
 GET请求报文：无
 响应报文：
 		成功则返回状态码200 data为
@@ -226,7 +229,7 @@ GET请求报文：无
 		失败则返回错误的状态码及错误原因：
 404：无该文件
 406：格式不正确
-6.2 文档重命名：PATCH / menus / {fname} / filepaths / {path} / project / {pid}
+6.2 文档重命名：PATCH / menus / {fname} / project / {pid} / filepaths?path=...
 PATCH请求报文：不需要修改则为空
 			{"file_fname=”   “}
 响应报文：
