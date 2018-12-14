@@ -85,9 +85,10 @@ get请求报文：无
 响应报文
 	成功 状态码200data为
 		{"pid"=" "
-,"project_pname"="  "
+		,"project_pname"="  "
 		,"project_describe"=" "
-,”project_property”=” ”
+		,”project_property”=” ”
+		,"project_establisher"=" "
 		,"content":[{"project_member"="   "	
 		,project_authority="  "}….]}
 	失败 则返回错误的状态码及错误原因
