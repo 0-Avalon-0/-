@@ -1,0 +1,34 @@
+<button (click)="createFile()">新建文档</button>
+<button (click)="lookFile()" >查看文档</button>
+<button (click)="editFile()" >修改文档</button>
+<button (click)="deleteFile()" >删除文档</button>
+<div ng-switch="changeFileOption">
+  <div ng-switch-when = "1">
+    <div>
+      <label>文件名：
+        <input [(ngModel)]="changeFile.file_fname" placeholder="文件名">
+      </label>
+      <label>文件内容：<input [(ngModel)]="changeFile.file_text" placeholder="文件内容"></label>
+      <button (click)="createF()">创建</button>
+    </div>
+  </div>
+
+  <div ng-switch-when = "2">
+    <div>
+文档内容如下：<div>{{changeFile.file_text}}</div>
+  </div>
+
+  <div ng-switch-when="3">
+    <div>
+      <div>文件名：{{changeFile.file_fname}}</div>
+      <label>文件内容：<input [(ngModel)]="changeFile.file_text" placeholder="文件内容"></label>
+      <button (click)="editFinished()">完成修改</button>
+    </div>
+  </div>
+
+  <div ng-switch-when="4">
+    <div>
+删除完成！
+    </div>
+  </div>
+</div>
