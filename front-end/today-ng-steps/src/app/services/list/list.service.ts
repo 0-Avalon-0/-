@@ -4,7 +4,7 @@ import { LocalStorageService } from '../local-storage/local-storage.service';
 import { List } from '../../../domain/entities';
 import { LISTS } from '../local-storage/local-storage.namespace';
 import { HttpServiceService } from '../http-service.service';
-import { message, project, projectAll } from 'src/domain/person';
+import { message, project, projectAll, project_authority, project_set } from 'src/domain/person';
 
 
 type SpecialListUUID = 'today' | 'todo';
@@ -50,6 +50,7 @@ export class ListService {
 
   private update(list: List): void {
     const index = this.lists.findIndex(l => l.pid === list.pid);
+    alert(index);
     if (index !== -1) {
       this.lists.splice(index, 1, list);
       this.persist();
@@ -85,11 +86,19 @@ export class ListService {
   rename(listUuid: string, name: string) {
     const list = this.getByUuid(listUuid);
     if (list) {
-      list.project_pname = name;
-      this.update(list);
+      this.setProject(list,name)
     }
   }
-
+  setProject(list:List,project_pname="",project_describe="",project_property="",content=[new project_authority()])
+  { 
+     const projectSetReady=new project_set(project_pname,project_describe,project_property,content)
+     this,this.httpservice.setProjectPro(projectSetReady,list.pid).subscribe(message=>this.successSetProject(message,list))
+  }
+  successSetProject(mes:message,list)
+  {
+    list=<List>JSON.parse(mes.data)
+    this.update(list)
+  }
   delete(uuid: string): void {
     const i = this.lists.findIndex(l => l.pid === uuid);
     if (i !== -1) {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import {Observable,of,throwError} from 'rxjs'; 
-import {Person,login,message, project, project_property} from '../../domain/person'
+import {Person,login,message, project, project_set} from '../../domain/person'
 import { catchError, map, retry } from 'rxjs/operators';
 import { HttpHeaders ,HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -25,7 +25,8 @@ export class HttpServiceService {
   REGIST=2;
   PERSONMESSAGE=3;
   PROJECT=4;
-
+  MENU=5;
+  FILE=6
   private handleError(operation = 0) {
     return (error: any)=>{
     if (error.error instanceof ErrorEvent) {
@@ -114,14 +115,13 @@ export class HttpServiceService {
       catchError(this.handleError(4))
     );
   }
-  setProjectPro(hero:project_property,pid:string):Observable<message> {
-    return this.http.put<message>(this.api_url.getProjectManage()+"/"+pid,(hero),httpOptions).pipe(
+  setProjectPro(hero:project_set,pid:string):Observable<message> {
+    return this.http.patch<message>(this.api_url.getProjectManage()+"/"+pid,hero,httpOptions).pipe(
       catchError(this.handleError(4))
     );
   }
   getProjectProAll()
   {
-    alert("getprojectAll")
     return this.http.get<message>(this.api_url.getProjectManage()+"/user",httpOptions).pipe(
       catchError(this.handleError(4))
     );
@@ -130,6 +130,12 @@ export class HttpServiceService {
   {
     return this.http.delete<message>(this.api_url.getProjectManage()+"/"+pid,httpOptions).pipe(
       catchError(this.handleError(4))
+    );
+  }
+  getMenus(rootPath:string,pid :number)
+  {
+    return this.http.get<message>(this.api_url.getMenuManage()+"/"+rootPath+"/"+pid,httpOptions).pipe(
+      catchError(this.handleError(5))
     );
   }
   private log(message: string) {

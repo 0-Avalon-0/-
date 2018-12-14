@@ -11,6 +11,8 @@ import { SuggestComponent } from './right-control/header/suggest/suggest.compone
 import { HomeComponent } from './right-control/home/home.component';
 import { AllprojectComponent } from './right-control/allproject/allproject.component';
 import { PersonComponent } from './right-control/person/person.component';
+import { MenuComponent } from './right-control/menu/menu.component';
+import { FileComponent } from './right-control/file/file.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { PersonComponent } from './right-control/person/person.component';
     SuggestComponent,
     HomeComponent,
     AllprojectComponent,
-    PersonComponent
+    PersonComponent,
+    MenuComponent,
+    FileComponent
   ]
 })
 export class MainModule { }

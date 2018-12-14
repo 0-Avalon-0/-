@@ -114,8 +114,8 @@ export class ListComponent implements OnInit, OnDestroy {
     this.closeRenameListModal();
   }
 
-  add(name: string,describe:string,property:number): void {
-    this.listService.add(name,describe,property);
+  add(name: string,describe:string): void {
+    this.listService.add(name,describe,this.project_property);
     this.closeAddListModal();
   }
 

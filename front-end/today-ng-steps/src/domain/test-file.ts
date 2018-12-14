@@ -1,4 +1,4 @@
-import {File} from  '../domain/file';
+import {File} from  './file';
 
 export const FILES: File[]=[
     {file_fname:'A',file_property:0,file_text:'1'},

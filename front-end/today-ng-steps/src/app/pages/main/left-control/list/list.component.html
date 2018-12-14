@@ -36,7 +36,7 @@
           (contextmenu)="contextMenu($event, contextTemplate, list.pid)">
         <span>
           <i class="anticon anticon-bars"></i>
-          <span class="nav-text">{{ list.project_pname }}</span>
+          <span class="nav-text" >{{ list.project_pname }}</span>
         </span>
       </li>
     </ul>
@@ -77,12 +77,12 @@
                #listInput
                name="listTitle"
                placeholder="工程名"
-               (keydown.enter)="add(listInput.value,listInput_des.value,project_property); listInput.value = '';listInput_des.value=' '">
+               (keydown.enter)="add(listInput.value,listInput_des.value); listInput.value = '';listInput_des.value=' '">
         <input nz-input
                #listInput_des
                name="listDicribe"
                placeholder="工程描述"
-               (keydown.enter)="add(listInput.value,listInput_des.value,project_property); listInput_des.value = '';listInput_des.value=' '">      
+               (keydown.enter)="add(listInput.value,listInput_des.value); listInput_des.value = '';listInput_des.value=' '">      
       </nz-form-control>
     </nz-form-item>
   </form>

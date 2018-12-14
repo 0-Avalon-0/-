@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {File} from '../../../domain/file';
-import{FILES} from '../../../utils/test-file';
-import{FileService} from '../../services/file.service';
+import { File } from 'src/domain/file';
+import { FileService } from 'src/app/services/file/file.service';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',

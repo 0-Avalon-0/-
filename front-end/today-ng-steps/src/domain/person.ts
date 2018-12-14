@@ -29,14 +29,24 @@ export class project_authority
 {
     project_member:string;
     project_authority:string;
+    constructor()
+    {
+        this.project_member="";
+        this.project_authority=""
+    }
 }
-export class project_property{
-    pid:string;
+export class project_set{//set某一个具体工程配置的时候
     project_pname:string;
-	project_establisher:string;
     project_describe:string;
     project_property:string;
     content:project_authority[];
+    constructor(project_pname:string,project_describe:string,project_property:string,content:project_authority[])
+    {
+        this.project_pname=project_pname;
+        this.project_describe=project_describe;
+        this.project_property=project_property;
+        this.content=content;
+    }
 }
 export class projectAll{
     projects:List[];

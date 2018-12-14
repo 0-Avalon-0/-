@@ -1,8 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  TemplateRef,
+  OnDestroy,
+  ViewChild,
+  ElementRef
+  ,EventEmitter, Output}from '@angular/core';
 import { List } from 'src/domain/entities';
 import { ListService } from 'src/app/services/list/list.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { NzModalService } from 'ng-zorro-antd';
 @Component({
   selector: 'app-allproject',
   templateUrl: './allproject.component.html',
@@ -10,9 +19,13 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class AllprojectComponent implements OnInit {
   lists: List[];
-  constructor(private listService: ListService,) { 
+  contextListUuid: string;
+  @ViewChild('listRenameInput') private listRenameInput: ElementRef;
+  constructor(private listService: ListService,
+    private modal: NzModalService,) { 
   }
   page="allproject建议"
+  renameListModalVisible = false;
   private destroy$ = new Subject();
   listitle="查看所有工程"
   ngOnInit() {
@@ -23,5 +36,37 @@ export class AllprojectComponent implements OnInit {
       this.lists = lists;
     });
     
+  }
+  closeRenameListModal(): void {
+    this.renameListModalVisible = false;
+  }
+  openRenameListModal(): void {
+    this.renameListModalVisible = true;
+    setTimeout(() => {
+      const name = this.lists.find(l => l.pid === this.contextListUuid).project_pname;
+      this.listRenameInput.nativeElement.value = name;
+      this.listRenameInput.nativeElement.focus();
+    });
+  }
+  rename(name: string): void {
+    this.listService.rename(this.contextListUuid, name);
+    this.closeRenameListModal();
+  }
+  delete(): void {
+    const uuid = this.contextListUuid;
+    this.modal.confirm({
+      nzTitle: '确认删除工程项目',
+      nzContent: '该操作会导致该工程下的所有文件删除',
+      nzOnOk: () => 
+        new Promise((res, rej) => {
+          alert("delete"+uuid)
+          this.listService.delete(uuid);
+          res();
+        }).catch(() => console.error('Delete list failed'))
+    });
+  }
+  updateId(i:number):void{
+    alert(i)
+    this.contextListUuid=this.lists[i].pid
   }
 }
