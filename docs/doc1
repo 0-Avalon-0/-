@@ -97,7 +97,7 @@ get请求报文：无
 				{"project_pname"="  "
 		,"project_describe"=" "
 ,”project_property”=” ”
-		,"content":[{"project_member"="   "	
+		,"content":[{"member_name"="   "	
 		,project_authority="  "}….]}
 响应报文
 	成功 状态码201data为
@@ -119,7 +119,7 @@ get请求报文：无
 ,"project_establisher"="   "
 ,"project_describe"=" "
 ,”project_property”=” ”
-,"content":[{"project_member"="   "	
+,"content":[{"member_name"="   "	
 ,project_authority="  "}….]}
 ,….]
 }
@@ -129,7 +129,7 @@ get请求报文：无
 post /projectsettings/{pid}/user/{name} 
 post请求报文：
 {
-    "authority":""
+    "authority":""s
 }
 成功状态码201
 data为
