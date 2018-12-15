@@ -25,13 +25,19 @@ Post请求报文：
 	{"user_name":""
 	,"user_password":""
 	,"user_gender":" "
-	,"user_email":" "}
+	,"user_email":" "
+	,"user_signature":""
+	,"user_company":""
+	,"user_location":""}
   响应报文：
               	正确 状态码201data 
 		{"user_name":""
 		,"user_password":""
 		,"user_gender":" "
-		,"user_email":" "}
+		,"user_email":" "
+		,"user_signature":""
+		,"user_company":""
+		,"user_location":""}
 	错误则返回相应的状态码及错误原因：
 		422：用户名已被占用,验证错误
 		
@@ -44,20 +50,29 @@ Post请求报文：
 		{"user_name":" "
 		,"user_password":" "
 		,"user_gender":" "
-		,"user_email"=" "}
+		,"user_email"=" "
+		,"user_signature":""
+		,"user_company":""
+		,"user_location":""}
 	失败则返回错误的状态码及错误原因
 PATCH / datamanagers / {name}
 请求报文：若不需要更改某一项更改为空即可
 		{"user_name":" "
 		,"user_password":" "
 		,"user_gender":" "
-		,"user_email"=" "}
+		,"user_email"=" "
+		,"user_signature":""
+		,"user_company":""
+		,"user_location":""}
 响应报文：
 	成功 状态码201data为
 		{"user_name":" "
 		,"user_password":" "
 		,"user_gender":" "
-		,"user_email"=" "}
+		,"user_email"=" "
+		,"user_signature":""
+		,"user_company":""
+		,"user_location":""}
 	失败则返回错误的状态码及错误原因		
 		404：请求修改的用户信息不存在
 		422：更改后用户名重复,
