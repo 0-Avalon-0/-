@@ -8,7 +8,7 @@
         <div *ngIf="i%3==0">
         <div nz-row  [nzGutter]="{ xs: 8, sm: 8, md: 8, lg: 8, xl: 8, xxl: 8 }">
             <div *ngIf="i+1<=lists.length">
-            <div  (click)="updateId(i)" nz-col nzSpan="8">
+            <div  (click)="updateId(lists[i].pid)" nz-col nzSpan="8">
                 <nz-card nzTitle={{lists[i].project_pname}} nzBordered=true nzHoverable=true  [nzExtra]="extraTemplate"  [nzActions]="[actionSetting,actionEdit,actionEllipsis]">
                     <p>简介: {{lists[i].project_describe.slice(0,20)}}</p>
                     <p>项目拥有者: {{lists[i].project_establisher}}</p>
@@ -22,7 +22,7 @@
             </div>
             </div>
             <div *ngIf="i+2<=lists.length">
-            <div (click)="updateId(i+1)" nz-col nzSpan="8" >
+            <div (click)="updateId(lists[i+1].pid)" nz-col nzSpan="8" >
                 <nz-card nzTitle={{lists[i+1].project_pname}}  class="test" nzBordered=true nzHoverable=true [nzExtra]="extraTemplate"  [nzActions]="[actionSetting,actionEdit,actionEllipsis]">
                         <p>简介: {{lists[i+1].project_describe.slice(0,20)}}</p>
                         <p>项目拥有者: {{lists[i+1].project_establisher}}</p>
@@ -36,7 +36,7 @@
             </div>
             </div>
             <div *ngIf="i+3<=lists.length">
-                    <div nz-col (click)="updateId(i+2)"   nzSpan="8" >
+                    <div nz-col (click)="updateId(lists[i+2].pid)"   nzSpan="8" >
                         <nz-card nzTitle={{lists[i+2].project_pname}} nzBordered=true nzHoverable=true [nzExtra]="extraTemplate"  [nzActions]="[actionSetting,actionEdit,actionEllipsis]">
                                 <p>简介: {{lists[i+2].project_describe.slice(0,20)}}</p>
                                 <p>项目拥有者: {{lists[i+2].project_establisher}}</p>
@@ -60,7 +60,5 @@
         <i nz-icon type="edit"  [routerLink]="['/main']"></i>
 </ng-template>
 <ng-template #actionEllipsis>
-                <a nz-dropdown>
-                        <i nz-icon type="delete" click="delete()" theme="outline"></i>
-                </a>
+        <i nz-icon type="delete" (click)="delete()" theme="outline"></i>
     </ng-template>

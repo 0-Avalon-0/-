@@ -52,21 +52,23 @@ export class AllprojectComponent implements OnInit {
     this.listService.rename(this.contextListUuid, name);
     this.closeRenameListModal();
   }
-  delete(): void {
-    const uuid = this.contextListUuid;
-    this.modal.confirm({
-      nzTitle: '确认删除工程项目',
-      nzContent: '该操作会导致该工程下的所有文件删除',
-      nzOnOk: () => 
-        new Promise((res, rej) => {
-          alert("delete"+uuid)
-          this.listService.delete(uuid);
-          res();
-        }).catch(() => console.error('Delete list failed'))
-    });
+  delete(): void {setTimeout(() => 
+    {
+      const uuid = this.contextListUuid;
+      this.modal.confirm({
+        nzTitle: '确认删除工程项目',
+        nzContent: '该操作会导致该工程下的所有文件删除',
+        nzOnOk: () => 
+          new Promise((res, rej) => {
+            this.listService.delete(uuid);
+            res();
+          }).catch(() => console.error('Delete list failed'))
+      });
+    },
+    200);
+
   }
-  updateId(i:number):void{
-    alert(i)
-    this.contextListUuid=this.lists[i].pid
+  updateId(i:string):void{
+    this.contextListUuid=i
   }
 }

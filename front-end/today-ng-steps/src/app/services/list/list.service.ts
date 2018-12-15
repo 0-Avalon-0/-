@@ -89,7 +89,7 @@ export class ListService {
       this.setProject(list,name)
     }
   }
-  setProject(list:List,project_pname="",project_describe="",project_property="",content=[new project_authority()])
+  setProject(list:List,project_pname="",project_describe="",project_property="",content=[])
   { 
      const projectSetReady=new project_set(project_pname,project_describe,project_property,content)
      this,this.httpservice.setProjectPro(projectSetReady,list.pid).subscribe(message=>this.successSetProject(message,list))

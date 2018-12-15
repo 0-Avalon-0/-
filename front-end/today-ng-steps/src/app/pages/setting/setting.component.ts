@@ -15,7 +15,9 @@ import { AVATAR_CODE, USERNAME } from '../../services/local-storage/local-storag
 export class SettingComponent implements OnInit {
   avatar = this.store.get(AVATAR_CODE);
   username = this.store.get(USERNAME);
-
+  userpassword="";
+  change:boolean;
+  radioValue:number;
   @HostBinding('@pageSwitchTransition') state = 'activated';
   @ViewChild('usernameInput') private usernameInput: ElementRef;
 

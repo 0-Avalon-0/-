@@ -39,7 +39,8 @@ registerLocaleData(zh);
     AppRoutingModule,
     MainModule,
     RouterModule,
-    SettingModule
+    SettingModule,
+    FormsModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'zh-Hans' },
