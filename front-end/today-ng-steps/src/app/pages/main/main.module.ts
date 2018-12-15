@@ -13,6 +13,8 @@ import { AllprojectComponent } from './right-control/allproject/allproject.compo
 import { PersonComponent } from './right-control/person/person.component';
 import { MenuComponent } from './right-control/menu/menu.component';
 import { FileComponent } from './right-control/file/file.component';
+import { CreateFileComponent } from './right-control/create-file/create-file.component';
+import { CreateFolderComponent } from './right-control/create-folder/create-folder.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { FileComponent } from './right-control/file/file.component';
     AllprojectComponent,
     PersonComponent,
     MenuComponent,
-    FileComponent
+    FileComponent,
+    CreateFileComponent,
+    CreateFolderComponent
   ]
 })
 export class MainModule { }

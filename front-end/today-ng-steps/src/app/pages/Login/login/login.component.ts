@@ -24,6 +24,6 @@ export class LoginComponent implements OnInit {
   successLog(mes :message)
   {
     this.store.set(USERNAME,this.name)
-    this._router.navigate(['/main']);
+    this._router.navigate(['/main/home']);
   }
 }

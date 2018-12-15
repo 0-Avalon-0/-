@@ -22,13 +22,15 @@ import { LoginComponent } from './pages/Login/login/login.component';
 import { RegistComponent } from './pages/Login/regist/regist.component';
 import { RouterModule } from '@angular/router'
 import { ApiService } from './services/api.service';
+import { ProjectSettingComponent } from './pages/project-setting/project-setting.component';
 registerLocaleData(zh);
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistComponent
+    RegistComponent,
+    ProjectSettingComponent
   ],
   imports: [
     BrowserModule,

@@ -61,7 +61,7 @@ export class ListComponent implements OnInit, OnDestroy {
       .subscribe(uuid => {
         this.currentListUuid = uuid;
       });
-
+      
   }
 
   ngOnDestroy() {

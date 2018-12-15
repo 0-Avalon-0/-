@@ -1,20 +1,19 @@
+
 import { Component, ElementRef, Host, HostBinding, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NzMessageService, UploadFile } from 'ng-zorro-antd';
-import { pageSwitchTransition } from './setting.animation';
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 import { AVATAR_CODE, USERNAME } from '../../services/local-storage/local-storage.namespace';
 import { HttpServiceService } from 'src/app/services/http-service.service';
 import { message, Person } from 'src/domain/person';
 
-
 @Component({
-  selector: 'app-setting',
-  templateUrl: './setting.component.html',
-  styleUrls: [ './setting.component.less' ],
-  animations: [ pageSwitchTransition ]
+  selector: 'app-project-setting',
+  templateUrl: './project-setting.component.html',
+  styleUrls: ['./project-setting.component.less']
 })
-export class SettingComponent implements OnInit {
+export class ProjectSettingComponent implements OnInit {
+
   avatar = this.store.get(AVATAR_CODE);
   user:Person=
   {
@@ -35,12 +34,15 @@ export class SettingComponent implements OnInit {
     private store: LocalStorageService,
     private message: NzMessageService,
     private router: Router,
-    private httpservice:HttpServiceService
+    private httpservice:HttpServiceService,
+    private activatedRoute: ActivatedRoute
   ) { }
-
+ pid:string;
   ngOnInit() {
     this.usernameInput.nativeElement.value = this.user.user_name;
     this.changeable=false;
+    this.pid = this.activatedRoute.snapshot.params['pid'];
+    alert(this.pid)
     this.httpservice.getPersonMessage(this.store.get(USERNAME)).subscribe(message=>this.successget(message));
   }
   successget(mes:message):void
@@ -97,4 +99,5 @@ export class SettingComponent implements OnInit {
           this.changeable=true;
       }
   }
+
 }

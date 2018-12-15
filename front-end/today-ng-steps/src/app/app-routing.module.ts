@@ -3,17 +3,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { InitGuardService } from './services/init-guard/init-guard.service';
 import { LoginComponent } from './pages/Login/login/login.component';
 import{RegistComponent} from './pages/Login/regist/regist.component'
-import {AllprojectComponent} from './pages/main/right-control/allproject/allproject.component'
 import { FileComponent } from './pages/main/right-control/file/file.component';
 import { MenuComponent } from './pages/main/right-control/menu/menu.component';
+import { CreateFileComponent } from './pages/main/right-control/create-file/create-file.component';
+import { ProjectSettingComponent } from './pages/project-setting/project-setting.component';
 const routes: Routes = [
   { path: 'summary', redirectTo: '/summary', pathMatch: 'full' },
   { path: 'setting', redirectTo: '/setting', pathMatch: 'full' },
   { path: 'login',  component: LoginComponent },
   { path: 'regist',  component: RegistComponent },
-  { path: '' ,redirectTo:'/main',pathMatch: 'full'},
+  { path: '' ,redirectTo:'/main/home',pathMatch: 'full'},
   {path: 'file',component:FileComponent},
   {path :'menu',component:MenuComponent},
+  {path:'create-file',component:CreateFileComponent },
+  { path: 'projectconfigure/:pid', component: ProjectSettingComponent }
 ];
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],

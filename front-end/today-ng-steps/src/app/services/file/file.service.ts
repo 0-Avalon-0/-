@@ -1,23 +1,28 @@
 import { Injectable } from '@angular/core';
-import { File } from 'src/domain/file';
-import {FILES} from '../../../domain/test-file'
+import { File } from '../../../domain/file';
+import {FILES} from '../../../domain/test-file';
+import{HttpServiceService}from '../../services/http-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileService {
   private selectedFile;
-  getFiles(file_fname:string): File[] {
-    //return http.get(file_fname);
-    return  FILES;
-    }
-  setSelectedFile(file:File){
+  setSelectedFile(file:File):void{
   this.selectedFile = file;
   }
   getSelectedFile():File{
     return this.selectedFile;
   }
+  deleteFile():void{
+
+//this.httpSerivce.deleteFile(this.selectedFile);
+  }
+  updateFiles():File[]{
+    //http.updateFile();
+    return FILES;
+  }
 
 
-  constructor() { }
+  constructor(private httpSerivce:HttpServiceService) { }
 }

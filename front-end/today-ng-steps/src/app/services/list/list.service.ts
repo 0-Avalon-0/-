@@ -7,7 +7,7 @@ import { HttpServiceService } from '../http-service.service';
 import { message, project, projectAll, project_authority, project_set } from 'src/domain/person';
 
 
-type SpecialListUUID = 'today' | 'todo';
+type SpecialListUUID = 'home' | 'person'|'today';
 
 @Injectable()
 export class ListService {
@@ -15,7 +15,7 @@ export class ListService {
   private current: List;
   private lists: List[] = [];
 
-  currentUuid: SpecialListUUID | string = 'today';
+  currentUuid: SpecialListUUID | string = 'home';
   currentUuid$ = new Subject<string>();
   current$ = new Subject<List>();
   lists$ = new Subject<List[]>();
@@ -50,7 +50,6 @@ export class ListService {
 
   private update(list: List): void {
     const index = this.lists.findIndex(l => l.pid === list.pid);
-    alert(index);
     if (index !== -1) {
       this.lists.splice(index, 1, list);
       this.persist();

@@ -99,7 +99,7 @@ export class HttpServiceService {
     );
   }
   setPersonMessage(hero:Person,name:string):Observable<message> {
-    return this.http.put<message>(this.api_url.getPersonManage()+"/"+name,(hero),httpOptions).pipe(
+    return this.http.patch<message>(this.api_url.getPersonManage()+"/"+name,(hero),httpOptions).pipe(
       catchError(this.handleError(3))
     );
   }
@@ -137,6 +137,11 @@ export class HttpServiceService {
     return this.http.get<message>(this.api_url.getMenuManage()+"/"+rootPath+"/"+pid,httpOptions).pipe(
       catchError(this.handleError(5))
     );
+  }
+  setFileName(name:string,path:string,pid:number):Observable<message>{
+    return this.http.post<message>(this.api_url.getFileManage()+name+"/"+'project'+"/"+pid+"/file?path=..."+path,httpOptions).pipe(
+      catchError(this.handleError(5)
+    ));
   }
   private log(message: string) {
     alert(`HeroService: ${message}`);

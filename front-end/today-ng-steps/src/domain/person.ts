@@ -3,9 +3,12 @@ import { List } from "./entities";
 
 export class Person {
     user_name:string;
-    user_gender:string;
+    user_gender:number;
     user_password:string;
     user_email:string;
+    user_signature:string;
+    user_company:string;
+    user_location:string;
 }
 export class login{
     user_password:string;
