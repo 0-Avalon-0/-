@@ -5,7 +5,7 @@ import {Person,login,message, project, project_set} from '../../domain/person'
 import { catchError, map, retry } from 'rxjs/operators';
 import { HttpHeaders ,HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import {CreateFileHolder} from '../../domain/file'; 
 const httpOptions = {
   withCredentials: true,
   headers: new HttpHeaders({
