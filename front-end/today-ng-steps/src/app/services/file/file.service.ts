@@ -31,10 +31,8 @@ export class FileService {
   }
 
   createFileHolder:CreateFileHolder;
-  createFile(file_fname: string, file_text: string,parent_node:string,pid:number) {
-    this.createFileHolder.file_property = 0;
-    this.createFileHolder.file_text = file_text;
-    this.httpService.createFile(this.createFileHolder,file_fname,parent_node,pid).subscribe(message => this.successCreateFile(file_fname,file_text,parent_node,pid))
+  createFile(createFileHolder:CreateFileHolder,file_fname:string,pid:number,parent_node:string) {
+    this.httpService.createFile(createFileHolder,file_fname,pid,parent_node).subscribe(message => this.successCreateFile(file_fname,createFileHolder.file_text,parent_node,pid))
   }
   successCreateFile(file_fname: string, file_text: string,parent_node:string,pid:number): void {
     this.files[0].file_fname = file_fname;
@@ -42,7 +40,7 @@ export class FileService {
     this.files[0].file_property = 0;
     this.files[0].parent_node = parent_node;
     this.files[0].pid = pid;
-    alert("OK!");
+    alert("通路完成");
   }
 
 }
