@@ -145,14 +145,14 @@ get请求报文：无
 post /projectsettings/{pid}/user/{name} 
 post请求报文：
 {
-    "authority":""s
+    "project_authority":""
 }
 成功状态码201
 data为
 {
     "pid":"",
-    "name":"",
-    "authority":""
+    "membername":"",
+    "project_authority":""
 }
 失败则返回错误的状态码及错误原因
 		406：格式不正确
@@ -174,7 +174,7 @@ delete请求报文：空
 data为
 {
     "pid":"",
-    "name":"",
+    "membername":"",
 }
 失败则返回错误的状态码及错误原因
 		406：格式不正确
