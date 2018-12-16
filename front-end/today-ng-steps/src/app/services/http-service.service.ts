@@ -138,8 +138,8 @@ export class HttpServiceService {
       catchError(this.handleError(5))
     );
   }
-  setFileName(name:string,path:string,pid:number):Observable<message>{
-    return this.http.post<message>(this.api_url.getFileManage()+name+"/"+'project'+"/"+pid+"/file?path=..."+path,httpOptions).pipe(
+  createFile(createFileHolder:CreateFileHolder,file_fname:string,file_node:string,pid:number):Observable<message>{
+    return this.http.post<message>('filemanagers/'+file_fname+'/project'+pid+'/file?path='+file_node,createFileHolder,httpOptions).pipe(
       catchError(this.handleError(5)
     ));
   }
