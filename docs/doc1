@@ -167,6 +167,18 @@ delete请求报文：无
 	失败 则返回错误的状态码及错误原因
 		404：项目不存在
 		403：无权限
+	4.7删除权限
+delete /projectsettings/{pid}/user/{name} 
+delete请求报文：空
+成功状态码204
+data为
+{
+    "pid":"",
+    "name":"",
+}
+失败则返回错误的状态码及错误原因
+		406：格式不正确
+		403：无权限
 5文档管理：
 注意：fname均为当前文件/文件夹的名字，path为所在文件夹的完整路径，所有文件的根目录均为root
 5.1查看文档：GET / filemanagers / {fname} / project / {pid} / file?path=...
