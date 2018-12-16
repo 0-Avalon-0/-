@@ -36,7 +36,7 @@ export class ListComponent implements OnInit, OnDestroy {
   contextListUuid: string;
   addListModalVisible = false;
   renameListModalVisible = false;
-  project_property=0;
+  project_property="0";
   private dropdown: NzDropdownContextComponent;
   private destroy$ = new Subject();
   constructor(

@@ -5,30 +5,36 @@ import { NzMessageService, UploadFile } from 'ng-zorro-antd';
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 import { AVATAR_CODE, USERNAME } from '../../services/local-storage/local-storage.namespace';
 import { HttpServiceService } from 'src/app/services/http-service.service';
-import { message, Person } from 'src/domain/person';
+import { message, Person, project, project_set, project_authority } from 'src/domain/person';
+import { List } from 'src/domain/entities';
+import { pageSwitchTransition } from './setting.animation';
 
 @Component({
   selector: 'app-project-setting',
   templateUrl: './project-setting.component.html',
-  styleUrls: ['./project-setting.component.less']
+  styleUrls: ['./project-setting.component.less'],
+  animations: [ pageSwitchTransition ]
 })
 export class ProjectSettingComponent implements OnInit {
 
   avatar = this.store.get(AVATAR_CODE);
-  user:Person=
+  initLoading = true; // bug
+  addListModalVisible = false;
+  addAuthorityModalVisible=false;
+  pro:List=
   {
-    user_name:this.store.get(USERNAME),
-    user_password:"",
-    user_gender:0,
-    user_email:"",
-    user_signature:"",
-    user_company:"",
-    user_location:"",
+    pid:"",
+    project_pname:"",
+    project_describe: "" ,
+    project_establisher: "",
+    project_property :"",
+    content:[],
   }
+  projec_authority_object_ready:project_authority
+  project_authority_ready:string;
   changeable:boolean;
   radioValue:number;
   @HostBinding('@pageSwitchTransition') state = 'activated';
-  @ViewChild('usernameInput') private usernameInput: ElementRef;
 
   constructor(
     private store: LocalStorageService,
@@ -39,32 +45,24 @@ export class ProjectSettingComponent implements OnInit {
   ) { }
  pid:string;
   ngOnInit() {
-    this.usernameInput.nativeElement.value = this.user.user_name;
     this.changeable=false;
-    this.pid = this.activatedRoute.snapshot.params['pid'];
-    alert(this.pid)
-    this.httpservice.getPersonMessage(this.store.get(USERNAME)).subscribe(message=>this.successget(message));
+    this.pro.pid = this.activatedRoute.snapshot.params['pid'];
+    this.httpservice.getProjectPro(this.pro.pid).subscribe(message=>this.successget(message));
   }
   successget(mes:message):void
   {
-    const person=<Person>JSON.parse(mes.data)
+    const person=<List>JSON.parse(mes.data)
     // this.user_password=person.user_password;
-    this.user.user_gender=person.user_gender;
-    this.user.user_email=person.user_email;
-    this.user.user_signature=person.user_signature;
-    this.user.user_company=person.user_company;
-    this.user.user_location=person.user_location;
+    this.pro=person;
   }
   validateUsername(username: string): void {
     if (!username) {
       this.message.error('用户名不能为空');
-      this.usernameInput.nativeElement.value = this.user.user_name;
     } 
   }
   validatePassword(userpassword:string):void{
     if (!userpassword) {
       this.message.error('密码不能为空');
-      this.usernameInput.nativeElement.value = this.user.user_name;
     }
   }
   private getBase64(img: File, callback: (img: {}) => void): void {
@@ -85,10 +83,11 @@ export class ProjectSettingComponent implements OnInit {
     this.router.navigateByUrl('/main/home');
   }
   click_button():void{
-    this.httpservice.setPersonMessage(this.user,this.user.user_name).subscribe(message=>this.successset(message));
+    const project_Set=new project_set(this.pro.project_pname,this.pro.project_describe,this.pro.project_property,this.pro.content)
+    this.httpservice.setProjectPro(project_Set,this.pro.pid).subscribe(message=>this.successset(message));
   }
   successset(mes:message):void{
-    this.user=<Person>JSON.parse(mes.data)
+    this.pro=<List>JSON.parse(mes.data)
     this.router.navigateByUrl('/main');
     this.message.success("修改成功")
   }
@@ -99,5 +98,42 @@ export class ProjectSettingComponent implements OnInit {
           this.changeable=true;
       }
   }
+  getAuthority(i:string):string
+  {
+    if(i=="0")
+    {
+      return"观察者"
+    }
+    else if(i=="1")
+    {
+      return "开发者"
+    }
+    else 
+    {
+      return "管理员"
+    }
+  }
+  setAuthority():void{
+      this.projec_authority_object_ready.project_authority=this.project_authority_ready;
+      this.closeAddListModal();
+  }
+  openAddListModal(i:string): void {//更改权限窗口
+    this.projec_authority_object_ready=this.pro.content.find(x=>x.membername==i)
+    this.addListModalVisible = true;
+  }
+  closeAddListModal(): void {
+    this.addListModalVisible = false;
+  }
+  openAddAuthorityModal(i:string): void {
+    this.addAuthorityModalVisible = true;
+  }
+  closeAddAuthorityModal(): void {
+    this.addAuthorityModalVisible = false;
+  }
+  addAuthority():void{
+    
+  }
+  onLoadMore():void{
 
+  }
 }

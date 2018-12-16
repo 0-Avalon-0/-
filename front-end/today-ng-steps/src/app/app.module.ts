@@ -22,15 +22,13 @@ import { LoginComponent } from './pages/Login/login/login.component';
 import { RegistComponent } from './pages/Login/regist/regist.component';
 import { RouterModule } from '@angular/router'
 import { ApiService } from './services/api.service';
-import { ProjectSettingComponent } from './pages/project-setting/project-setting.component';
 registerLocaleData(zh);
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistComponent,
-    ProjectSettingComponent
+    RegistComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +40,7 @@ registerLocaleData(zh);
     MainModule,
     RouterModule,
     SettingModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'zh-Hans' },

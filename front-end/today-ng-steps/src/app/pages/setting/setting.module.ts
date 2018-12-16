@@ -4,6 +4,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { SettingComponent } from './setting.component';
 import { SettingRoutingModule } from './setting-routing.module';
 import { FormsModule } from '@angular/forms';
+import { ProjectSettingComponent } from './project-setting.component';
 
 @NgModule({
   imports: [
@@ -12,6 +13,6 @@ import { FormsModule } from '@angular/forms';
     NgZorroAntdModule,
     FormsModule
   ],
-  declarations: [ SettingComponent ]
+  declarations: [ SettingComponent, ProjectSettingComponent ]
 })
 export class SettingModule { }

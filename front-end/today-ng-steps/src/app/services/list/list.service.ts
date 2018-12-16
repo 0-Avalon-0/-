@@ -68,7 +68,7 @@ export class ListService {
     this.broadCast();
   }
 
-  add(name: string,describe:string,property:number): void {
+  add(name: string,describe:string,property:string): void {
     const newList = new project(name,describe,property);
     this.httpservice.newProject(newList).subscribe(message=>this.successNewproject(message));
   }

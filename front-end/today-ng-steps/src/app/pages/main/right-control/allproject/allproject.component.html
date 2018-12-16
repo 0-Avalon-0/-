@@ -54,7 +54,7 @@
     </div>
 </nz-content>
 <ng-template #actionSetting>
-        <i nz-icon type="setting" [routerLink]="['/setting']"></i>
+        <i nz-icon type="setting" (click)="gotoSet()"></i>
       </ng-template>
 <ng-template #actionEdit>
         <i nz-icon type="edit"  [routerLink]="['/main']"></i>

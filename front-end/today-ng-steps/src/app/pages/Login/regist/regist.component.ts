@@ -21,7 +21,7 @@ export class RegistComponent implements OnInit {
   thisregist: Person = {
     user_name: "123887678678",
     user_password:"456",
-    user_gender:0,
+    user_gender:"",
     user_email:"123123@163.com",
     user_signature:"",
     user_company:"",

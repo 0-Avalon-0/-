@@ -32,7 +32,4 @@ export class LeftControlComponent implements OnInit {
     this.router.navigateByUrl('/setting');
   }
 
-  goSummary() {
-    this.router.navigateByUrl('/summary');
-  }
 }

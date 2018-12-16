@@ -1,9 +1,8 @@
 import { stringify } from "@angular/compiler/src/util";
 import { List } from "./entities";
-
 export class Person {
     user_name:string;
-    user_gender:number;
+    user_gender:string;
     user_password:string;
     user_email:string;
     user_signature:string;
@@ -20,8 +19,8 @@ export class message{
 export class project{//新建工程时 需要发送的内容
     project_pname:string;
     project_describe:string;
-    project_property:number
-    constructor( project_pname:string,project_describe:string,project_property:number)
+    project_property:string;
+    constructor( project_pname:string,project_describe:string,project_property:string)
     {
         this.project_describe=project_describe;
         this.project_pname=project_pname;
@@ -30,11 +29,11 @@ export class project{//新建工程时 需要发送的内容
 }
 export class project_authority
 {
-    project_member:string;
+    membername:string;
     project_authority:string;
     constructor()
     {
-        this.project_member="";
+        this.membername="";
         this.project_authority=""
     }
 }

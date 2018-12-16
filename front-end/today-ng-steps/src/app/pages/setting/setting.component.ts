@@ -20,14 +20,13 @@ export class SettingComponent implements OnInit {
   {
     user_name:this.store.get(USERNAME),
     user_password:"",
-    user_gender:0,
+    user_gender:"1",//这个地方有bug  只能初始化为1 只要ngonint给他赋值，第一次显示就会吸纳失败
     user_email:"",
     user_signature:"",
     user_company:"",
     user_location:"",
   }
   changeable:boolean;
-  radioValue:number;
   @HostBinding('@pageSwitchTransition') state = 'activated';
   @ViewChild('usernameInput') private usernameInput: ElementRef;
 
@@ -41,13 +40,14 @@ export class SettingComponent implements OnInit {
   ngOnInit() {
     this.usernameInput.nativeElement.value = this.user.user_name;
     this.changeable=false;
+    
     this.httpservice.getPersonMessage(this.store.get(USERNAME)).subscribe(message=>this.successget(message));
   }
   successget(mes:message):void
   {
     const person=<Person>JSON.parse(mes.data)
-    // this.user_password=person.user_password;
-    this.user.user_gender=person.user_gender;
+    this.user.user_password=person.user_password;
+   // this.user.user_gender=person.user_gender;显示会出问题
     this.user.user_email=person.user_email;
     this.user.user_signature=person.user_signature;
     this.user.user_company=person.user_company;

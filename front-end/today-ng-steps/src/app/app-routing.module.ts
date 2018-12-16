@@ -6,7 +6,6 @@ import{RegistComponent} from './pages/Login/regist/regist.component'
 import { FileComponent } from './pages/main/right-control/file/file.component';
 import { MenuComponent } from './pages/main/right-control/menu/menu.component';
 import { CreateFileComponent } from './pages/main/right-control/create-file/create-file.component';
-import { ProjectSettingComponent } from './pages/project-setting/project-setting.component';
 const routes: Routes = [
   { path: 'summary', redirectTo: '/summary', pathMatch: 'full' },
   { path: 'setting', redirectTo: '/setting', pathMatch: 'full' },
@@ -16,7 +15,6 @@ const routes: Routes = [
   {path: 'file',component:FileComponent},
   {path :'menu',component:MenuComponent},
   {path:'create-file',component:CreateFileComponent },
-  { path: 'projectconfigure/:pid', component: ProjectSettingComponent }
 ];
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],

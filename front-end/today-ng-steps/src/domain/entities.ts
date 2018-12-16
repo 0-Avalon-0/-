@@ -26,9 +26,9 @@ export class List {
   project_pname:string;
   project_describe: string;
   project_establisher: string;
-  project_property :number;
+  project_property :string;
   content:project_authority[];
-  constructor(id:string,createBy:string,describe: string,name:string,property:number,content:project_authority[]) {
+  constructor(id:string,createBy:string,describe: string,name:string,property:string,content:project_authority[]) {
     alert(name);
     this.pid = id;
     this.project_describe = describe;

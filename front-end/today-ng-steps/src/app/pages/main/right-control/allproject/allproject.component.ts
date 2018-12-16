@@ -12,6 +12,7 @@ import { ListService } from 'src/app/services/list/list.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NzModalService } from 'ng-zorro-antd';
+import { RouterState, Router } from '@angular/router';
 @Component({
   selector: 'app-allproject',
   templateUrl: './allproject.component.html',
@@ -21,7 +22,7 @@ export class AllprojectComponent implements OnInit {
   lists: List[];
   contextListUuid: string;
   @ViewChild('listRenameInput') private listRenameInput: ElementRef;
-  constructor(private listService: ListService,
+  constructor(private listService: ListService,private _router:Router,
     private modal: NzModalService,) { 
   }
   page="allproject建议"
@@ -51,6 +52,15 @@ export class AllprojectComponent implements OnInit {
   rename(name: string): void {
     this.listService.rename(this.contextListUuid, name);
     this.closeRenameListModal();
+  }
+  gotoSet():void{
+    setTimeout(() => 
+    {
+      this._router.navigate(['projectconfigure/'+this.contextListUuid]);
+    },
+    200);
+
+
   }
   delete(): void {setTimeout(() => 
     {
