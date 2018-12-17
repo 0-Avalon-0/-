@@ -5,7 +5,7 @@ import {Person,login,message, project, project_set, project_authoritys} from '..
 import { catchError, map, retry } from 'rxjs/operators';
 import { HttpHeaders ,HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import {CreateFileHolder} from '../../domain/file'; 
 const httpOptions = {
   withCredentials: true,
   headers: new HttpHeaders({
@@ -26,7 +26,7 @@ export class HttpServiceService {
   PERSONMESSAGE=3;
   PROJECT=4;
   MENU=5;
-  FILE=6
+  FILE=6;
   private handleError(operation = 0) {
     return (error: any)=>{
     if (error.error instanceof ErrorEvent) {
@@ -69,6 +69,9 @@ export class HttpServiceService {
       else if(error.status=="500")
       {
             alert("服务器不可用，请稍后重试")
+      }
+      else if(operation=this.FILE){
+        alert('没发送成功！');
       }
       else {
         alert(
@@ -153,9 +156,10 @@ export class HttpServiceService {
       catchError(this.handleError(5))
     );
   }
-  setFileName(name:string,path:string,pid:number):Observable<message>{
-    return this.http.post<message>(this.api_url.getFileManage()+name+"/"+'project'+"/"+pid+"/file?path=..."+path,httpOptions).pipe(
-      catchError(this.handleError(5)
+  createFile(createFileHolder:CreateFileHolder,file_fname:string,pid:number,parent_node:string):Observable<message>{
+    
+    return this.http.post<message>(this.api_url.getFileManage()+'/'+file_fname+'/project/'+pid+'/file?path='+parent_node,(createFileHolder),httpOptions).pipe(
+      catchError(this.handleError(6)
     ));
   }
   private log(message: string) {

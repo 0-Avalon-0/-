@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { File } from '../../../../../domain/file';
-import{HttpServiceService}from '../../../../services/http-service.service';
+import { File, CreateFileHolder } from '../../../../../domain/file';
+import { FileService } from '../../../../services/file/file.service';
 
 @Component({
   selector: 'app-create-file',
@@ -9,17 +9,28 @@ import{HttpServiceService}from '../../../../services/http-service.service';
 })
 export class CreateFileComponent implements OnInit {
 
-  createdFile:File;
-
-  create():void{
-    this.createdFile.file_property = 0;
-    //httpPostFile(this.createdFile);
-    this.httpSerivce.setFileName(this.createdFile.file_fname,"A",1);
+  createdFile:File = {
+    parent_node:'root\Teddy',
+    file_fname:'',
+    file_property:1,
+    file_text:'',
+    pid:2
+  }
+  thisFile: CreateFileHolder = {
+    file_property: 1,
+    file_text: this.createdFile.file_text
   }
 
-  constructor(private httpSerivce:HttpServiceService) { }
+  create(): void {
+    alert('createBegin');
+    this.fileService.createFile(this.thisFile,this.createdFile.file_fname,this.createdFile.pid,this.createdFile.parent_node);
+    alert('createOver');
+  }
 
+  constructor(private fileService: FileService) {
+  }
   ngOnInit() {
+
   }
 
 }

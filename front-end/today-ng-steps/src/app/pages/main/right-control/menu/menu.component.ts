@@ -19,7 +19,7 @@ export class MenuComponent implements OnInit {
       //改变路由，跳转到file
     }
     else{//文件夹
-      this.fileService.updateFiles();
+      //更新文件表
     }
   }
   setSelectedFile():void{
@@ -29,6 +29,6 @@ export class MenuComponent implements OnInit {
     private fileService:FileService,
     ) { }
   ngOnInit() {
-    this.fileService.updateFiles();
+    //显示原始文件表
   }
 }
