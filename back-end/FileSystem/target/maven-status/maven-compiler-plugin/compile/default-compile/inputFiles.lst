@@ -30,6 +30,7 @@ D:\EclipseWorkSpace\FileSystem\src\main\java\com\application\bean\FileText.java
 D:\EclipseWorkSpace\FileSystem\src\main\java\com\application\dao\MenuDao.java
 D:\EclipseWorkSpace\FileSystem\src\main\java\com\application\dao\Iauthority.java
 D:\EclipseWorkSpace\FileSystem\src\main\java\com\application\acceptbean\AcceptFileMenu.java
+D:\EclipseWorkSpace\FileSystem\src\main\java\com\application\acceptbean\NoPidAuthority.java
 D:\EclipseWorkSpace\FileSystem\src\main\java\com\application\dao\PersonaldataDao.java
 D:\EclipseWorkSpace\FileSystem\src\main\java\com\application\service\IMenuService.java
 D:\EclipseWorkSpace\FileSystem\src\main\java\com\application\bean\Member.java

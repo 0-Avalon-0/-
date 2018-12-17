@@ -67,7 +67,7 @@ public class PersonaldataDao implements Ipersonaldata{
 
 	public Status changeData(String name, User user,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
 		Status status = new Status();
-		String sql = "update user set user_password = ?, user_gender = ?, user_email = ? where user_name = ?";
+		String sql = "update user set user_name = ?, user_password = ?, user_gender = ?, user_email = ? ,user_signature = ?,user_company = ?,user_location = ? where user_name = ?";
 			
 		HttpSession httpSession = httpServletRequest.getSession();
 		
@@ -75,41 +75,36 @@ public class PersonaldataDao implements Ipersonaldata{
 		
 		if(httpSession.getAttribute("user")!=null && ((String)httpSession.getAttribute("user")).equals(name)) {
 			try {
-				User originUser = new User();
-				String findusersql = "select * from user where user_name = ?";
-				List<User> originUserList = jdbcTemplate.query(findusersql,new Object[] {name}, new BeanPropertyRowMapper(User.class));
-				//先找原来用户的信息
-				//原因是更改时不变的信息不传，需要服务器找
-				if(originUserList!=null && originUserList.size()>0) {
-					originUser = originUserList.get(0);
+				//发啥改啥
+				int result= jdbcTemplate.update(sql,
+						user.getuser_name(),
+						user.getuser_password(),
+						user.getuser_gender(),
+						user.getuser_email(),
+						user.getuser_signature(),
+						user.getuser_company(),
+						user.getuser_location(),
+						name);
+				if(result>=0) {
+					User newuser = user;
+					newuser.setuser_email(user.getuser_email());
+					newuser.setuser_gender(user.getuser_gender());
+					newuser.setuser_name(user.getuser_name());
+					newuser.setuser_password(user.getuser_password());
+					newuser.setuser_company(user.getuser_company());
+					newuser.setuser_signature(user.getuser_signature());
+					newuser.setuser_location(user.getuser_location());
 					
-					//此处若gender不修改则要求客户端传入gender数据为-1
-					//此处若其余数据不修改则要求客户端传入""空字符串
-					int result= jdbcTemplate.update(sql,
-							user.getuser_password()==""?originUser.getuser_password():user.getuser_password(),
-							user.getuser_gender()==-1?originUser.getuser_gender():user.getuser_gender(),
-							user.getuser_email()==""?originUser.getuser_email():user.getuser_email(),
-							user.getuser_name()==""?originUser.getuser_name():user.getuser_name());
-					if(result>0) {
-						User newuser = user;
-						newuser.setuser_email(user.getuser_email()==""?originUser.getuser_email():user.getuser_email());
-						newuser.setuser_gender(user.getuser_gender()==-1?originUser.getuser_gender():user.getuser_gender());
-						newuser.setuser_name(user.getuser_name()==""?originUser.getuser_name():user.getuser_name());
-						newuser.setuser_password(user.getuser_password()==""?originUser.getuser_password():user.getuser_password());
-						JSONObject jsonObject = JSONObject.fromObject(newuser);
-						status.setCode(201);
-						httpServletResponse.setStatus(201);
-						status.setData(jsonObject.toString());
-					}else {
-						status.setCode(404);
-						httpServletResponse.setStatus(404);
-						status.setData("用户信息不存在");
-					}	
+					httpSession.setAttribute("user", user.getuser_name());
+					JSONObject jsonObject = JSONObject.fromObject(newuser);
+					status.setCode(201);
+					httpServletResponse.setStatus(201);
+					status.setData(jsonObject.toString());
 				}else {
 					status.setCode(404);
 					httpServletResponse.setStatus(404);
-					status.setData("用户信息不存在");
-				}				
+					status.setData("用户不存在");
+				}			
 			}catch(Exception exception) {
 				if(exception instanceof DataAccessResourceFailureException) {
 					status.setCode(500);
@@ -121,8 +116,7 @@ public class PersonaldataDao implements Ipersonaldata{
 					httpServletResponse.setStatus(422);
 					status.setData("用户名重复");
 				}else {
-					exception.printStackTrace();
-					
+					exception.printStackTrace();	
 					status.setCode(600);
 					httpServletResponse.setStatus(600);
 					status.setData(exception.getMessage());

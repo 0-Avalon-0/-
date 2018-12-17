@@ -25,5 +25,11 @@ public class AuthorityService implements IAuthorityService{
 		return authoritydao.addAuthority(pid, membername, requestAuthority, httpServletRequest,httpServletResponse);
 	}
 
+	@Override
+	public Status deleteAuthority(int pid, String membername, HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) {
+		return authoritydao.deleteAuthority(pid, membername, httpServletRequest, httpServletResponse);
+	}
+
 
 }

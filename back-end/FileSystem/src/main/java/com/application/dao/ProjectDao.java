@@ -157,9 +157,9 @@ public class ProjectDao implements Iproject{
 							JSONObject jsonObject = JSONObject.fromObject(acceptPid);
 							status.setData(jsonObject.toString());
 						}else {
-							status.setCode(600);
+							status.setCode(404);
 							httpServletResponse.setStatus(600);
-							status.setData("删除工程失败");
+							status.setData("工程不存在");
 						}
 					}else {
 						status.setCode(403);
@@ -302,6 +302,16 @@ public class ProjectDao implements Iproject{
 						//获取成员信息
 						List<Member> memList = jdbcTemplate.query(sql1, new Object[] {pid},new BeanPropertyRowMapper(Member.class));
 						if(memList!=null && memList.size()>0) {
+							//遍历成员，删除管理员信息
+							//防止管理员改自己权限
+							Iterator memiterator = memList.iterator();
+							while(memiterator.hasNext()) {
+								Member currenmem = (Member)memiterator.next();
+								if(currenmem.getmembername().equals(pList.get(0).getproject_establisher())) {
+									memList.remove(currenmem);
+									break;
+								}	
+							}	
 							psetting.setContent(memList);
 						}else {
 							//没找到
@@ -342,10 +352,7 @@ public class ProjectDao implements Iproject{
 			status.setCode(401);
 			httpServletResponse.setStatus(401);
 			status.setData("用户未登录");
-		}
-		
-		
-		
+		}		
 		return status;
 	}
 	
@@ -355,7 +362,7 @@ public class ProjectDao implements Iproject{
 		HttpSession httpSession = httpServletRequest.getSession();
 		
 		String projectUpdate = "update project set project_pname = ?,project_establisher = ?, project_property = ?, project_describe = ? where pid = ?";
-		String memberUpdate = "update member set membername = ?, project_authority = ? where pid = ?";
+		String memberUpdate = "update member set project_authority = ? where membername = ? and pid = ?";
 		List<Member> membersToChange = pSetting.getContent();//用户要改的成员信息
 		
 		if(httpSession.getAttribute("user")!=null) {
@@ -392,15 +399,14 @@ public class ProjectDao implements Iproject{
 							Project currentProject = projectsinfo.get(0);//源工程
 							//首先更新工程配置
 							int presult = jdbcTemplate.update(projectUpdate,
-									pSetting.getproject_pname()==""?currentProject.getproject_pname():pSetting.getproject_pname(),
+									pSetting.getproject_pname(),
 									currentProject.getproject_establisher(),
-									pSetting.getproject_property()==-1?currentProject.getproject_property():pSetting.getproject_property(),
-									pSetting.getproject_describe()==""?currentProject.getproject_describe():pSetting.getproject_describe(),
-													pid);
-							if(presult>0) {
+									pSetting.getproject_property(),
+									pSetting.getproject_describe(),
+									pid);
+							if(presult>=0) {
 								//project部分更改成功
 								int times = membersToChange.size();//记录更新次数
-								//如果times=1，说明只有默认的管理员，此时
 								
 								
 								Iterator memIterator = membersToChange.iterator();
@@ -418,11 +424,11 @@ public class ProjectDao implements Iproject{
 											break;
 										}
 									}
-									int mresult = jdbcTemplate.update(memberUpdate,
-											temp.getmembername()==""?origin.getmembername():temp.getmembername(),
-											temp.getproject_authority()==-1?origin.getproject_authority():temp.getproject_authority(),
+									int mresult = jdbcTemplate.update(memberUpdate,	
+											temp.getproject_authority(),
+											temp.getmembername(),
 											pid);
-									if(mresult>0) {
+									if(mresult>=0) {
 										//member部分更改成功
 										
 										
@@ -440,10 +446,10 @@ public class ProjectDao implements Iproject{
 									//此处再向数据库查询，获取最新成员信息并返回
 									List<Member> newmembersinfo = jdbcTemplate.query(originMember, new Object[] {pid}, new BeanPropertyRowMapper(Member.class));
 									returnSetting.setContent(newmembersinfo);
-									returnSetting.setproject_pname(pSetting.getproject_pname()==""?currentProject.getproject_pname():pSetting.getproject_pname());
+									returnSetting.setproject_pname(pSetting.getproject_pname());
 									returnSetting.setpid(pid);
-									returnSetting.setproject_describe(pSetting.getproject_describe()==""?currentProject.getproject_describe():pSetting.getproject_describe());
-									returnSetting.setproject_property(pSetting.getproject_property()==-1?currentProject.getproject_property():pSetting.getproject_property());
+									returnSetting.setproject_describe(pSetting.getproject_describe());
+									returnSetting.setproject_property(pSetting.getproject_property());
 									returnSetting.setproject_establisher(currentProject.getproject_establisher());
 									JSONObject jsonObject = JSONObject.fromObject(returnSetting);
 									status.setCode(201);
@@ -476,11 +482,9 @@ public class ProjectDao implements Iproject{
 					httpServletResponse.setStatus(500);
 					status.setData("数据库连接失败");
 				}else {
-					exception.printStackTrace();
-					
 					status.setCode(600);
 					httpServletResponse.setStatus(600);
-					status.setData("UpdateProject "+"size"+membersToChange.size()+exception.getMessage());
+					status.setData(exception.getMessage());
 				}
 			}
 		}else {

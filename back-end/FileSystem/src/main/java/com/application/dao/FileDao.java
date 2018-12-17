@@ -247,7 +247,7 @@ public class FileDao implements IFile{
 					}
 					if(isAble) {
 						int result = jdbcTemplate.update(sql,fileText.getfile_text(),pid,filenode.toString());
-						if(result>0) {
+						if(result>=0) {
 							status.setCode(201);
 							httpServletResponse.setStatus(201);
 							AcceptFile acceptFile = new AcceptFile();
