@@ -1,0 +1,38 @@
+
+<div id="box"></div>
+<div class="cent-box">
+	<div class="cent-box-header">
+		<h1 class="main-title hide">文档管理系统</h1>
+		<h2 class="sub-title">管理您的文档 - File Manage system</h2>
+	</div>
+
+	<div class="cont-main clearfix">
+		<div class="index-tab">
+			<div class="index-slide-nav">
+				<a [routerLink]="['/login']" class="active">登录</a>
+				<a [routerLink]="['/regist']">注册</a>
+				<div class="slide-bar"></div>				
+			</div>
+		</div>
+
+		<div class="login form">
+			<div class="group">
+				<div class="group-ipt email">
+					<input [(ngModel)]="name"  type="text" name="email" id="email" class="ipt" placeholder="用户名" >
+				</div>
+				<div class="group-ipt password">
+					<input [(ngModel)]="thislog.user_password"  type="password" name="password" id="password" class="ipt" placeholder="输入您的登录密码" >
+				</div>
+			</div>
+		</div>
+
+		<div class="button">
+			<button (click)="onLogin()" type="submit" class="login-btn register-btn" id="button">登录</button>
+		</div>
+	</div>
+</div>
+
+<div class="footer">
+		<p>文档管理系统</p>
+		<p>Designed By Wenxu Li,Shuhan Li,Peicheng Li,JingJing Zhu  2018</p>
+</div>

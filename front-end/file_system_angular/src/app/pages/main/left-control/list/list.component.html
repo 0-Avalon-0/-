@@ -1,0 +1,114 @@
+<ul nz-menu
+    [nzTheme]="'dark'"
+    [nzMode]="'inline'"
+    [nzInlineCollapsed]="isCollapsed">
+  <li nz-menu-item
+      [nzSelected]="currentListUuid === 'home'"
+      (click)="click_home('home')">
+    <span>
+        <i nz-icon type="home" theme="outline"></i>
+      <span class="nav-text">主页</span>
+    </span>
+  </li>
+  <li nz-menu-item
+  [nzSelected]="currentListUuid === 'person'"
+  (click)="click_person()">
+  <span>
+      <i nz-icon type="user" theme="outline"></i>
+    <span class="nav-text">个人信息</span>
+  </span>
+  </li>
+  <li nz-menu-item
+  [nzSelected]="currentListUuid === 'today'"
+  (click)="click_project()">
+  <span>
+      <i nz-icon type="appstore" theme="outline"></i>
+    <span class="nav-text">查看所有工程</span>
+  </span>
+  </li>
+  <li nz-submenu>
+    <span title><i nz-icon type="tool" theme="outline"></i>我的工程</span>
+    <ul>
+      <li nz-menu-item
+          *ngFor="let list of lists"
+          [nzSelected]="currentListUuid === list.pid"
+          (click)="click(list.pid)"
+          (contextmenu)="contextMenu($event, contextTemplate, list.pid)">
+        <span>
+          <i class="anticon anticon-bars"></i>
+          <span class="nav-text" >{{ list.project_pname }}</span>
+        </span>
+      </li>
+    </ul>
+</ul>
+
+<ng-template #contextTemplate>
+  <ul nz-menu
+      nzInDropDown
+      nzSelectable
+      (nzClick)="close()">
+    <li nz-menu-item
+        (click)="openRenameListModal()">
+      <i class="anticon anticon-edit anticon-right-margin"></i>
+      <span>重命名</span>
+    </li>
+    <li nz-menu-divider></li>
+    <li nz-menu-item
+        (click)="delete()">
+      <i class="anticon anticon-delete anticon-right-margin danger"></i>
+      <span class="danger">删除列表</span>
+    </li>
+  </ul>
+</ng-template>
+
+<nz-modal [(nzVisible)]="addListModalVisible"
+          [nzTitle]="'新建工程'"
+          [nzClosable]="true"
+          [nzWidth]="420"
+          [nzOkText]="'新建'"
+          [nzCancelText]="'取消'"
+          [nzMaskClosable]="true"
+          (nzOnCancel)="closeAddListModal()"
+          (nzOnOk)="add(listInput.value,listInput_des.value); listInput.value = '';listInput_des.value=' '">
+  <form nz-form>
+    <nz-form-item>
+      <nz-form-control>
+        <input nz-input
+               #listInput
+               name="listTitle"
+               placeholder="工程名"
+               (keydown.enter)="add(listInput.value,listInput_des.value); listInput.value = '';listInput_des.value=' '">
+        <input nz-input
+               #listInput_des
+               name="listDicribe"
+               placeholder="工程描述"
+               (keydown.enter)="add(listInput.value,listInput_des.value); listInput_des.value = '';listInput_des.value=' '">      
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <nz-radio-group [(ngModel)]="project_property">
+      <label nz-radio nzValue="0">公有</label>
+      <label nz-radio nzValue="1">私有</label>
+    </nz-radio-group>
+</nz-modal>
+<nz-modal [(nzVisible)]="renameListModalVisible"
+          [nzTitle]="'重命名列表'"
+          [nzClosable]="true"
+          [nzWidth]="420"
+          [nzOkText]="'重命名'"
+          [nzCancelText]="'取消'"
+          [nzMaskClosable]="true"
+          (nzOnCancel)="closeRenameListModal()"
+          (nzOnOk)="rename(listRenameInput.value); listRenameInput.value = '';">
+  <form nz-form>
+    <nz-form-item>
+      <nz-form-control>
+        <input nz-input
+               #listRenameInput
+               placeholder="列表名称"
+               name="renameListTitle"
+               (keydown.enter)="rename(listRenameInput.value); listRenameInput.value = '';">
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>
