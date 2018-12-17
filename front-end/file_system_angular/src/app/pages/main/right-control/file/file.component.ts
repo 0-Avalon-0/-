@@ -14,22 +14,22 @@ export class FileComponent implements OnInit {
   changeFile: File;
 
   save():void{
-    this.fileService.setSelectedFile(this.changeFile);
-    this.changeFileOption = 1;
+    //this.fileService.setSelectedFile(this.changeFile);
+    //this.changeFileOption = 1;
   }
 
   editFile():void{
-    this.changeFileOption=2;
-    this.changeFile=this.fileService.getSelectedFile();
+    //this.changeFileOption=2;
+    //this.changeFile=this.fileService.getSelectedFile();
   }
   deleteFile():void{
-    this.changeFileOption=3;
-    this.changeFile=this.fileService.getSelectedFile();
+    //this.changeFileOption=3;
+    //this.changeFile=this.fileService.getSelectedFile();
     
   }
   delete():void{
-    this.fileService.deleteFile();
-    this.changeFileOption=4;
+    //this.fileService.deleteFile();
+    //this.changeFileOption=4;
   }
   back():void{
     this.location.back();

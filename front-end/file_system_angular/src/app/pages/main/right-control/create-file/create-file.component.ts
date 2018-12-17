@@ -22,9 +22,7 @@ export class CreateFileComponent implements OnInit {
   }
 
   create(): void {
-    alert('createBegin');
     this.fileService.createFile(this.thisFile,this.createdFile.file_fname,this.createdFile.pid,this.createdFile.parent_node);
-    alert('createOver');
   }
 
   constructor(private fileService: FileService) {

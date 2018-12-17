@@ -11,7 +11,7 @@ export class CreateFolderComponent implements OnInit {
   createdFolder:File;
 
   create():void{
-    this.createdFolder.file_property = 1;
+    //this.createdFolder.file_property = 1;
     //httpPostFile(this.createdFile);
   }
 
