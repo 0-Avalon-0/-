@@ -1,13 +1,13 @@
 package com.application.acceptbean;
 
 public class RequestAuthority {
-	private int authority;
+	private int project_authority;
 	
-	public void setauthority(int authority) {
-		this.authority = authority;
+	public void setproject_authority(int authority) {
+		this.project_authority = authority;
 	}
-	public int getauthority() {
-		return this.authority;
+	public int getproject_authority() {
+		return this.project_authority;
 	}
 
 }

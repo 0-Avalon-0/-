@@ -32,5 +32,9 @@ public class AuthorityController {
 		return authorityService.addAuthority(pid, name, requestAuthority,httpServletRequest, httpServletResponse);
 	}
 	
+	@RequestMapping(value = "/{pid}/user/{name}",method = RequestMethod.DELETE)
+	public Status deleteAuthority(@PathVariable("pid")int pid,@PathVariable("name")String membername,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
+		return authorityService.deleteAuthority(pid, membername, httpServletRequest, httpServletResponse);
+	}
 
 }

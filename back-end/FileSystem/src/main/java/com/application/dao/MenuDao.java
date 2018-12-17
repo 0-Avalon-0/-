@@ -153,7 +153,7 @@ public class MenuDao implements Imenu{
 						if(menus!=null && menus.size()>=0) {
 							Menu currentMenu = menus.get(0);
 							int result = jdbcTemplate.update(sql,acceptFileName.getfile_fname(),filenode.toString(),currentMenu.getfile_parentnode(),currentMenu.getfile_property(),currentMenu.getfile_text(),pid);
-							if(result>0) {
+							if(result>=0) {
 								status.setCode(201);
 								httpServletResponse.setStatus(201);
 								AcceptText acceptText = new AcceptText();
@@ -187,12 +187,10 @@ public class MenuDao implements Imenu{
 					status.setCode(500);
 					httpServletResponse.setStatus(500);
 					status.setData("数据库连接失败");
-				}else {
-					exception.printStackTrace();
-					
+				}else {	
 					status.setCode(600);
 					httpServletResponse.setStatus(600);
-					status.setData("RenameFile"+"   "+filenode.toString()+"   "+exception.getMessage());
+					status.setData(exception.getMessage());
 				}
 			}
 		}else {

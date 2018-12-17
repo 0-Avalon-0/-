@@ -35,7 +35,7 @@ public class FileController {
 		return fileService.createFile(pid, filename, path, simpleText, httpServletRequest,httpServletResponse);
 	}
 	
-	@RequestMapping(value = "/{fname}/project/{pid}/file", method = RequestMethod.PUT)
+	@RequestMapping(value = "/{fname}/project/{pid}/file", method = RequestMethod.PATCH)
 	public Status changeFile(@PathVariable("pid") int pid, @PathVariable("fname") String filename, @RequestParam("path")String path, @RequestBody FileText fileText,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
 		return fileService.changeFile(pid, filename, path, fileText, httpServletRequest,httpServletResponse);
 	}

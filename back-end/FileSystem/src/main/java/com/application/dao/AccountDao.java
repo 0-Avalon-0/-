@@ -83,15 +83,23 @@ public class AccountDao implements Iaccount{
 	public Status login(User user,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
 		Status status = new Status();
 		try {
-			int result = jdbcTemplate.update(("insert into user values (?,?,?,?)"),user.getuser_name(),user.getuser_password(),user.getuser_gender(),user.getuser_email());
-			status.setCode(201);
-			
-			httpServletResponse.setStatus(201);
-			JSONObject jsonObject = JSONObject.fromObject(user);
-			status.setData(jsonObject.toString());
-			
-			HttpSession httpSession = httpServletRequest.getSession();
-			httpSession.setAttribute("user", user.getuser_name());
+			String insertsql = "insert into user values (?,?,?,?,?,?,?)";
+			int result = jdbcTemplate.update(insertsql,user.getuser_name(),user.getuser_password(),user.getuser_gender(),user.getuser_email(),user.getuser_signature(),user.getuser_company(),user.getuser_location());
+			if(result>0) {
+				status.setCode(201);
+				
+				httpServletResponse.setStatus(201);
+				JSONObject jsonObject = JSONObject.fromObject(user);
+				status.setData(jsonObject.toString());
+				
+				HttpSession httpSession = httpServletRequest.getSession();
+				httpSession.setAttribute("user", user.getuser_name());
+			}else {
+				status.setCode(600);
+				
+				httpServletResponse.setStatus(600);
+				status.setData("×¢²áÊ§°Ü");
+			}		
 			
 		}catch(Exception exception){
 			if(exception instanceof DataAccessResourceFailureException) {
