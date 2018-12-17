@@ -15,6 +15,7 @@ import { MenuComponent } from './right-control/menu/menu.component';
 import { FileComponent } from './right-control/file/file.component';
 import { CreateFileComponent } from './right-control/create-file/create-file.component';
 import { CreateFolderComponent } from './right-control/create-folder/create-folder.component';
+import { ProjectComponent } from './right-control/project/project.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { CreateFolderComponent } from './right-control/create-folder/create-fold
     MenuComponent,
     FileComponent,
     CreateFileComponent,
-    CreateFolderComponent
+    CreateFolderComponent,
+    ProjectComponent
   ]
 })
 export class MainModule { }

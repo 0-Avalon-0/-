@@ -4,7 +4,7 @@ import { LocalStorageService } from '../local-storage/local-storage.service';
 import { List } from '../../../domain/entities';
 import { LISTS } from '../local-storage/local-storage.namespace';
 import { HttpServiceService } from '../http-service.service';
-import { message, project, projectAll, project_authority, project_set } from 'src/domain/person';
+import { message, project, projectAll, project_authoritys, project_set } from 'src/domain/person';
 
 
 type SpecialListUUID = 'home' | 'person'|'today';

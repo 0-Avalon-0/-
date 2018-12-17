@@ -27,7 +27,7 @@ export class project{//新建工程时 需要发送的内容
         this.project_property=project_property;
     }
 }
-export class project_authority
+export class project_authoritys
 {
     membername:string;
     project_authority:string;
@@ -41,8 +41,8 @@ export class project_set{//set某一个具体工程配置的时候
     project_pname:string;
     project_describe:string;
     project_property:string;
-    content:project_authority[];
-    constructor(project_pname:string,project_describe:string,project_property:string,content:project_authority[])
+    content:project_authoritys[];
+    constructor(project_pname:string,project_describe:string,project_property:string,content:project_authoritys[])
     {
         this.project_pname=project_pname;
         this.project_describe=project_describe;

@@ -1,11 +1,11 @@
 
 import { Component, ElementRef, Host, HostBinding, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NzMessageService, UploadFile } from 'ng-zorro-antd';
+import { NzMessageService, UploadFile, NzModalService } from 'ng-zorro-antd';
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 import { AVATAR_CODE, USERNAME } from '../../services/local-storage/local-storage.namespace';
 import { HttpServiceService } from 'src/app/services/http-service.service';
-import { message, Person, project, project_set, project_authority } from 'src/domain/person';
+import { message, Person, project, project_set, project_authoritys } from 'src/domain/person';
 import { List } from 'src/domain/entities';
 import { pageSwitchTransition } from './setting.animation';
 
@@ -18,7 +18,7 @@ import { pageSwitchTransition } from './setting.animation';
 export class ProjectSettingComponent implements OnInit {
 
   avatar = this.store.get(AVATAR_CODE);
-  initLoading = true; // bug
+  loading = false; // bug
   addListModalVisible = false;
   addAuthorityModalVisible=false;
   pro:List=
@@ -30,7 +30,7 @@ export class ProjectSettingComponent implements OnInit {
     project_property :"",
     content:[],
   }
-  projec_authority_object_ready:project_authority
+  projec_authority_object_ready:project_authoritys
   project_authority_ready:string;
   changeable:boolean;
   radioValue:number;
@@ -41,7 +41,8 @@ export class ProjectSettingComponent implements OnInit {
     private message: NzMessageService,
     private router: Router,
     private httpservice:HttpServiceService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private modal: NzModalService,
   ) { }
  pid:string;
   ngOnInit() {
@@ -80,7 +81,21 @@ export class ProjectSettingComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigateByUrl('/main/home');
+    if(this.changeable==true)
+    {
+      this.modal.confirm({
+        nzTitle: '确认退出吗',
+        nzContent: '更改的数据将无法更新',
+        nzOnOk: () => 
+          new Promise((res, rej) => {
+            this.router.navigateByUrl('/main/home');
+            res();
+          }).catch(() => console.error('failed'))
+      });
+    }
+    else {
+      this.router.navigateByUrl('/main/home');
+    }
   }
   click_button():void{
     const project_Set=new project_set(this.pro.project_pname,this.pro.project_describe,this.pro.project_property,this.pro.content)
@@ -114,7 +129,7 @@ export class ProjectSettingComponent implements OnInit {
     }
   }
   setAuthority():void{
-      this.projec_authority_object_ready.project_authority=this.project_authority_ready;
+      this.projec_authority_object_ready.project_authority=this.project_authority_ready;//将变更添加到pro中 等待提交按钮
       this.closeAddListModal();
   }
   openAddListModal(i:string): void {//更改权限窗口
@@ -124,16 +139,43 @@ export class ProjectSettingComponent implements OnInit {
   closeAddListModal(): void {
     this.addListModalVisible = false;
   }
+
+
   openAddAuthorityModal(i:string): void {
     this.addAuthorityModalVisible = true;
   }
   closeAddAuthorityModal(): void {
     this.addAuthorityModalVisible = false;
   }
-  addAuthority():void{
-    
+  addAuthority(membername:string):void{
+    this.loading = true;
+    this.httpservice.addAuthority(membername,this.project_authority_ready,this.pro.pid).subscribe(message=>this.sucessAdd(message))
+  }//不等待提交 直接添加
+  sucessAdd(mess:message)
+  {
+    this.pro.content.push(<project_authoritys>JSON.parse(mess.data))
+    this.loading=false;
+    this.closeAddAuthorityModal();
   }
-  onLoadMore():void{
+  successDelete(mess:message,name:string):void
+  {
+    const i = this.pro.content.findIndex(l => l.membername === name);
+    if (i !== -1) {
+      this.pro.content.splice(i, 1);
+    }
+    this.loading=false;
+  }
+  deleteAuthority(name :string):void{
+    this.modal.confirm({
+      nzTitle: '确认删除该成员吗',
+      nzContent: '该操作会导致该成员对于改工程失去权限',
+      nzOnOk: () => 
+        new Promise((res, rej) => {
+          this.loading=true;
+          this.httpservice.deleteAuthority(this.pro.pid,name).subscribe(message=>this.successDelete(message,name))
+                    res();
+        }).catch(() => console.error('Delete list failed'))
+    });
+  }
 
-  }
 }

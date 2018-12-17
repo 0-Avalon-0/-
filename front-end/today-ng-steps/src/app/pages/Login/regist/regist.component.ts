@@ -19,10 +19,10 @@ export class RegistComponent implements OnInit {
   constructor( private httpservice: HttpServiceService,private _router: Router,private store:LocalStorageService) { 
   }
   thisregist: Person = {
-    user_name: "123887678678",
-    user_password:"456",
+    user_name: "",
+    user_password:"",
     user_gender:"",
-    user_email:"123123@163.com",
+    user_email:"",
     user_signature:"",
     user_company:"",
     user_location:"",

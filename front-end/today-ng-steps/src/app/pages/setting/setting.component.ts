@@ -1,6 +1,6 @@
 import { Component, ElementRef, Host, HostBinding, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { NzMessageService, UploadFile } from 'ng-zorro-antd';
+import { NzMessageService, UploadFile, NzModalService } from 'ng-zorro-antd';
 import { pageSwitchTransition } from './setting.animation';
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 import { AVATAR_CODE, USERNAME } from '../../services/local-storage/local-storage.namespace';
@@ -34,7 +34,8 @@ export class SettingComponent implements OnInit {
     private store: LocalStorageService,
     private message: NzMessageService,
     private router: Router,
-    private httpservice:HttpServiceService
+    private httpservice:HttpServiceService,
+    private modal: NzModalService,
   ) { }
 
   ngOnInit() {
@@ -80,7 +81,21 @@ export class SettingComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigateByUrl('/main/home');
+    if(this.changeable==true)
+    {
+      this.modal.confirm({
+        nzTitle: '确认退出吗',
+        nzContent: '更改的数据将无法更新',
+        nzOnOk: () => 
+          new Promise((res, rej) => {
+            this.router.navigateByUrl('/main/home');
+            res();
+          }).catch(() => console.error('failed'))
+      });
+    }
+    else {
+      this.router.navigateByUrl('/main/home');
+    }
   }
   click_button():void{
     this.httpservice.setPersonMessage(this.user,this.user.user_name).subscribe(message=>this.successset(message));

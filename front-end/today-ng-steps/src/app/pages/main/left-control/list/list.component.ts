@@ -99,14 +99,18 @@ export class ListComponent implements OnInit, OnDestroy {
 
   click(_id: string): void {
     this.listService.setCurrentUuid(_id);
+    this._router.navigateByUrl('/main/project/'+_id);
   }
   click_person():void{
+    this.listService.setCurrentUuid("person");
     this._router.navigateByUrl('/main/person');
   }
   click_project():void{
+    this.listService.setCurrentUuid("today");
     this._router.navigateByUrl('/main/allproject');
   }
   click_home():void{
+    this.listService.setCurrentUuid("home");
     this._router.navigateByUrl('/main/home');
   }
   rename(name: string): void {

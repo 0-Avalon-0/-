@@ -76,7 +76,6 @@ export class AllprojectComponent implements OnInit {
       });
     },
     200);
-
   }
   updateId(i:string):void{
     this.contextListUuid=i

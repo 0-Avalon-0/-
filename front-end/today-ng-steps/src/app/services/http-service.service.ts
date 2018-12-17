@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import {Observable,of,throwError} from 'rxjs'; 
-import {Person,login,message, project, project_set} from '../../domain/person'
+import {Person,login,message, project, project_set, project_authoritys} from '../../domain/person'
 import { catchError, map, retry } from 'rxjs/operators';
 import { HttpHeaders ,HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -117,6 +117,21 @@ export class HttpServiceService {
   }
   setProjectPro(hero:project_set,pid:string):Observable<message> {
     return this.http.patch<message>(this.api_url.getProjectManage()+"/"+pid,hero,httpOptions).pipe(
+      catchError(this.handleError(4))
+    );
+  }
+  addAuthority(name:string,authority:string,pid:string)
+  {
+    const ready={
+        project_authority:authority
+    }
+    return this.http.post<message>(this.api_url.getProjectManage()+"/"+pid+"/"+"user"+"/"+name,(ready),httpOptions).pipe(
+      catchError(this.handleError(4))
+    );
+  }
+  deleteAuthority(pid:string,name:string)
+  {
+    return this.http.delete<message>(this.api_url.getProjectManage()+"/"+pid+"/user/"+name,httpOptions).pipe(
       catchError(this.handleError(4))
     );
   }

@@ -5,6 +5,7 @@ import { HomeComponent } from './right-control/home/home.component';
 import { AllprojectComponent } from './right-control/allproject/allproject.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { PersonComponent } from './right-control/person/person.component';
+import { ProjectComponent } from './right-control/project/project.component';
 const routes: Routes = [
   {
     path: 'main',
@@ -15,6 +16,9 @@ const routes: Routes = [
     },{
       path:'allproject',
       component: AllprojectComponent
+    },{
+      path:'project/:pid',
+      component: ProjectComponent
     },
     {
       path:'person',
