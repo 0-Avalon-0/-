@@ -19,7 +19,7 @@ export class FileComponent implements OnInit {
   }
 
   editFile():void{
-    //this.changeFileOption=2;
+    this.changeFileOption=2;
     //this.changeFile=this.fileService.getSelectedFile();
   }
   deleteFile():void{

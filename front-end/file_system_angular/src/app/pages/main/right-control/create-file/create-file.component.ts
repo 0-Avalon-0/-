@@ -9,26 +9,22 @@ import { FileService } from '../../../../services/file/file.service';
 })
 export class CreateFileComponent implements OnInit {
 
-  createdFile:File = {
-    parent_node:'root\Teddy',
-    file_fname:'',
-    file_property:1,
-    file_text:'',
-    pid:2
-  }
+  createdFile:File;
   thisFile: CreateFileHolder = {
-    file_property: 1,
-    file_text: this.createdFile.file_text
+    file_property: 0,
+    file_text:''
   }
 
   create(): void {
+
     this.fileService.createFile(this.thisFile,this.createdFile.file_fname,this.createdFile.pid,this.createdFile.parent_node);
+  
   }
 
   constructor(private fileService: FileService) {
   }
   ngOnInit() {
-
+    this.createdFile = new File(11,'root','',0,'');
   }
 
 }

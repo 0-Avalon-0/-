@@ -23,7 +23,7 @@ export class MenuComponent implements OnInit {
     }
   }
   setSelectedFile():void{
-    this.fileService.setSelectedFile(this.selectedFile);
+    //this.fileService.setSelectedFile(this.selectedFile);
   }
   constructor(
     private fileService:FileService,

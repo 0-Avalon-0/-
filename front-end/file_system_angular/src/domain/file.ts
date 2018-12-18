@@ -36,3 +36,15 @@ export class allFile{
 
 
 }
+export class RenameFileHolder{
+    file_fname:string;
+    constructor(file_fname:string){
+        this.file_fname=file_fname;
+    }
+}
+export class ChangeFileHolder{
+    file_text:string;
+    constructor(file_text:string){
+        this.file_text=file_text;
+    }
+}
