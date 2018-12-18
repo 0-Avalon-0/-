@@ -180,15 +180,15 @@ export class HttpServiceService {
   }
 
   //6.1查看目录下所有文件:GET menus / project / {pid} / path?path=...
-  getMenus(rootPath:string,pid :number)
+  getMenus(parent_node:string,pid :number)
   {
-    return this.http.get<message>(this.api_url.getMenuManage()+'/project/'+pid+'/path?path='+rootPath,httpOptions).pipe(
+    return this.http.get<message>(this.api_url.getMenuManage()+'/project/'+pid+'/path?path='+parent_node,httpOptions).pipe(
       catchError(this.handleError(6))
     );
   }
   ////6.2 文档重命名：PATCH / menus / {fname} / project / {pid} / filepaths?path=...
-  renameFile(renameFileHolder:RenameFileHolder, file_fname:string,pid:number,rootPath:string):Observable<message>{
-    return this.http.patch<message>(this.api_url.getMenuManage()+'/'+file_fname+'/project/'+pid+'/filepaths?path='+rootPath,(renameFileHolder), httpOptions).pipe(
+  renameFile(renameFileHolder:RenameFileHolder, file_fname:string,pid:number,parent_node:string):Observable<message>{
+    return this.http.patch<message>(this.api_url.getMenuManage()+'/'+file_fname+'/project/'+pid+'/filepaths?path='+parent_node,(renameFileHolder), httpOptions).pipe(
       catchError(this.handleError(6))
     );
   }

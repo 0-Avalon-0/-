@@ -12,12 +12,12 @@ export class CreateFolderComponent implements OnInit {
 
   thisFile:CreateFileHolder={
     file_property:1,
-    file_text:this.createdFolder.file_text
+    file_text:''
   }
 
   create():void{
     this.createdFolder.file_property = 1;
-    this.createdFolder.parent_node='root\Teddy';
+    this.createdFolder.parent_node='root';
     this.createdFolder.pid=2;
     this.fileService.createFile(this.thisFile,this.createdFolder.file_fname,this.createdFolder.pid,this.createdFolder.parent_node);
   }

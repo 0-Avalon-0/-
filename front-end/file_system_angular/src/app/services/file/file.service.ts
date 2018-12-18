@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { File, CreateFileHolder, Files, allFile, RenameFileHolder,ChangeFileHolder } from '../../../domain/file';
+import { File, CreateFileHolder, Files, allFile, RenameFileHolder, ChangeFileHolder, GetFileHolder, ReNameFileHolder } from '../../../domain/file';
 import { Subject } from 'rxjs';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { List } from '../../../domain/entities';
@@ -14,28 +14,42 @@ export class FileService {
 
   private files: File[] = [];
   private index;//index是当前文件总数
+  private currentIndex;
+  private currentFile;
 
-  constructor(private httpService: HttpServiceService,
-    private store: LocalStorageService) {
+  constructor(private httpService: HttpServiceService) {
 
-  } 
-   //5.1查看文档：GET / filemanagers / {fname} / project / {pid} / file?path=...
-getFile(i:number){
-  this.httpService.getFile(this.files[i].file_fname,this.files[i].pid,this.files[i].parent_node).subscribe(message=>this.successGetFile(i));
-}
-successGetFile(i:number){
-//查看文档逻辑
-}
-  
+  }
+  setCurrentIndex(i: number): void {
+    this.currentIndex = i;
+  }
+  getCurrentIndex(): number {
+    return this.currentIndex;
+  }
+  returnFile(i:number):File{
+return this.files[i];
+  }
+  //5.1查看文档：GET / filemanagers / {fname} / project / {pid} / file?path=...
+  getFile(i: number) {
+    this.httpService.getFile(this.files[i].file_fname, this.files[i].pid, this.files[i].parent_node).subscribe(message => this.successGetFile(message));
+  }
+  successGetFile(mes: message) {
+    alert("查看文档成功！");
+    this.currentFile = <GetFileHolder>JSON.parse(mes.data);
+    this.files[this.currentIndex].file_text = this.currentFile.file_text;
+  }
+
 
   //5.2修改文档： PUT / filemanagers / {fname} / project / {pid} / file?path=...
-changeFile(i:number){
-  const changeFileHolder = new ChangeFileHolder(this.files[i].file_text);
-  this.httpService.changeFile(this.files[i].file_fname,this.files[i].pid,this.files[i].parent_node,changeFileHolder).subscribe(message=>this.successChangeFile(i));
-}
-successChangeFile(i:number){
-//修改文档逻辑
-}
+  changeFile(i: number) {
+    const changeFileHolder = new ChangeFileHolder(this.files[i].file_text);
+    this.httpService.changeFile(this.files[i].file_fname, this.files[i].pid, this.files[i].parent_node, changeFileHolder).subscribe(message => this.successChangeFile(message));
+  }
+  successChangeFile(mes:message) {
+this.currentFile=<GetFileHolder>JSON.parse(mes.data);
+    this.files[this.currentIndex].file_text=this.currentFile.file_text;
+    alert("保存成功！");
+  }
 
   //5.3新建文档：POST / filemanagers / {fname} / project / {pid} / file?path=...
   createFileHolder: CreateFileHolder;
@@ -60,10 +74,9 @@ successChangeFile(i:number){
   }
 
   //6.1 查看目录下所有文件：GET menus / project / {pid} / path?path=...
-  
-  getMenus(parent_node:string,pid:number) {//工程路径;pid
-    this.httpService.getMenus(parent_node,pid).subscribe(message => this.successGetMenus(message));
-  alert('afterGetMenus');
+
+  getMenus(parent_node: string, pid: number) {//工程路径;pid
+    this.httpService.getMenus(parent_node, pid).subscribe(message => this.successGetMenus(message));
   }
   private menu: Files[];
   successGetMenus(mes: message) {
@@ -74,20 +87,19 @@ successChangeFile(i:number){
       this.files[i].file_fname = this.menu[i].file_fname;
       this.files[i].file_property = this.menu[i].file_property;
     }
-alert('afterSuccessGetMenus');
   }
-  getMenusToProject():Files[]{
+  getMenusToProject(): Files[] {
     return this.menu;
   }
 
   //6.2 文档重命名：PATCH / menus / {fname} / project / {pid} / filepaths?path=...
   renameFile(i: number) {
-    //click->i,传入的参数应为更新后的filename
     const renameFileHolder = new RenameFileHolder(this.files[i].file_fname);
-    this.httpService.renameFile(renameFileHolder, this.files[i].file_fname, this.files[i].pid, this.files[i].parent_node).subscribe(message => this.successRenameFile(this.files[i].file_fname, i));
+    this.httpService.renameFile(renameFileHolder, this.files[i].file_fname, this.files[i].pid, this.files[i].parent_node).subscribe(message => this.successRenameFile(message));
   }
-  successRenameFile(file_fname: string, i: number) {
-  //文档重命名逻辑
+  successRenameFile(mes:message) {
+    this.currentFile=<ReNameFileHolder>JSON.parse(mes.data);
+    this.files[this.currentIndex].file_fname=this.currentFile.file_fname;
   }
 
 
