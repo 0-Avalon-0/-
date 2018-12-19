@@ -24,7 +24,7 @@ export class Files {
         this.file_property = file_property;
     }
 }
-export class allFile {
+export class AllFile {
     path: string;
     pid: number;
     files: Files[];

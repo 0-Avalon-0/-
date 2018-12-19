@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { File, CreateFileHolder, Files, allFile, RenameFileHolder, ChangeFileHolder, GetFileHolder, ReNameFileHolder } from '../../../domain/file';
+import { File, CreateFileHolder, Files, AllFile, RenameFileHolder, ChangeFileHolder, GetFileHolder, ReNameFileHolder } from '../../../domain/file';
 import { Subject } from 'rxjs';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { List } from '../../../domain/entities';
@@ -65,7 +65,6 @@ this.currentFile=<GetFileHolder>JSON.parse(mes.data);
     this.httpService.createFile(createFileHolder, file_fname, pid, parent_node).subscribe(message => this.successCreateFile(file_fname, createFileHolder.file_text, parent_node, pid));
   }
   successCreateFile(file_fname: string, file_text: string, parent_node: string, pid: number): void {
-    alert(file_text);
     const fileHolder = new File(pid, parent_node, file_fname, 0, file_text);
     this.files[this.index] = fileHolder;
     this.index++;
@@ -89,8 +88,9 @@ this.currentFile=<GetFileHolder>JSON.parse(mes.data);
   private menu: Files[];
   successGetMenus(mes: message) {
     //收到的形式为name/property
-    this.menu = (<allFile>JSON.parse(mes.data)).files;
-    this.index = this.menu.length;
+    this.menu = (<AllFile>JSON.parse(mes.data)).files;
+    alert(this.menu[0].file_fname);
+    this.index = this.menu.length;//每次点击文件夹后，index必须改变
     for (var i = 0; i < this.menu.length; i++) {
       this.files[i].file_fname = this.menu[i].file_fname;
       this.files[i].file_property = this.menu[i].file_property;

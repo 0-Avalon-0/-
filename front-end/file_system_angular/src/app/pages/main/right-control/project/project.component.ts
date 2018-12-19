@@ -21,7 +21,7 @@ export class ProjectComponent implements OnInit {
   files:Files[];
   file:Files;
   selectedFile:Files;
-  parent_node='root';
+  parent_node='';
 
   clickSelectedFile(i:number):void{
     this.fileService.setCurrentIndex(i);
@@ -45,7 +45,6 @@ export class ProjectComponent implements OnInit {
       this.fileService.getMenus(this.parent_node,this._pid);
       this.files=this.fileService.getMenusToProject();
       this.fileService.setPid(this._pid);
-      alert('yeah');
      }); 
   }
 
