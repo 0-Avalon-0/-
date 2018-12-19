@@ -41,31 +41,31 @@ public class MenuDao implements Imenu{
 		HttpSession httpSession = httpServletRequest.getSession();
 		if(httpSession.getAttribute("user")!=null ) {
 			try {
-				//ÏÈÅĞ¶ÏÏîÄ¿ÊÇ·ñ´æÔÚ
+				//å…ˆåˆ¤æ–­é¡¹ç›®æ˜¯å¦å­˜åœ¨
 				String projectQuery = "select * from project where pid = ?";
 				List<Project> projectsList = jdbcTemplate.query(projectQuery, new Object[] {pid},new BeanPropertyRowMapper(Project.class));
 				if(projectsList!=null&&projectsList.size()>0) {
 					int projectproperty = projectsList.get(0).getproject_property();
 					
-					boolean isAble = false;//ÊÇ·ñÓĞÈ¨ÏŞ
+					boolean isAble = false;//æ˜¯å¦æœ‰æƒé™
 					
-					//³ıÁË²é¿´ÎÄµµÒÔÍâ¶¼²»ĞèÒª·Ö¹«Ë½ÓĞÏîÄ¿
+					//é™¤äº†æŸ¥çœ‹æ–‡æ¡£ä»¥å¤–éƒ½ä¸éœ€è¦åˆ†å…¬ç§æœ‰é¡¹ç›®
 					Status autStatus = authorityDao.getAuthority(pid, (String)httpSession.getAttribute("user"));
 					if(autStatus.getCode()==200) {
-						//ÅĞ¶ÏÈ¨ÏŞ									
+						//åˆ¤æ–­æƒé™									
 						int cusAuhthority = Integer.valueOf(autStatus.getData());
 						if(cusAuhthority>=1) {
 							isAble = true;
 						}												
 					}else {
-						//»ñÈ¡È¨ÏŞÊ±¾ÍÓĞÎÊÌâ
+						//è·å–æƒé™æ—¶å°±æœ‰é—®é¢˜
 						status = autStatus;
 						httpServletResponse.setStatus(status.getCode());
 					}
-					//´Ë´¦ĞèÒªÅĞ¶ÏÊÇ·ñÓµÓĞÈ¨ÏŞ
+					//æ­¤å¤„éœ€è¦åˆ¤æ–­æ˜¯å¦æ‹¥æœ‰æƒé™
 					if(isAble) {
-						String sql = "select file_fname,file_property from menu where file_parentnode = ?";
-						List<SimpleFile> simpleFiles = jdbcTemplate.query(sql, new Object[] {path},new BeanPropertyRowMapper(SimpleFile.class));
+						String sql = "select file_fname,file_property from menu where file_parentnode = ? and pid = ?";
+						List<SimpleFile> simpleFiles = jdbcTemplate.query(sql, new Object[] {path,pid},new BeanPropertyRowMapper(SimpleFile.class));
 						if(simpleFiles!=null && simpleFiles.size()>=0) {
 							acceptAllFiles.setfiles(simpleFiles);
 							status.setCode(200);
@@ -75,23 +75,23 @@ public class MenuDao implements Imenu{
 						}else {
 							status.setCode(600);
 							httpServletResponse.setStatus(600);
-							status.setData("²éÑ¯ÎÄ¼şÄ¿Â¼Ê§°Ü");							
+							status.setData("æŸ¥è¯¢æ–‡ä»¶ç›®å½•å¤±è´¥");							
 						}					
 					}else {
 						status.setCode(403);
 						httpServletResponse.setStatus(403);
-						status.setData("ÓÃ»§È¨ÏŞ²»×ã");
+						status.setData("ç”¨æˆ·æƒé™ä¸è¶³");
 					}			
 				}else {
 					status.setCode(404);
 					httpServletResponse.setStatus(404);
-					status.setData("¹¤³Ì²»´æÔÚ");
+					status.setData("å·¥ç¨‹ä¸å­˜åœ¨");
 				}	
 			}catch(Exception exception) {
 				if(exception instanceof DataAccessResourceFailureException) {
 					status.setCode(500);
 					httpServletResponse.setStatus(500);
-					status.setData("Êı¾İ¿âÁ¬½ÓÊ§°Ü");
+					status.setData("æ•°æ®åº“è¿æ¥å¤±è´¥");
 				}else {
 					exception.printStackTrace();
 					
@@ -103,7 +103,7 @@ public class MenuDao implements Imenu{
 		}else {
 			status.setCode(401);
 			httpServletResponse.setStatus(401);
-			status.setData("ÓÃ»§Î´µÇÂ¼");	
+			status.setData("ç”¨æˆ·æœªç™»å½•");	
 		}
 		return status;
 	}
@@ -122,28 +122,28 @@ public class MenuDao implements Imenu{
 		HttpSession httpSession = httpServletRequest.getSession();
 		if(httpSession.getAttribute("user")!=null ) {
 			try {
-				//ÏÈÅĞ¶ÏÏîÄ¿ÊÇ·ñ´æÔÚ
+				//å…ˆåˆ¤æ–­é¡¹ç›®æ˜¯å¦å­˜åœ¨
 				String projectQuery = "select * from project where pid = ?";
 				List<Project> projectsList = jdbcTemplate.query(projectQuery, new Object[] {pid},new BeanPropertyRowMapper(Project.class));
 				if(projectsList!=null&&projectsList.size()>0) {
 					int projectproperty = projectsList.get(0).getproject_property();
 					
-					boolean isAble = false;//ÊÇ·ñÓĞÈ¨ÏŞ
+					boolean isAble = false;//æ˜¯å¦æœ‰æƒé™
 					
-					//³ıÁË²é¿´ÎÄµµÒÔÍâ¶¼²»ĞèÒª·Ö¹«Ë½ÓĞÏîÄ¿
+					//é™¤äº†æŸ¥çœ‹æ–‡æ¡£ä»¥å¤–éƒ½ä¸éœ€è¦åˆ†å…¬ç§æœ‰é¡¹ç›®
 					Status autStatus = authorityDao.getAuthority(pid, (String)httpSession.getAttribute("user"));
 					if(autStatus.getCode()==200) {
-						//ÅĞ¶ÏÈ¨ÏŞ									
+						//åˆ¤æ–­æƒé™									
 						int cusAuhthority = Integer.valueOf(autStatus.getData());
 						if(cusAuhthority>=1) {
 							isAble = true;
 						}												
 					}else {
-						//»ñÈ¡È¨ÏŞÊ±¾ÍÓĞÎÊÌâ
+						//è·å–æƒé™æ—¶å°±æœ‰é—®é¢˜
 						status = autStatus;
 						httpServletResponse.setStatus(status.getCode());
 					}
-					//´Ë´¦ĞèÒªÅĞ¶ÏÊÇ·ñÓµÓĞÈ¨ÏŞ
+					//æ­¤å¤„éœ€è¦åˆ¤æ–­æ˜¯å¦æ‹¥æœ‰æƒé™
 					if(isAble) {
 						String getMenu = "select * from menu where pid = ? and file_node = ?";
 						
@@ -165,28 +165,28 @@ public class MenuDao implements Imenu{
 							}else {
 								status.setCode(600);
 								httpServletResponse.setStatus(600);
-								status.setData("¸ü¸ÄÎÄ¼şÃûÊ§°Ü");
+								status.setData("æ›´æ”¹æ–‡ä»¶åå¤±è´¥");
 							}									
 						}else {
 							status.setCode(600);
 							httpServletResponse.setStatus(600);
-							status.setData("²éÑ¯ÎÄ¼şÄ¿Â¼Ê§°Ü");							
+							status.setData("æŸ¥è¯¢æ–‡ä»¶ç›®å½•å¤±è´¥");							
 						}					
 					}else {
 						status.setCode(403);
 						httpServletResponse.setStatus(403);
-						status.setData("ÓÃ»§È¨ÏŞ²»×ã");
+						status.setData("ç”¨æˆ·æƒé™ä¸è¶³");
 					}			
 				}else {
 					status.setCode(404);
 					httpServletResponse.setStatus(404);
-					status.setData("¹¤³Ì²»´æÔÚ");
+					status.setData("å·¥ç¨‹ä¸å­˜åœ¨");
 				}	
 			}catch(Exception exception) {
 				if(exception instanceof DataAccessResourceFailureException) {
 					status.setCode(500);
 					httpServletResponse.setStatus(500);
-					status.setData("Êı¾İ¿âÁ¬½ÓÊ§°Ü");
+					status.setData("æ•°æ®åº“è¿æ¥å¤±è´¥");
 				}else {	
 					status.setCode(600);
 					httpServletResponse.setStatus(600);
@@ -196,7 +196,7 @@ public class MenuDao implements Imenu{
 		}else {
 			status.setCode(401);
 			httpServletResponse.setStatus(401);
-			status.setData("ÓÃ»§Î´µÇÂ¼");	
+			status.setData("ç”¨æˆ·æœªç™»å½•");	
 		}
 		
 		return status;
