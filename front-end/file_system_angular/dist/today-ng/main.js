@@ -149,12 +149,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppModule", function() { return AppModule; });
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var ng_zorro_antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ng-zorro-antd */ "./node_modules/ng-zorro-antd/fesm5/ng-zorro-antd.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var ng_zorro_antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ng-zorro-antd */ "./node_modules/ng-zorro-antd/fesm5/ng-zorro-antd.js");
 /* harmony import */ var _angular_common_locales_zh__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/locales/zh */ "./node_modules/@angular/common/locales/zh.js");
 /* harmony import */ var _angular_common_locales_zh__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_angular_common_locales_zh__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
@@ -182,6 +182,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 // modules
 
 
@@ -194,38 +195,39 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-Object(_angular_common__WEBPACK_IMPORTED_MODULE_7__["registerLocaleData"])(_angular_common_locales_zh__WEBPACK_IMPORTED_MODULE_8___default.a);
+Object(_angular_common__WEBPACK_IMPORTED_MODULE_2__["registerLocaleData"])(_angular_common_locales_zh__WEBPACK_IMPORTED_MODULE_8___default.a);
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"],
+                _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"],
                 _pages_Login_login_login_component__WEBPACK_IMPORTED_MODULE_15__["LoginComponent"],
-                _pages_Login_regist_regist_component__WEBPACK_IMPORTED_MODULE_16__["RegistComponent"]
+                _pages_Login_regist_regist_component__WEBPACK_IMPORTED_MODULE_16__["RegistComponent"],
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
-                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_3__["BrowserAnimationsModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"],
-                ng_zorro_antd__WEBPACK_IMPORTED_MODULE_6__["NgZorroAntdModule"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormsModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClientModule"],
+                ng_zorro_antd__WEBPACK_IMPORTED_MODULE_7__["NgZorroAntdModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_9__["AppRoutingModule"],
                 _pages_main_main_module__WEBPACK_IMPORTED_MODULE_10__["MainModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_17__["RouterModule"],
                 _pages_setting_setting_module__WEBPACK_IMPORTED_MODULE_14__["SettingModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormsModule"],
             ],
             providers: [
                 { provide: _angular_core__WEBPACK_IMPORTED_MODULE_1__["LOCALE_ID"], useValue: 'zh-Hans' },
-                { provide: ng_zorro_antd__WEBPACK_IMPORTED_MODULE_6__["NZ_I18N"], useValue: ng_zorro_antd__WEBPACK_IMPORTED_MODULE_6__["zh_CN"] },
+                { provide: ng_zorro_antd__WEBPACK_IMPORTED_MODULE_7__["NZ_I18N"], useValue: ng_zorro_antd__WEBPACK_IMPORTED_MODULE_7__["zh_CN"] },
+                { provide: _angular_common__WEBPACK_IMPORTED_MODULE_2__["LocationStrategy"], useClass: _angular_common__WEBPACK_IMPORTED_MODULE_2__["HashLocationStrategy"] },
                 _services_local_storage_local_storage_service__WEBPACK_IMPORTED_MODULE_11__["LocalStorageService"],
                 _services_list_list_service__WEBPACK_IMPORTED_MODULE_12__["ListService"],
                 _services_api_service__WEBPACK_IMPORTED_MODULE_18__["ApiService"],
                 _services_init_guard_init_guard_service__WEBPACK_IMPORTED_MODULE_13__["InitGuardService"]
             ],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]]
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
@@ -242,7 +244,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\t\t/*\r\n\t\t\tcreate by zrong.me\r\n\t\t\t璇峰ぇ瀹跺叧娉ㄦ垜鐨勪釜浜哄井鍗� 璇碯鍏堢敓鐖变綘\r\n\t\t\t涔熻澶у鍏虫敞鎴戠殑涓汉缃戠珯 zrong.me\r\n\t\t*/\r\n\t\t*{\r\n\t\t\tpadding: 0;\r\n\t\t\tmargin: 0;\r\n\t\t\tlist-style: none;\r\n\t\t\ttext-decoration: none;\r\n\t\t}\r\n\t\thtml,body{\r\n\t\t\theight: 100%;\r\n\t\t\twidth: 100%;\r\n\t\t\tfont-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',Arial,sans-serif;\r\n\t\t\tcolor: #555;\r\n    \t\tfont-size: 15px;\r\n    \t\tline-height: 1.7;\r\n\t\t}\r\n\t\tinput:focus{\r\n\t\t\toutline: none;\r\n\t\t}\r\n\t\tcanvas{\r\n  \t\t\tdisplay:block;\r\n  \t\t\tvertical-align:bottom;\r\n\t\t}\r\n\t\t#box{\r\n\t\t\twidth: 100%;\r\n  \t\t\theight: 100%;\r\n  \t\t\tbackground-color: #F7FAFC;\r\n  \t\t\tbackground-image: url('bg.jpg');\r\n  \t\t\tbackground-size: cover;\r\n  \t\t\tbackground-position: 50% 50%;\r\n  \t\t\tbackground-repeat: no-repeat;\r\n  \t\t\tposition: fixed;\r\n  \t\t\ttop: 0;\r\n  \t\t\tleft: 0;\r\n  \t\t\tright: 0;\r\n  \t\t\tbottom: 0;\r\n  \t\t\tz-index: 1;\r\n\t\t}\r\n\t\t.cent-box{\r\n\t\t\twidth: 300px;\r\n\t\t\theight: 440px;\r\n\t\t\tvertical-align: middle;\r\n\t\t\twhite-space: normal;\r\n\t\t\tmargin: 0 auto;\r\n\t\t\tposition: absolute;\r\n\t\t\tz-index: 2;\r\n\t\t\tleft: 50%;\r\n\t\t\ttop: 50%;\r\n\t\t\tmargin-left: -150px;\r\n\t\t\tmargin-top: -220px;\r\n\t\t}\r\n\t\t.register-box{\r\n\t\t\theight: 490px;\r\n\t\t\tmargin-top: -270px;\r\n\t\t}\r\n\t\t.cent-box-header{\r\n\t\t\ttext-align: center;\r\n\t\t}\r\n\t\t.hide{\r\n\t\t\tfont: 0/0 a;\r\n    \t\tcolor: transparent;\r\n    \t\ttext-shadow: none;\r\n    \t\tbackground-color: transparent;\r\n    \t\tborder: 0;\r\n\t\t}\r\n\t\t.cent-box-header .main-title{\r\n\t\t\twidth: 160px;\r\n\t\t\theight: 74px;\r\n\t\t\tmargin: 0 auto;\r\n\t\t\t\r\n\t\t\tbackground-size: contain;\r\n\t\t}\r\n\t\t.cent-box-header .sub-title{\r\n\t\t\tmargin: 30px 0 20px;\r\n    \t\tfont-weight: 400;\r\n    \t\tfont-size: 18px;\r\n    \t\tline-height: 1;\r\n\t\t}\r\n\t\t.clearfix:before{\r\n\t\t\tcontent: '';\r\n\t\t\tdisplay: table;\r\n\t\t}\r\n\t\t.index-tab{\r\n\t\t\ttext-align: center;\r\n\t\t\tfont-size: 18px;\r\n\t\t\tmargin-bottom: 10px;\r\n\t\t}\r\n\t\t.index-tab .index-slide-nav{\r\n\t\t\tdisplay: inline-block;\r\n\t\t\tposition: relative;\r\n\t\t}\r\n\t\t.index-tab .index-slide-nav a{\r\n\t\t\tfloat: left;\r\n\t\t\twidth: 4em;\r\n\t\t\tline-height: 35px;\r\n\t\t\topacity: 0.7;\r\n   transition: opacity .15s,color .15s;\r\n    \t\tcolor: #555;\r\n\t\t}\r\n\t\t.index-tab .index-slide-nav a:hover{\r\n\t\t\topacity: 1;\r\n\t\t}\r\n\t\t.index-tab .index-slide-nav a.active{\r\n\t\t\topacity: 1;\r\n\t\t\tcolor: #0f88eb;\r\n\t\t}\r\n\t\t.slide-bar{\r\n\t\t\tposition: absolute;\r\n    \t\tleft: 0;\r\n    \t\tbottom: 0;\r\n    \t\tmargin: 0 .8em;\r\n    \t\twidth: 2.4em;\r\n    \t\theight: 2px;\r\n    \t\tbackground: #0f88eb;\r\n\t\t}\r\n\t\t.slide-bar1{\r\n\t\t\tleft: 4em;\r\n\t\t}\r\n\t\t.form{\r\n\t\t\tfloat: none;\r\n\t\t\tmargin: auto;\r\n\t\t\ttext-align: left;\r\n\t\t\twidth: 300px;\r\n\t\t}\r\n\t\t.form .group{\r\n\t\t\tpadding: 1px 0;\r\n    \t\tborder: 1px solid #d5d5d5;\r\n    \t\tborder-radius: 3px;\r\n\t\t}\r\n\t\t.form .group .group-ipt{\r\n\t\t\tposition: relative;\r\n    \t\tmargin: 0;\r\n    \t\toverflow: hidden;\r\n\t\t}\r\n\t\t.form .group .group-ipt input{\r\n\t\t\tpadding: 1em .8em;\r\n    \t\twidth: 100%;\r\n    \t\tbox-sizing: border-box;\r\n    \t\tborder: 0;\r\n    \t\tborder-radius: 0;\r\n    \t\tbox-shadow: none;\r\n    \t\tbackground: rgba(255,255,255,0.5);\r\n    \t\tfont-family: 'Microsoft Yahei';\r\n    \t\tcolor: #666;\r\n    \t\tposition: relative;\r\n\t\t}\r\n\t\t#password,#verify,#user,#password1{\r\n\t\t\tborder-top: 1px solid #e8e8e8;\r\n\t\t}\r\n\t\t.imgcode{\r\n\t\t\twidth: 95px;\r\n\t\t\tposition: absolute;\r\n\t\t\tright: 0;\r\n\t\t\ttop: 2px;\r\n\t\t\tcursor: pointer;\r\n\t\t\theight: 40px;\r\n\t\t}\r\n\t\t.button{\r\n\t\t\tmargin-top:18px; \r\n\t\t}\r\n\t\t#button{\r\n\t\t\twidth: 100%;\r\n\t\t\tbackground: #0f88eb;\r\n    \t\tbox-shadow: none;\r\n    \t\tborder: 0;\r\n    \t\tborder-radius: 3px;\r\n    \t\tline-height: 41px;\r\n    \t\tcolor: #fff;\r\n    \t\tdisplay: block;\r\n    \t\tfont-size: 15px;\r\n    \t\tcursor: pointer;\r\n    \t\tfont-family: 'Microsoft Yahei';\r\n\t\t}\r\n\t\t#button:hover{\r\n\t\t\tbackground: #80c3f7;\r\n\t\t}\r\n\t\t.remember{\r\n\t\t\tmargin-top: 10px;\r\n\t\t\tline-height: 30px;\r\n\t\t}\r\n\t\t.remember label{\r\n\t\t\tdisplay: block;\r\n\t\t}\r\n\t\t.remember-me{\r\n\t\t\tfont-size: 14px;\r\n\t\t\tfloat: left;\r\n\t\t\tposition: relative;\r\n\t\t\tcursor: pointer;\r\n\t\t}\r\n\t\t.icon{\r\n\t\t\twidth: 11px;\r\n\t\t\theight: 11px;\r\n\t\t\tdisplay: block;\r\n\t\t\tborder: 1px solid #ccc;\r\n\t\t\tfloat: left;\r\n\t\t\tmargin-top: 8px;\r\n\t\t\tmargin-right: 5px;\r\n\t\t\tcursor: pointer;\r\n\t\t}\r\n\t\t.zt{\r\n\t\t\twidth: 9px;\r\n\t\t\theight: 9px;\r\n\t\t\tbackground: #0f88eb;\r\n\t\t\tmargin: 1px;\r\n\t\t\tdisplay: block;\r\n\t\t}\r\n\t\t#remember-me{\r\n\t\t\tposition: absolute;\r\n\t\t\tleft: 0;\r\n\t\t\ttop: 8px;\r\n\t\t\topacity: 0;\r\n\t\t\tcursor: pointer;\r\n\t\t}\r\n\t\t.forgot-password{\r\n\t\t\tfloat: right;\r\n\t\t\tfont-size: 14px;\r\n\t\t}\r\n\t\t.forgot-password a{\r\n\t\t\tcolor: #555;\r\n\t\t}\r\n\t\t.forgot-password a:hover{\r\n\t\t\ttext-decoration: underline;\r\n\t\t}\r\n\t\t.footer{\r\n\t\t\tposition: fixed;\r\n\t\t\twidth: 100%;\r\n\t\t\theight: 40px;\r\n\t\t\tbottom: 0;\r\n\t\t\tleft: 0;\r\n\t\t\ttext-align: center;\r\n\t\t\tcolor: #999;\r\n\t\t\tz-index: 2;\r\n\t\t\tpadding-bottom: 10px;\r\n\t\t\tfont-size: 13px;\r\n\t\t}\r\n\t\t.footer a{\r\n\t\t\tcolor: #666;\r\n\t\t\ttext-decoration: underline;\r\n\t\t}"
+module.exports = "\t\t/*\r\n\t\t\tcreate by zrong.me\r\n\t\t\t璇峰ぇ瀹跺叧娉ㄦ垜鐨勪釜浜哄井鍗� 璇碯鍏堢敓鐖变綘\r\n\t\t\t涔熻澶у鍏虫敞鎴戠殑涓汉缃戠珯 zrong.me\r\n\t\t*/\r\n\t\t*{\r\n\t\t\tpadding: 0;\r\n\t\t\tmargin: 0;\r\n\t\t\tlist-style: none;\r\n\t\t\ttext-decoration: none;\r\n\t\t}\r\n\t\thtml,body{\r\n\t\t\theight: 100%;\r\n\t\t\twidth: 100%;\r\n\t\t\tfont-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',Arial,sans-serif;\r\n\t\t\tcolor: #555;\r\n    \t\tfont-size: 15px;\r\n    \t\tline-height: 1.7;\r\n\t\t}\r\n\t\tinput:focus{\r\n\t\t\toutline: none;\r\n\t\t}\r\n\t\tcanvas{\r\n  \t\t\tdisplay:block;\r\n\t\t}\r\n\t\t#box{\r\n\t\t\twidth: 100%;\r\n  \t\t\theight: 100%;\r\n  \t\t\tbackground-color: #F7FAFC;\r\n  \t\t\tbackground-image: url('bg.jpg');\r\n  \t\t\tbackground-size: cover;\r\n  \t\t\tbackground-position: 50% 50%;\r\n  \t\t\tbackground-repeat: no-repeat;\r\n  \t\t\tposition: fixed;\r\n  \t\t\ttop: 0;\r\n  \t\t\tleft: 0;\r\n  \t\t\tright: 0;\r\n  \t\t\tbottom: 0;\r\n  \t\t\tz-index: 1;\r\n\t\t}\r\n\t\t.cent-box{\r\n\t\t\twidth: 300px;\r\n\t\t\theight: 440px;\r\n\t\t\tvertical-align: middle;\r\n\t\t\twhite-space: normal;\r\n\t\t\tmargin: 0 auto;\r\n\t\t\tposition: absolute;\r\n\t\t\tz-index: 2;\r\n\t\t\tleft: 50%;\r\n\t\t\ttop: 50%;\r\n\t\t\tmargin-left: -150px;\r\n\t\t\tmargin-top: -220px;\r\n\t\t}\r\n\t\t.register-box{\r\n\t\t\theight: 490px;\r\n\t\t\tmargin-top: -270px;\r\n\t\t}\r\n\t\t.cent-box-header{\r\n\t\t\ttext-align: center;\r\n\t\t}\r\n\t\t.hide{\r\n\t\t\tfont: 0/0 a;\r\n    \t\tcolor: transparent;\r\n    \t\ttext-shadow: none;\r\n    \t\tbackground-color: transparent;\r\n    \t\tborder: 0;\r\n\t\t}\r\n\t\t.cent-box-header .main-title{\r\n\t\t\twidth: 160px;\r\n\t\t\theight: 74px;\r\n\t\t\tmargin: 0 auto;\r\n\t\t\t\r\n\t\t\tbackground-size: contain;\r\n\t\t}\r\n\t\t.cent-box-header .sub-title{\r\n\t\t\tmargin: 30px 0 20px;\r\n    \t\tfont-weight: 400;\r\n    \t\tfont-size: 18px;\r\n    \t\tline-height: 1;\r\n\t\t}\r\n\t\t.clearfix:before{\r\n\t\t\tcontent: '';\r\n\t\t\tdisplay: table;\r\n\t\t}\r\n\t\t.index-tab{\r\n\t\t\ttext-align: center;\r\n\t\t\tfont-size: 18px;\r\n\t\t\tmargin-bottom: 10px;\r\n\t\t}\r\n\t\t.index-tab .index-slide-nav{\r\n\t\t\tdisplay: inline-block;\r\n\t\t\tposition: relative;\r\n\t\t}\r\n\t\t.index-tab .index-slide-nav a{\r\n\t\t\tfloat: left;\r\n\t\t\twidth: 4em;\r\n\t\t\tline-height: 35px;\r\n\t\t\topacity: 0.7;\r\n   transition: opacity .15s,color .15s;\r\n    \t\tcolor: #555;\r\n\t\t}\r\n\t\t.index-tab .index-slide-nav a:hover{\r\n\t\t\topacity: 1;\r\n\t\t}\r\n\t\t.index-tab .index-slide-nav a.active{\r\n\t\t\topacity: 1;\r\n\t\t\tcolor: #0f88eb;\r\n\t\t}\r\n\t\t.slide-bar{\r\n\t\t\tposition: absolute;\r\n    \t\tleft: 0;\r\n    \t\tbottom: 0;\r\n    \t\tmargin: 0 .8em;\r\n    \t\twidth: 2.4em;\r\n    \t\theight: 2px;\r\n    \t\tbackground: #0f88eb;\r\n\t\t}\r\n\t\t.slide-bar1{\r\n\t\t\tleft: 4em;\r\n\t\t}\r\n\t\t.form{\r\n\t\t\tfloat: none;\r\n\t\t\tmargin: auto;\r\n\t\t\ttext-align: left;\r\n\t\t\twidth: 300px;\r\n\t\t}\r\n\t\t.form .group{\r\n\t\t\tpadding: 1px 0;\r\n    \t\tborder: 1px solid #d5d5d5;\r\n    \t\tborder-radius: 3px;\r\n\t\t}\r\n\t\t.form .group .group-ipt{\r\n\t\t\tposition: relative;\r\n    \t\tmargin: 0;\r\n    \t\toverflow: hidden;\r\n\t\t}\r\n\t\t.form .group .group-ipt input{\r\n\t\t\tpadding: 1em .8em;\r\n    \t\twidth: 100%;\r\n    \t\tbox-sizing: border-box;\r\n    \t\tborder: 0;\r\n    \t\tborder-radius: 0;\r\n    \t\tbox-shadow: none;\r\n    \t\tbackground: rgba(255,255,255,0.5);\r\n    \t\tfont-family: 'Microsoft Yahei';\r\n    \t\tcolor: #666;\r\n    \t\tposition: relative;\r\n\t\t}\r\n\t\t#password,#verify,#user,#password1{\r\n\t\t\tborder-top: 1px solid #e8e8e8;\r\n\t\t}\r\n\t\t.imgcode{\r\n\t\t\twidth: 95px;\r\n\t\t\tposition: absolute;\r\n\t\t\tright: 0;\r\n\t\t\ttop: 2px;\r\n\t\t\tcursor: pointer;\r\n\t\t\theight: 40px;\r\n\t\t}\r\n\t\t.button{\r\n\t\t\tmargin-top:18px; \r\n\t\t}\r\n\t\t#button{\r\n\t\t\twidth: 100%;\r\n\t\t\tbackground: #0f88eb;\r\n    \t\tbox-shadow: none;\r\n    \t\tborder: 0;\r\n    \t\tborder-radius: 3px;\r\n    \t\tline-height: 41px;\r\n    \t\tcolor: #fff;\r\n    \t\tdisplay: block;\r\n    \t\tfont-size: 15px;\r\n    \t\tcursor: pointer;\r\n    \t\tfont-family: 'Microsoft Yahei';\r\n\t\t}\r\n\t\t#button:hover{\r\n\t\t\tbackground: #80c3f7;\r\n\t\t}\r\n\t\t.remember{\r\n\t\t\tmargin-top: 10px;\r\n\t\t\tline-height: 30px;\r\n\t\t}\r\n\t\t.remember label{\r\n\t\t\tdisplay: block;\r\n\t\t}\r\n\t\t.remember-me{\r\n\t\t\tfont-size: 14px;\r\n\t\t\tfloat: left;\r\n\t\t\tposition: relative;\r\n\t\t\tcursor: pointer;\r\n\t\t}\r\n\t\t.icon{\r\n\t\t\twidth: 11px;\r\n\t\t\theight: 11px;\r\n\t\t\tdisplay: block;\r\n\t\t\tborder: 1px solid #ccc;\r\n\t\t\tfloat: left;\r\n\t\t\tmargin-top: 8px;\r\n\t\t\tmargin-right: 5px;\r\n\t\t\tcursor: pointer;\r\n\t\t}\r\n\t\t.zt{\r\n\t\t\twidth: 9px;\r\n\t\t\theight: 9px;\r\n\t\t\tbackground: #0f88eb;\r\n\t\t\tmargin: 1px;\r\n\t\t\tdisplay: block;\r\n\t\t}\r\n\t\t#remember-me{\r\n\t\t\tposition: absolute;\r\n\t\t\tleft: 0;\r\n\t\t\ttop: 8px;\r\n\t\t\topacity: 0;\r\n\t\t\tcursor: pointer;\r\n\t\t}\r\n\t\t.forgot-password{\r\n\t\t\tfloat: right;\r\n\t\t\tfont-size: 14px;\r\n\t\t}\r\n\t\t.forgot-password a{\r\n\t\t\tcolor: #555;\r\n\t\t}\r\n\t\t.forgot-password a:hover{\r\n\t\t\ttext-decoration: underline;\r\n\t\t}\r\n\t\t.footer{\r\n\t\t\tposition: fixed;\r\n\t\t\twidth: 100%;\r\n\t\t\theight: 40px;\r\n\t\t\tbottom: 0;\r\n\t\t\tleft: 0;\r\n\t\t\ttext-align: center;\r\n\t\t\tcolor: #999;\r\n\t\t\tz-index: 2;\r\n\t\t\tpadding-bottom: 10px;\r\n\t\t\tfont-size: 13px;\r\n\t\t}\r\n\t\t.footer a{\r\n\t\t\tcolor: #666;\r\n\t\t\ttext-decoration: underline;\r\n\t\t}"
 
 /***/ }),
 
@@ -292,7 +294,7 @@ var LoginComponent = /** @class */ (function () {
         this.httpservice = httpservice;
         this.store = store;
         this.thislog = {
-            user_password: "456",
+            user_password: "",
         };
     }
     LoginComponent.prototype.ngOnInit = function () {
@@ -2498,7 +2500,7 @@ var HttpServiceService = /** @class */ (function () {
                 else if (error.status == "500") {
                     alert("服务器不可用，请稍后重试");
                 }
-                else if (operation = _this.FILE) {
+                else if (operation == _this.FILE) {
                     alert('没发送成功！');
                 }
                 else {
@@ -2537,7 +2539,7 @@ var HttpServiceService = /** @class */ (function () {
         var ready = {
             project_authority: authority
         };
-        return this.http.post(this.api_url.getProjectManage() + "/" + pid + "/" + "user" + "/" + name, (ready), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError(4)));
+        return this.http.post(this.api_url.getProjectManage() + "/" + pid + "/" + "user" + "/" + name, (ready), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError(3)));
     };
     HttpServiceService.prototype.deleteAuthority = function (pid, name) {
         return this.http.delete(this.api_url.getProjectManage() + "/" + pid + "/user/" + name, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError(4)));

@@ -6,12 +6,13 @@ import{RegistComponent} from './pages/Login/regist/regist.component'
 import { FileComponent } from './pages/main/right-control/file/file.component';
 import { MenuComponent } from './pages/main/right-control/menu/menu.component';
 import { CreateFileComponent } from './pages/main/right-control/create-file/create-file.component';
+import { ProjectSettingComponent } from './pages/setting/project-setting.component';
 const routes: Routes = [
-  { path: 'summary', redirectTo: '/summary', pathMatch: 'full' },
-  { path: 'setting', redirectTo: '/setting', pathMatch: 'full' },
-  { path: 'login',  component: LoginComponent },
+  { path: 'setting' ,loadChildren: './pages/setting/setting.module#SettingModule', pathMatch: 'full' },
+  { path: '', redirectTo: '/main/home', pathMatch: 'full'},
+  { path:'projectconfigure/:pid',component:ProjectSettingComponent},
   { path: 'regist',  component: RegistComponent },
-  { path: '' ,redirectTo:'/main/home',pathMatch: 'full'},
+  { path: 'login',  component: LoginComponent },
   {path: 'file',component:FileComponent},
   {path :'menu',component:MenuComponent},
   {path:'create-file',component:CreateFileComponent },

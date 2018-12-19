@@ -13,6 +13,6 @@ import { ProjectSettingComponent } from './project-setting.component';
     NgZorroAntdModule,
     FormsModule
   ],
-  declarations: [ SettingComponent, ProjectSettingComponent ]
+  declarations: [ SettingComponent ]
 })
 export class SettingModule { }

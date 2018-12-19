@@ -25,6 +25,7 @@ export class AllprojectComponent implements OnInit {
   constructor(private listService: ListService,private _router:Router,
     private modal: NzModalService,) { 
   }
+  navigateTo="/main/home"
   page="allproject建议"
   renameListModalVisible = false;
   private destroy$ = new Subject();

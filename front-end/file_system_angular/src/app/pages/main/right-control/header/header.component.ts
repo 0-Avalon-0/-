@@ -6,6 +6,7 @@ import { ListService } from '../../../../services/list/list.service';
 import { Input } from '@angular/core';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { USERNAME } from 'src/app/services/local-storage/local-storage.namespace';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -20,10 +21,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   completedHide = false;  
   hour:number;
   warm:string;
+  @Input() routerNavigate:string;
   @Input() suggetContent: string;
   constructor(
     private listService: ListService,
     private store:LocalStorageService,
+    private _router:Router
   ) { }
 
   ngOnInit(): void {
@@ -56,5 +59,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+  goto():void{
+    alert(123)
+    this._router.navigate([this.routerNavigate]);
   }
 }

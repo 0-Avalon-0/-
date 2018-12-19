@@ -1,8 +1,40 @@
 <nz-layout class="right-control">
     <nz-header class="header-wrapper">
-      <app-header [suggetContent]=page [listTitle]=listitle></app-header>
+      <app-header [suggetContent]=page [listTitle]=listitle [routerNavigate]=navigateTo></app-header>
     </nz-header>
   </nz-layout>
 <nz-content>
-8979798798798798
+  <div class="maincontent">
+  <nz-steps [nzCurrent]="current">
+    <nz-step nzTitle="home" nzDescription="查看您的工程与信息" nzIcon="home"></nz-step>
+    <nz-step nzTitle="project" nzDescription="工程管理" nzIcon="setting"></nz-step>
+    <nz-step nzTitle="user" nzDescription="文档管理" nzIcon="user"></nz-step>
+    <nz-step nzTitle="file" nzDescription="文档管理" nzIcon="file"></nz-step>
+  </nz-steps>
+  <div class="steps-content">
+  <div class="home" *ngIf="current==1">
+    213
+  </div>
+  <div class="project" *ngIf="current==2">
+    123
+    </div>
+  <div class="user" *ngIf="current==3">
+    123
+    </div>
+  <div class="file" *ngIf="current==4">
+    445
+     </div>
+  </div>
+  <div>
+    <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
+      <span>Previous</span>
+    </button>
+    <button nz-button nzType="default" (click)="next()" *ngIf="current < 3">
+      <span>Next</span>
+    </button>
+    <button nz-button nzType="primary" (click)="done()" *ngIf="current === 3">
+      <span>Done</span>
+    </button>
+  </div>
+</div>
 </nz-content>

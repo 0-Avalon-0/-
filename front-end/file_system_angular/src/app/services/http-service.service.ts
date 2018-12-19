@@ -129,7 +129,7 @@ export class HttpServiceService {
         project_authority:authority
     }
     return this.http.post<message>(this.api_url.getProjectManage()+"/"+pid+"/"+"user"+"/"+name,(ready),httpOptions).pipe(
-      catchError(this.handleError(4))
+      catchError(this.handleError(3))
     );
   }
   deleteAuthority(pid:string,name:string)

@@ -8,6 +8,7 @@ import { HttpServiceService } from 'src/app/services/http-service.service';
 import { message, Person, project, project_set, project_authoritys } from 'src/domain/person';
 import { List } from 'src/domain/entities';
 import { pageSwitchTransition } from './setting.animation';
+import { ListService } from 'src/app/services/list/list.service';
 
 @Component({
   selector: 'app-project-setting',
@@ -43,6 +44,7 @@ export class ProjectSettingComponent implements OnInit {
     private httpservice:HttpServiceService,
     private activatedRoute: ActivatedRoute,
     private modal: NzModalService,
+    private listservice:ListService
   ) { }
  pid:string;
   ngOnInit() {
@@ -88,6 +90,7 @@ export class ProjectSettingComponent implements OnInit {
         nzContent: '更改的数据将无法更新',
         nzOnOk: () => 
           new Promise((res, rej) => {
+            this.listservice.setCurrentUuid("home")
             this.router.navigateByUrl('/main/home');
             res();
           }).catch(() => console.error('failed'))
@@ -103,7 +106,8 @@ export class ProjectSettingComponent implements OnInit {
   }
   successset(mes:message):void{
     this.pro=<List>JSON.parse(mes.data)
-    this.router.navigateByUrl('/main');
+    this.listservice.setCurrentUuid("home")
+    this.router.navigateByUrl('/main/home');
     this.message.success("修改成功")
   }
   change():void 
