@@ -49,6 +49,7 @@ export class ListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.listService.setCurrentUuid("home");
     this.listService.InitAllproject();
     this.listService.lists$
       .pipe(takeUntil(this.destroy$))

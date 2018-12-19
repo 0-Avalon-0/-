@@ -37,7 +37,7 @@ export class SettingComponent implements OnInit {
     private router: Router,
     private httpservice:HttpServiceService,
     private modal: NzModalService,
-    private listservice:ListService
+    private listService:ListService
   ) { }
 
   ngOnInit() {
@@ -90,14 +90,14 @@ export class SettingComponent implements OnInit {
         nzContent: '更改的数据将无法更新',
         nzOnOk: () => 
           new Promise((res, rej) => {
-            this.listservice.setCurrentUuid("home")
+            this.listService.setCurrentUuid("home")
             this.router.navigateByUrl('/main/home');
             res();
           }).catch(() => console.error('failed'))
       });
     }
     else {
-      this.listservice.setCurrentUuid("home")
+      this.listService.setCurrentUuid("home");
       this.router.navigateByUrl('/main/home');
     }
   }
@@ -106,7 +106,7 @@ export class SettingComponent implements OnInit {
   }
   successset(mes:message):void{
     this.user=<Person>JSON.parse(mes.data)
-    this.listservice.setCurrentUuid("home")
+    this.listService.setCurrentUuid("home")
     this.router.navigateByUrl('/main/home');
     this.message.success("修改成功")
   }
