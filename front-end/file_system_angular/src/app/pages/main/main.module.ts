@@ -7,7 +7,6 @@ import { MainRoutingModule } from './main-routing.module';
 import { LeftControlComponent } from './left-control/left-control.component';
 import { ListComponent } from './left-control/list/list.component';
 import { HeaderComponent } from './right-control/header/header.component';
-import { SuggestComponent } from './right-control/header/suggest/suggest.component';
 import { HomeComponent } from './right-control/home/home.component';
 import { AllprojectComponent } from './right-control/allproject/allproject.component';
 import { PersonComponent } from './right-control/person/person.component';
@@ -29,7 +28,6 @@ import { ProjectComponent } from './right-control/project/project.component';
     LeftControlComponent,
     ListComponent,
     HeaderComponent,
-    SuggestComponent,
     HomeComponent,
     AllprojectComponent,
     PersonComponent,

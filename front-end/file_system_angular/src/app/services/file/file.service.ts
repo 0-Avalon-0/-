@@ -88,8 +88,8 @@ this.currentFile=<GetFileHolder>JSON.parse(mes.data);
   private menu: Files[];
   successGetMenus(mes: message) {
     //收到的形式为name/property
+    //点击显示的是上一个的menu，要实时刷新才可以
     this.menu = (<AllFile>JSON.parse(mes.data)).files;
-    alert(this.menu[0].file_fname);
     this.index = this.menu.length;//每次点击文件夹后，index必须改变
     for (var i = 0; i < this.menu.length; i++) {
       this.files[i].file_fname = this.menu[i].file_fname;

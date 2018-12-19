@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { InitGuardService } from './services/init-guard/init-guard.service';
 import { LoginComponent } from './pages/Login/login/login.component';
 import{RegistComponent} from './pages/Login/regist/regist.component'
 import { FileComponent } from './pages/main/right-control/file/file.component';
