@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { List } from '../../../domain/entities';
-import { LISTS } from '../local-storage/local-storage.namespace';
 import { HttpServiceService } from '../http-service.service';
 import { message, project, projectAll, project_authoritys, project_set } from 'src/domain/person';
 
@@ -80,10 +79,10 @@ export class ListService {
   rename(listUuid: string, name: string) {
     const list = this.getByUuid(listUuid);
     if (list) {
-      this.setProject(list,name)
+      this.setRenameProject(list,name)
     }
   }
-  setProject(list:List,project_pname="",project_describe="",project_property="",content=[])
+  setRenameProject(list:List,project_pname="",project_describe="",project_property="",content=[])
   { 
      const projectSetReady=new project_set(project_pname,project_describe,project_property,content)
      this,this.httpservice.setProjectPro(projectSetReady,list.pid).subscribe(message=>this.successSetProject(message,list))

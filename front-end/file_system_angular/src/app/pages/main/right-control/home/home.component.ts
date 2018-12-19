@@ -9,7 +9,7 @@ export class HomeComponent implements OnInit {
 
   constructor() { }
   page="home  建议";
-  listitle="主页"
+  listitle="Get Started!"
   navigateTo="/setting"
   ngOnInit() {
   }
