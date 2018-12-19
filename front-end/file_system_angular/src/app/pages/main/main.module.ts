@@ -11,7 +11,6 @@ import { SuggestComponent } from './right-control/header/suggest/suggest.compone
 import { HomeComponent } from './right-control/home/home.component';
 import { AllprojectComponent } from './right-control/allproject/allproject.component';
 import { PersonComponent } from './right-control/person/person.component';
-import { MenuComponent } from './right-control/menu/menu.component';
 import { FileComponent } from './right-control/file/file.component';
 import { CreateFileComponent } from './right-control/create-file/create-file.component';
 import { CreateFolderComponent } from './right-control/create-folder/create-folder.component';
@@ -34,7 +33,6 @@ import { ProjectComponent } from './right-control/project/project.component';
     HomeComponent,
     AllprojectComponent,
     PersonComponent,
-    MenuComponent,
     FileComponent,
     CreateFileComponent,
     CreateFolderComponent,

@@ -5,7 +5,7 @@ import {Person,login,message, project, project_set, project_authoritys} from '..
 import { catchError, map, retry } from 'rxjs/operators';
 import { HttpHeaders ,HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { Router } from '@angular/router';
-import {CreateFileHolder} from '../../domain/file'; 
+import {CreateFileHolder,RenameFileHolder,ChangeFileHolder} from '../../domain/file'; 
 const httpOptions = {
   withCredentials: true,
   headers: new HttpHeaders({
@@ -71,7 +71,7 @@ export class HttpServiceService {
             alert("服务器不可用，请稍后重试")
       }
       else if(operation==this.FILE){
-        alert('没发送成功！');
+        alert('文件操作出问题了！');
       }
       else {
         alert(
@@ -150,17 +150,47 @@ export class HttpServiceService {
       catchError(this.handleError(4))
     );
   }
-  getMenus(rootPath:string,pid :number)
+
+  //5.1查看文档：GET / filemanagers / {fname} / project / {pid} / file?path=...
+  getFile(file_fname:string,pid:number,parent_node:string)
   {
-    return this.http.get<message>(this.api_url.getMenuManage()+"/"+rootPath+"/"+pid,httpOptions).pipe(
-      catchError(this.handleError(5))
+    return this.http.get<message>(this.api_url.getFileManage()+'/'+file_fname+'/project/'+pid+'/file?path=root'+parent_node,httpOptions).pipe(
+      catchError(this.handleError(6))
     );
   }
+  //5.2修改文档： PUT / filemanagers / {fname} / project / {pid} / file?path=...
+  changeFile(file_fname:string,pid:number,parent_node:string,changeFileHolder:ChangeFileHolder){
+    return this.http.put<message>(this.api_url.getFileManage()+'/'+file_fname+'/project/'+pid+'/file?path=root'+parent_node,changeFileHolder,httpOptions).pipe(
+      catchError(this.handleError(6))
+    );
+  }
+  //5.3新建文档：POST / filemanagers / {fname} / project / {pid} / file?path=...
   createFile(createFileHolder:CreateFileHolder,file_fname:string,pid:number,parent_node:string):Observable<message>{
     
-    return this.http.post<message>(this.api_url.getFileManage()+'/'+file_fname+'/project/'+pid+'/file?path='+parent_node,(createFileHolder),httpOptions).pipe(
+    return this.http.post<message>(this.api_url.getFileManage()+'/'+file_fname+'/project/'+pid+'/file?path=root'+parent_node,(createFileHolder),httpOptions).pipe(
       catchError(this.handleError(6)
     ));
+  }
+
+  //5.4删除文档：DELETE / filemanagers / {fname} / project / {pid} / file?path=...
+  deleteFile(file_fname:string,pid:number,parent_node:string):Observable<message>{
+    return this.http.delete<message>(this.api_url.getFileManage()+'/'+file_fname+'/project/'+pid+'/file?path=root'+parent_node,httpOptions).pipe(
+      catchError(this.handleError(6))
+    );
+  }
+
+  //6.1查看目录下所有文件:GET menus / project / {pid} / path?path=...
+  getMenus(parent_node:string,pid :number)
+  {
+    return this.http.get<message>(this.api_url.getMenuManage()+'/project/'+pid+'/path?path=root'+parent_node,httpOptions).pipe(
+      catchError(this.handleError(6))
+    );
+  }
+  ////6.2 文档重命名：PATCH / menus / {fname} / project / {pid} / filepaths?path=...
+  renameFile(renameFileHolder:RenameFileHolder, file_fname:string,pid:number,parent_node:string):Observable<message>{
+    return this.http.patch<message>(this.api_url.getMenuManage()+'/'+file_fname+'/project/'+pid+'/filepaths?path=root'+parent_node,(renameFileHolder), httpOptions).pipe(
+      catchError(this.handleError(6))
+    );
   }
   private log(message: string) {
     alert(`HeroService: ${message}`);

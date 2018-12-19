@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { File } from '../../../../../domain/file';
+import { File ,CreateFileHolder} from '../../../../../domain/file';
 import{FileService} from '../../../../services/file/file.service';
 
 @Component({
@@ -10,14 +10,19 @@ import{FileService} from '../../../../services/file/file.service';
 export class CreateFolderComponent implements OnInit {
   createdFolder:File;
 
-  create():void{
-    this.createdFolder.file_property = 1;
-    //httpPostFile(this.createdFile);
+  thisFile:CreateFileHolder={
+    file_property:1,
+    file_text:''
   }
 
-  constructor() { }
+  create():void{
+    this.fileService.createFile(this.thisFile,this.createdFolder.file_fname,this.createdFolder.pid,this.createdFolder.parent_node);
+  }
+
+  constructor(private fileService:FileService) { }
 
   ngOnInit() {
+    this.createdFolder = new File(this.fileService.getPid(),'','',1,'')
   }
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { File } from '../../../../../domain/file';
-import{FileService} from '../../../../services/file/file.service';
-import { Location } from '@angular/common';
+import { FileService } from '../../../../services/file/file.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-file',
@@ -10,38 +10,47 @@ import { Location } from '@angular/common';
 })
 export class FileComponent implements OnInit {
 
-  changeFileOption:number;//1:新建 2：查看 3：修改 4：删除 
-  changeFile: File;
+  currentFileOption: number;
+  currentFile: File;
 
-  save():void{
-    this.fileService.setSelectedFile(this.changeFile);
-    this.changeFileOption = 1;
+  editFile(): void {
+    this.currentFileOption = 2;
   }
+  deleteFile(): void {
+    this.currentFileOption = 3;
+  }
+  renameFile(): void {
+    this.currentFileOption = 4;
+  }
+  saveText(): void {
+    this.fileService.changeFile(this.fileService.getCurrentIndex());
+    this.refreshCurrentFile();
+    this.currentFileOption = 1;
+  }
+  delete(): void {
+    this.fileService.deleteFile(this.fileService.getCurrentIndex());
+    this.currentFileOption = 5;
+  }
+  saveName():void{
+    this.fileService.renameFile(this.fileService.getCurrentIndex());
+    this.refreshCurrentFile();
+    this.currentFileOption = 1;
 
-  editFile():void{
-    this.changeFileOption=2;
-    this.changeFile=this.fileService.getSelectedFile();
   }
-  deleteFile():void{
-    this.changeFileOption=3;
-    this.changeFile=this.fileService.getSelectedFile();
-    
+  back(): void {
+    this.router.navigate(['main', 'home']);
   }
-  delete():void{
-    this.fileService.deleteFile();
-    this.changeFileOption=4;
+  refreshCurrentFile(){
+    this.currentFile=this.fileService.returnFile(this.fileService.getCurrentIndex());
   }
-  back():void{
-    this.location.back();
-  }
-
-
-  constructor(private fileService:FileService,
-    private location:Location
-    ) { }
+  constructor(private fileService: FileService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
-    this.changeFileOption=1;
+    this.currentFileOption = 1;
+    this.fileService.getFile(this.fileService.getCurrentIndex());
+    this.refreshCurrentFile();
   }
 
 }

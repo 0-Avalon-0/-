@@ -4,5 +4,13 @@
     </nz-header>
   </nz-layout>
 <nz-content>
-{{pid}}
+<div>{{pid}}</div>
+<div>
+    <div><a routerLink="/create-folder">新建文件夹</a></div>
+    <div><a routerLink='/create-file'>新建文件</a></div>
+  <li *ngFor="let file of files; let i=index" (click)="clickSelectedFile(i)">
+    <span [(ngModel)]="file.file_name" ></span>
+    <span [(ngModel)]="file.file_property"></span>
+  </li> 
+</div>
 </nz-content>
