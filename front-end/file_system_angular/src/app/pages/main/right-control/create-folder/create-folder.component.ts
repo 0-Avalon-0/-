@@ -16,15 +16,13 @@ export class CreateFolderComponent implements OnInit {
   }
 
   create():void{
-    this.createdFolder.file_property = 1;
-    this.createdFolder.parent_node='root';
-    this.createdFolder.pid=2;
     this.fileService.createFile(this.thisFile,this.createdFolder.file_fname,this.createdFolder.pid,this.createdFolder.parent_node);
   }
 
   constructor(private fileService:FileService) { }
 
   ngOnInit() {
+    this.createdFolder = new File(this.fileService.getPid(),'','',1,'')
   }
 
 }

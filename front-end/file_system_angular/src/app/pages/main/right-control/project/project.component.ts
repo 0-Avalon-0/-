@@ -44,6 +44,8 @@ export class ProjectComponent implements OnInit {
       this._pid=parseInt(this.pid);
       this.fileService.getMenus(this.parent_node,this._pid);
       this.files=this.fileService.getMenusToProject();
+      this.fileService.setPid(this._pid);
+      alert('yeah');
      }); 
   }
 

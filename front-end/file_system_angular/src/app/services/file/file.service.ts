@@ -16,9 +16,17 @@ export class FileService {
   private index;//index是当前文件总数
   private currentIndex;
   private currentFile;
+  private pid;
 
   constructor(private httpService: HttpServiceService) {
 
+  }
+
+  getPid():number{
+    return this.pid;
+  }
+  setPid(pid:number){
+    this.pid=pid;
   }
   setCurrentIndex(i: number): void {
     this.currentIndex = i;

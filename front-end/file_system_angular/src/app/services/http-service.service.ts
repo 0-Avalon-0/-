@@ -154,27 +154,27 @@ export class HttpServiceService {
   //5.1查看文档：GET / filemanagers / {fname} / project / {pid} / file?path=...
   getFile(file_fname:string,pid:number,parent_node:string)
   {
-    return this.http.get<message>(this.api_url.getFileManage()+'/'+file_fname+'/project/'+pid+'/file?path='+parent_node,httpOptions).pipe(
+    return this.http.get<message>(this.api_url.getFileManage()+'/'+file_fname+'/project/'+pid+'/file?path=root'+parent_node,httpOptions).pipe(
       catchError(this.handleError(6))
     );
   }
   //5.2修改文档： PUT / filemanagers / {fname} / project / {pid} / file?path=...
   changeFile(file_fname:string,pid:number,parent_node:string,changeFileHolder:ChangeFileHolder){
-    return this.http.put<message>(this.api_url.getFileManage()+'/'+file_fname+'/project/'+pid+'/file?path='+parent_node,changeFileHolder,httpOptions).pipe(
+    return this.http.put<message>(this.api_url.getFileManage()+'/'+file_fname+'/project/'+pid+'/file?path=root'+parent_node,changeFileHolder,httpOptions).pipe(
       catchError(this.handleError(6))
     );
   }
   //5.3新建文档：POST / filemanagers / {fname} / project / {pid} / file?path=...
   createFile(createFileHolder:CreateFileHolder,file_fname:string,pid:number,parent_node:string):Observable<message>{
     
-    return this.http.post<message>(this.api_url.getFileManage()+'/'+file_fname+'/project/'+pid+'/file?path='+parent_node,(createFileHolder),httpOptions).pipe(
+    return this.http.post<message>(this.api_url.getFileManage()+'/'+file_fname+'/project/'+pid+'/file?path=root'+parent_node,(createFileHolder),httpOptions).pipe(
       catchError(this.handleError(6)
     ));
   }
 
   //5.4删除文档：DELETE / filemanagers / {fname} / project / {pid} / file?path=...
   deleteFile(file_fname:string,pid:number,parent_node:string):Observable<message>{
-    return this.http.delete<message>(this.api_url.getFileManage()+'/'+file_fname+'/project/'+pid+'/file?path='+parent_node,httpOptions).pipe(
+    return this.http.delete<message>(this.api_url.getFileManage()+'/'+file_fname+'/project/'+pid+'/file?path=root'+parent_node,httpOptions).pipe(
       catchError(this.handleError(6))
     );
   }
@@ -182,13 +182,13 @@ export class HttpServiceService {
   //6.1查看目录下所有文件:GET menus / project / {pid} / path?path=...
   getMenus(parent_node:string,pid :number)
   {
-    return this.http.get<message>(this.api_url.getMenuManage()+'/project/'+pid+'/path?path='+parent_node,httpOptions).pipe(
+    return this.http.get<message>(this.api_url.getMenuManage()+'/project/'+pid+'/path?path=root'+parent_node,httpOptions).pipe(
       catchError(this.handleError(6))
     );
   }
   ////6.2 文档重命名：PATCH / menus / {fname} / project / {pid} / filepaths?path=...
   renameFile(renameFileHolder:RenameFileHolder, file_fname:string,pid:number,parent_node:string):Observable<message>{
-    return this.http.patch<message>(this.api_url.getMenuManage()+'/'+file_fname+'/project/'+pid+'/filepaths?path='+parent_node,(renameFileHolder), httpOptions).pipe(
+    return this.http.patch<message>(this.api_url.getMenuManage()+'/'+file_fname+'/project/'+pid+'/filepaths?path=root'+parent_node,(renameFileHolder), httpOptions).pipe(
       catchError(this.handleError(6))
     );
   }

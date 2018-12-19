@@ -24,7 +24,7 @@ export class CreateFileComponent implements OnInit {
   constructor(private fileService: FileService) {
   }
   ngOnInit() {
-    this.createdFile = new File(11,'root','',0,'');
+    this.createdFile = new File(this.fileService.getPid(),'','',0,'');
   }
 
 }
