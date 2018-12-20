@@ -67,7 +67,15 @@ public class MenuDao implements Imenu{
 						String sql = "select file_fname,file_property from menu where file_parentnode = ? and pid = ?";
 						List<SimpleFile> simpleFiles = jdbcTemplate.query(sql, new Object[] {path,pid},new BeanPropertyRowMapper(SimpleFile.class));
 						if(simpleFiles!=null && simpleFiles.size()>=0) {
-							acceptAllFiles.setfiles(simpleFiles);
+							List<SimpleFile> newsimpleFiles = new ArrayList<>();
+							Iterator sIterator = simpleFiles.iterator();
+							while(sIterator.hasNext()) {
+								SimpleFile cSimpleFile = (SimpleFile)sIterator.next();
+								cSimpleFile.setpath(path);
+								cSimpleFile.setpid(pid);
+								newsimpleFiles.add(cSimpleFile);
+							}
+							acceptAllFiles.setfiles(newsimpleFiles);
 							status.setCode(200);
 							httpServletResponse.setStatus(200);
 							JSONObject jsonObject = JSONObject.fromObject(acceptAllFiles);
