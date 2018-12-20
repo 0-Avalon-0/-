@@ -17,16 +17,17 @@ export class FileService {
   private currentIndex;
   private currentFile;
   private pid;
+  files$ = new Subject<File[]>();
 
   constructor(private httpService: HttpServiceService) {
 
   }
 
-  getPid():number{
+  getPid(): number {
     return this.pid;
   }
-  setPid(pid:number){
-    this.pid=pid;
+  setPid(pid: number) {
+    this.pid = pid;
   }
   setCurrentIndex(i: number): void {
     this.currentIndex = i;
@@ -34,9 +35,14 @@ export class FileService {
   getCurrentIndex(): number {
     return this.currentIndex;
   }
-  returnFile(i:number):File{
-return this.files[i];
+  returnFile(i: number): File {
+    return this.files[i];
   }
+
+  private broadCast():void{
+this.files$.next(this.files);
+  }
+
   //5.1查看文档：GET / filemanagers / {fname} / project / {pid} / file?path=...
   getFile(i: number) {
     this.httpService.getFile(this.files[i].file_fname, this.files[i].pid, this.files[i].parent_node).subscribe(message => this.successGetFile(message));
@@ -45,6 +51,7 @@ return this.files[i];
     alert("查看文档成功！");
     this.currentFile = <GetFileHolder>JSON.parse(mes.data);
     this.files[this.currentIndex].file_text = this.currentFile.file_text;
+    this.broadCast();
   }
 
 
@@ -53,21 +60,24 @@ return this.files[i];
     const changeFileHolder = new ChangeFileHolder(this.files[i].file_text);
     this.httpService.changeFile(this.files[i].file_fname, this.files[i].pid, this.files[i].parent_node, changeFileHolder).subscribe(message => this.successChangeFile(message));
   }
-  successChangeFile(mes:message) {
-this.currentFile=<GetFileHolder>JSON.parse(mes.data);
-    this.files[this.currentIndex].file_text=this.currentFile.file_text;
+  successChangeFile(mes: message) {
+    this.currentFile = <GetFileHolder>JSON.parse(mes.data);
+    this.files[this.currentIndex].file_text = this.currentFile.file_text;
     alert("保存成功！");
+    this.broadCast();
   }
 
   //5.3新建文档：POST / filemanagers / {fname} / project / {pid} / file?path=...
   createFileHolder: CreateFileHolder;
   createFile(createFileHolder: CreateFileHolder, file_fname: string, pid: number, parent_node: string) {
-    this.httpService.createFile(createFileHolder, file_fname, pid, parent_node).subscribe(message => this.successCreateFile(file_fname, createFileHolder.file_text, parent_node, pid));
+    this.httpService.createFile(createFileHolder, file_fname, pid, parent_node).subscribe(message => this.successCreateFile(message, file_fname, createFileHolder.file_text, parent_node, pid));
   }
-  successCreateFile(file_fname: string, file_text: string, parent_node: string, pid: number): void {
+  successCreateFile(mes: message, file_fname: string, file_text: string, parent_node: string, pid: number): void {
+    //alert('pid: '+pid+ '  file_fname: ' + file_fname);
     const fileHolder = new File(pid, parent_node, file_fname, 0, file_text);
     this.files[this.index] = fileHolder;
     this.index++;
+    this.broadCast();
   }
 
   //5.4删除文档：DELETE / filemanagers / {fname} / project / {pid} / file?path=...
@@ -78,36 +88,31 @@ this.currentFile=<GetFileHolder>JSON.parse(mes.data);
     for (var j = i; j < this.index - 1; ++j) {
       this.files[j + 1] = this.files[j];
     }
+    this.broadCast();
   }
 
   //6.1 查看目录下所有文件：GET menus / project / {pid} / path?path=...
 
   getMenus(parent_node: string, pid: number) {//工程路径;pid
+
     this.httpService.getMenus(parent_node, pid).subscribe(message => this.successGetMenus(message));
   }
-  private menu: Files[];
   successGetMenus(mes: message) {
-    //收到的形式为name/property
-    //点击显示的是上一个的menu，要实时刷新才可以
-    this.menu = (<AllFile>JSON.parse(mes.data)).files;
-    this.index = this.menu.length;//每次点击文件夹后，index必须改变
-    for (var i = 0; i < this.menu.length; i++) {
-      this.files[i].file_fname = this.menu[i].file_fname;
-      this.files[i].file_property = this.menu[i].file_property;
-    }
+    
+    this.files = (<AllFile>JSON.parse(mes.data)).files;
+    this.broadCast();
   }
-  getMenusToProject(): Files[] {
-    return this.menu;
-  }
+
 
   //6.2 文档重命名：PATCH / menus / {fname} / project / {pid} / filepaths?path=...
   renameFile(i: number) {
     const renameFileHolder = new RenameFileHolder(this.files[i].file_fname);
     this.httpService.renameFile(renameFileHolder, this.files[i].file_fname, this.files[i].pid, this.files[i].parent_node).subscribe(message => this.successRenameFile(message));
   }
-  successRenameFile(mes:message) {
-    this.currentFile=<ReNameFileHolder>JSON.parse(mes.data);
-    this.files[this.currentIndex].file_fname=this.currentFile.file_fname;
+  successRenameFile(mes: message) {
+    this.currentFile = <ReNameFileHolder>JSON.parse(mes.data);
+    this.files[this.currentIndex].file_fname = this.currentFile.file_fname;
+    this.broadCast();
   }
 
 

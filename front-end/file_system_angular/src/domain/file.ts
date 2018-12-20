@@ -27,8 +27,8 @@ export class Files {
 export class AllFile {
     path: string;
     pid: number;
-    files: Files[];
-    constructor(path: string, pid: number, files: Files[]) {
+    files: File[];
+    constructor(path: string, pid: number, files:File[]) {
         this.path = path;
         this.pid = pid;
         this.files = files;
