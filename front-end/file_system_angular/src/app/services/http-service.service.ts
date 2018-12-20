@@ -166,7 +166,6 @@ export class HttpServiceService {
   }
   //5.3新建文档：POST / filemanagers / {fname} / project / {pid} / file?path=...
   createFile(createFileHolder:CreateFileHolder,file_fname:string,pid:number,parent_node:string):Observable<message>{
-    
     return this.http.post<message>(this.api_url.getFileManage()+'/'+file_fname+'/project/'+pid+'/file?path=root'+parent_node,(createFileHolder),httpOptions).pipe(
       catchError(this.handleError(6)
     ));
@@ -174,6 +173,7 @@ export class HttpServiceService {
 
   //5.4删除文档：DELETE / filemanagers / {fname} / project / {pid} / file?path=...
   deleteFile(file_fname:string,pid:number,parent_node:string):Observable<message>{
+    //alert('name:  '+file_fname+'pid:  '+pid+'parent_node:'+parent_node);
     return this.http.delete<message>(this.api_url.getFileManage()+'/'+file_fname+'/project/'+pid+'/file?path=root'+parent_node,httpOptions).pipe(
       catchError(this.handleError(6))
     );

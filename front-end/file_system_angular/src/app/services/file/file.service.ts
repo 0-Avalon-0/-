@@ -73,9 +73,9 @@ this.files$.next(this.files);
     this.httpService.createFile(createFileHolder, file_fname, pid, parent_node).subscribe(message => this.successCreateFile(message, file_fname, createFileHolder.file_text, parent_node, pid));
   }
   successCreateFile(mes: message, file_fname: string, file_text: string, parent_node: string, pid: number): void {
-    //alert('pid: '+pid+ '  file_fname: ' + file_fname);
-    const fileHolder = new File(pid, parent_node, file_fname, 0, file_text);
-    this.files[this.index] = fileHolder;
+    
+    this.currentFile=<File>JSON.parse(mes.data);
+    this.files[this.index] = this.currentFile;
     this.index++;
     this.broadCast();
   }
@@ -100,6 +100,7 @@ this.files$.next(this.files);
   successGetMenus(mes: message) {
     
     this.files = (<AllFile>JSON.parse(mes.data)).files;
+    //通过file_name得到file_text
     this.broadCast();
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, DoCheck, ChangeDetectorRef, NgZone } from '@angular/core';
 import { ActivatedRoute, Params, Route, Router } from '@angular/router';
-import { Files, File } from '../../../../../domain/file';
+import {  File } from '../../../../../domain/file';
 import { FileService } from '../../../../services/file/file.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -14,16 +14,15 @@ export class ProjectComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private fileService: FileService,
-    private router: Router,
-    private changeDetectorRef: ChangeDetectorRef
+    private router: Router
   ) { }
   page = "project建议";
   listitle = "工程"
   pid: string;
   _pid: number;
-  files: Files[];
-  file: Files;
-  selectedFile: Files;
+  files: File[];
+  file: File;
+  selectedFile: File;
   parent_node = '';
   private destroy$ = new Subject();
 
@@ -34,7 +33,7 @@ export class ProjectComponent implements OnInit {
       this.router.navigate(['file']);
     }
     else if (this.selectedFile.file_property == 1) {
-      this.parent_node += '/';
+      this.parent_node += '\\';
       this.parent_node += this.selectedFile.file_fname;
       this.fileService.getMenus(this.parent_node, this._pid);
       this.fileService.files$.pipe(takeUntil(this.destroy$)).subscribe(files=>{
@@ -54,12 +53,6 @@ export class ProjectComponent implements OnInit {
       this.fileService.files$.pipe(takeUntil(this.destroy$)).subscribe(files=>{
         this.files = files;
       });
-      
-      this.changeDetectorRef.markForCheck();
-      this.changeDetectorRef.detectChanges();
-      
-
-      //???????????????????????
     });
   }
 

@@ -9,10 +9,10 @@
 <div>
     <div><a routerLink="/create-folder">新建文件夹</a></div>
     <div><a routerLink='/create-file'>新建文件</a></div>
-  <li *ngFor="let file of files; let i=index" (click)="clickSelectedFile(i)">
-    <span>{{file.file_fname}}</span>
-    <span>{{file.file_property}}</span>
-  </li> 
+  <div *ngFor="let file of files; let i=index" (click)="clickSelectedFile(i)">
+    <div>{{file.file_fname}}</div>
+    <div>{{file.file_text}}</div>
+  </div> 
 </div>
 
 </nz-content>

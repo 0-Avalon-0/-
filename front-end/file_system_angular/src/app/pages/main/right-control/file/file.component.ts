@@ -24,7 +24,6 @@ export class FileComponent implements OnInit {
   }
   saveText(): void {
     this.fileService.changeFile(this.fileService.getCurrentIndex());
-    this.refreshCurrentFile();
     this.currentFileOption = 1;
   }
   delete(): void {
@@ -33,16 +32,13 @@ export class FileComponent implements OnInit {
   }
   saveName():void{
     this.fileService.renameFile(this.fileService.getCurrentIndex());
-    this.refreshCurrentFile();
     this.currentFileOption = 1;
 
   }
   back(): void {
     this.router.navigate(['main', 'home']);
   }
-  refreshCurrentFile(){
-    this.currentFile=this.fileService.returnFile(this.fileService.getCurrentIndex());
-  }
+
   constructor(private fileService: FileService,
     private router: Router
   ) { }
@@ -50,7 +46,6 @@ export class FileComponent implements OnInit {
   ngOnInit() {
     this.currentFileOption = 1;
     this.fileService.getFile(this.fileService.getCurrentIndex());
-    this.refreshCurrentFile();
   }
 
 }

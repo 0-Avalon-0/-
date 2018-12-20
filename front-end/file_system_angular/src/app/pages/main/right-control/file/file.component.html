@@ -2,6 +2,10 @@
 <button (click)="deleteFile()">删除文档</button>
 <button (click)="renameFile()">文档重命名</button>
 
+<div *ngIf="currentFileOption==1">
+  <div>{{currentFile.file_name}}</div>
+  <div>{{currentFile.file_text}}</div>
+</div>
 <div *ngIf="currentFileOption==2">
   <input [(ngModel)]="currentFile.file_text" placeholder="文件内容">
   <button (click)="saveText()">保存</button>
@@ -17,7 +21,3 @@
 <div *ngIf="currentFileOption==5">
   <button (click)="back()">返回文件列表</button>
 </div>
-<div *ngIf="currentFileOption==1">
-    <div>{{currentFile.file_name}}</div>
-    <div>{{currentFile.file_text}}</div>
-  </div>
