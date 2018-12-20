@@ -250,7 +250,7 @@ GET请求报文：无
 “path”:””
 ,”pid”:””
 ,”files”: [{"file_fname":" "
-,"file_property":" "},….]
+,"file_property":" ","path":"","pid":""},….]
 }
 			
 		失败则返回错误的状态码及错误原因：
