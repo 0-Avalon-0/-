@@ -156,11 +156,11 @@ public class MenuDao implements Imenu{
 						String getMenu = "select * from menu where pid = ? and file_node = ?";
 						
 						
-						String sql = "update menu set file_fname = ?, file_node = ?, file_parentnode = ?,file_property=?,file_text = ? where pid = ?";
+						String sql = "update menu set file_fname = ?, file_parentnode = ?,file_property=?,file_text = ? where pid = ? and file_node = ?";
 						List<Menu> menus = jdbcTemplate.query(getMenu, new Object[] {pid,filenode.toString()},new BeanPropertyRowMapper(Menu.class));
 						if(menus!=null && menus.size()>=0) {
 							Menu currentMenu = menus.get(0);
-							int result = jdbcTemplate.update(sql,acceptFileName.getfile_fname(),filenode.toString(),currentMenu.getfile_parentnode(),currentMenu.getfile_property(),currentMenu.getfile_text(),pid);
+							int result = jdbcTemplate.update(sql,acceptFileName.getfile_fname(),currentMenu.getfile_parentnode(),currentMenu.getfile_property(),currentMenu.getfile_text(),pid,filenode.toString());
 							if(result>=0) {
 								status.setCode(201);
 								httpServletResponse.setStatus(201);
@@ -195,6 +195,11 @@ public class MenuDao implements Imenu{
 					status.setCode(500);
 					httpServletResponse.setStatus(500);
 					status.setData("数据库连接失败");
+				}else if(exception instanceof DuplicateKeyException){
+					//exception.printStackTrace();
+					status.setCode(422);
+					httpServletResponse.setStatus(422);
+					status.setData("文件名重复");
 				}else {	
 					status.setCode(600);
 					httpServletResponse.setStatus(600);
