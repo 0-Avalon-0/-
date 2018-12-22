@@ -195,7 +195,7 @@ GET响应报文：
 	406：格式不正确
 5.2修改文档： PUT / filemanagers / {fname} / project / {pid} / file?path=...
 
-PUT请求报文：
+PATCH请求报文：
 	{"file_text":" "}
 响应报文：
 	成功 状态码201
