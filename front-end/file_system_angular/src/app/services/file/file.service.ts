@@ -102,10 +102,10 @@ export class FileService {
   //6.1 查看目录下所有文件：GET menus / project / {pid} / path?path=...
 
   getMenus(parent_node: string, pid: number) {//工程路径;pid
+    alert(1);
     this.httpService.getMenus(parent_node, pid).subscribe(message => this.successGetMenus(message));
   }
   successGetMenus(mes: message) {
-
     this.files = (<AllFile>JSON.parse(mes.data)).files;
     this.total=this.files.length;
 

@@ -33,12 +33,14 @@ export class ProjectComponent implements OnInit {
       this.router.navigate(['file']);
     }
     else if (this.selectedFile.file_property == 1) {
-      this.parent_node += '\\';
+      this.parent_node += '%2F';
       this.parent_node += this.selectedFile.file_fname;
       this.fileService.getMenus(this.parent_node, this._pid);
-      this.fileService.files$.pipe(takeUntil(this.destroy$)).subscribe(files=>{
-        this.files = files;
-      });
+      // this.fileService.files$.pipe(takeUntil(this.destroy$)).subscribe(files=>{
+      //   alert(10086);
+      //   this.files = files;
+      // });
+
     }
   }
 

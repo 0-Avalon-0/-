@@ -50,11 +50,6 @@ export class FileComponent implements OnInit {
   back(): void {
     this.router.navigate(['main', 'home']);
   }
-  ini(): void {
-    this.currentFile.file_fname = this.fileService.getCurrentFile().fname;
-    this.currentFile.file_text = this.fileService.getCurrentFile().file_text;
-  }
-
   constructor(private fileService: FileService,
     private router: Router
   ) { }
@@ -62,10 +57,10 @@ export class FileComponent implements OnInit {
   ngOnInit() {
     this.currentFileOption = 1;
     this.fileService.getFile(this.fileService.getCurrentIndex());
-    this.ini();
     this.fileService.files$.pipe(takeUntil(this.destroy$)).subscribe(files => {
       this.currentFile = files[this.fileService.getCurrentIndex()];
     });
+    
   }
 
 }
