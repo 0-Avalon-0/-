@@ -11,7 +11,7 @@
     <div><a routerLink='/create-file'>新建文件</a></div>
   <div *ngFor="let file of files; let i=index" (click)="clickSelectedFile(i)">
     <div>{{file.file_fname}}</div>
-    <div>{{file.file_text}}</div>
+    <div>{{file.file_property}}</div>
   </div> 
 </div>
 

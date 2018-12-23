@@ -23,7 +23,7 @@ export class ProjectComponent implements OnInit {
   files: File[];
   file: File;
   selectedFile: File;
-  parent_node = '';
+  parent_node = 'root';
   private destroy$ = new Subject();
 
   clickSelectedFile(i: number): void {

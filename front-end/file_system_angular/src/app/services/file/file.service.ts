@@ -13,7 +13,7 @@ import { message, project, projectAll, project_authoritys, project_set } from '.
 export class FileService {
 
   private files: File[] = [];
-  private index;//index是当前文件总数
+  private total = 0;//total是当前文件总数，是最大下标+1
   private currentIndex;
   private currentFile;
   private pid;
@@ -39,25 +39,29 @@ export class FileService {
     return this.files[i];
   }
 
-  private broadCast():void{
-this.files$.next(this.files);
+  private broadCast(): void {
+    this.files$.next(this.files);
   }
 
   //5.1查看文档：GET / filemanagers / {fname} / project / {pid} / file?path=...
   getFile(i: number) {
+    //alert('i: '+i+'name: '+this.files[i].parent_node);
     this.httpService.getFile(this.files[i].file_fname, this.files[i].pid, this.files[i].parent_node).subscribe(message => this.successGetFile(message));
   }
   successGetFile(mes: message) {
-    alert("查看文档成功！");
     this.currentFile = <GetFileHolder>JSON.parse(mes.data);
     this.files[this.currentIndex].file_text = this.currentFile.file_text;
     this.broadCast();
   }
 
+  getCurrentFile():GetFileHolder{
+    return this.currentFile;
+  }
+
 
   //5.2修改文档： PUT / filemanagers / {fname} / project / {pid} / file?path=...
-  changeFile(i: number) {
-    const changeFileHolder = new ChangeFileHolder(this.files[i].file_text);
+  changeFile(i: number,ft:string) {
+    const changeFileHolder = new ChangeFileHolder(ft);
     this.httpService.changeFile(this.files[i].file_fname, this.files[i].pid, this.files[i].parent_node, changeFileHolder).subscribe(message => this.successChangeFile(message));
   }
   successChangeFile(mes: message) {
@@ -73,10 +77,10 @@ this.files$.next(this.files);
     this.httpService.createFile(createFileHolder, file_fname, pid, parent_node).subscribe(message => this.successCreateFile(message, file_fname, createFileHolder.file_text, parent_node, pid));
   }
   successCreateFile(mes: message, file_fname: string, file_text: string, parent_node: string, pid: number): void {
-    
-    this.currentFile=<File>JSON.parse(mes.data);
-    this.files[this.index] = this.currentFile;
-    this.index++;
+
+    this.currentFile = <File>JSON.parse(mes.data);
+    this.files[this.total] = this.currentFile;
+    this.total++;
     this.broadCast();
   }
 
@@ -85,34 +89,42 @@ this.files$.next(this.files);
     this.httpService.deleteFile(this.files[i].file_fname, this.files[i].pid, this.files[i].parent_node).subscribe(message => this.successDeleteFile(i));
   }
   successDeleteFile(i: number) {//i是数组下标,被删除文件直接被覆盖
-    for (var j = i; j < this.index - 1; ++j) {
+    if(i==this.total-1){
+      this.total--;
+    }
+    for (var j = i; j < this.total - 1; ++j) {
       this.files[j + 1] = this.files[j];
     }
+    this.total--;
     this.broadCast();
   }
 
   //6.1 查看目录下所有文件：GET menus / project / {pid} / path?path=...
 
   getMenus(parent_node: string, pid: number) {//工程路径;pid
-
     this.httpService.getMenus(parent_node, pid).subscribe(message => this.successGetMenus(message));
   }
   successGetMenus(mes: message) {
-    
+
     this.files = (<AllFile>JSON.parse(mes.data)).files;
-    //通过file_name得到file_text
+    this.total=this.files.length;
+
+    for (var i = 0; i < this.total; ++i) {
+      this.files[i].parent_node = (<AllFile>JSON.parse(mes.data)).path;
+    }
+    //alert(this.files[3].parent_node);
     this.broadCast();
   }
 
 
   //6.2 文档重命名：PATCH / menus / {fname} / project / {pid} / filepaths?path=...
-  renameFile(i: number) {
-    const renameFileHolder = new RenameFileHolder(this.files[i].file_fname);
-    this.httpService.renameFile(renameFileHolder, this.files[i].file_fname, this.files[i].pid, this.files[i].parent_node).subscribe(message => this.successRenameFile(message));
+  renameFile(i: number,thisFileName:string,oldFileName:string) {
+    const renameFileHolder = new RenameFileHolder(thisFileName);
+    this.httpService.renameFile(renameFileHolder, oldFileName, this.files[i].pid, this.files[i].parent_node).subscribe(message => this.successRenameFile(message));
   }
   successRenameFile(mes: message) {
     this.currentFile = <ReNameFileHolder>JSON.parse(mes.data);
-    this.files[this.currentIndex].file_fname = this.currentFile.file_fname;
+    this.files[this.currentIndex].file_fname = this.currentFile.fname;
     this.broadCast();
   }
 

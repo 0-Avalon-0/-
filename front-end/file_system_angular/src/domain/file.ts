@@ -61,11 +61,11 @@ export class GetFileHolder{
     }
 }
 export class ReNameFileHolder{
-    name:string;
+    fname:string;
     path:string;
     pid:number;
     constructor(name:string,path:string,pid:number){
-        this.name=name;
+        this.fname=name;
         this.path=path;
         this.pid=pid;
     }
