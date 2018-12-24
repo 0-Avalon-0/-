@@ -217,7 +217,7 @@ POST请求报文:
 响应报文：
 	成功: 状态码201data为
 	{”pid”:””
-,"parent_node	"=”   “
+,"path"=”   “
 		,"file_fname"=”   “
 		,"file_property"=" "
 		,"file_text"="  "}
