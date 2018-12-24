@@ -10,9 +10,9 @@ import { Router } from '@angular/router';
 export class CreateFolderComponent implements OnInit {
   createdFolder:File={
     pid:this.fileService.getPid(),
-    parent_node:'root',
+    parent_node:this.fileService.getParentNode(),
     file_fname:'',
-    file_property:0,
+    file_property:1,
     file_text:''
   }
 

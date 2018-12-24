@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { File } from '../../../../../domain/file';
 import { FileService } from '../../../../services/file/file.service';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import {Location}from '@angular/common';
 @Component({
   selector: 'app-file',
   templateUrl: './file.component.html',
@@ -40,7 +41,7 @@ export class FileComponent implements OnInit {
   }
   delete(): void {
     this.fileService.deleteFile(this.fileService.getCurrentIndex());
-    this.currentFileOption = 5;
+    this.router.navigate(['main', 'home']);
   }
   saveName(): void {
     this.fileService.renameFile(this.fileService.getCurrentIndex(), this.currentFile.file_fname, this.temFileName);
@@ -48,10 +49,12 @@ export class FileComponent implements OnInit {
 
   }
   back(): void {
-    this.router.navigate(['main', 'home']);
+    this.location.back();
+    //this.router.navigate(['main', 'home']);
   }
   constructor(private fileService: FileService,
-    private router: Router
+    private router: Router,
+    private location:Location
   ) { }
 
   ngOnInit() {

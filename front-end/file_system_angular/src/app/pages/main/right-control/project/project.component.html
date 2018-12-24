@@ -7,6 +7,7 @@
 <div>{{pid}}</div>
 
 <div>
+    <div (click)="back()"><button >返回上级</button></div>
     <div><a routerLink="/create-folder">新建文件夹</a></div>
     <div><a routerLink='/create-file'>新建文件</a></div>
   <div *ngFor="let file of files; let i=index" (click)="clickSelectedFile(i)">
