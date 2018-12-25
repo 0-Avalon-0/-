@@ -27,6 +27,7 @@ export class RegistComponent implements OnInit {
     user_company:"",
     user_location:"",
   }
+  password_re:string;
   message:string;
   ngOnInit() {
   }

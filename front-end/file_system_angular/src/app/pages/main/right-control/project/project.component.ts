@@ -22,7 +22,7 @@ export class ProjectComponent implements OnInit {
   file:Files;
   selectedFile:Files;
   parent_node='root';
-
+  navigateTo:string
   clickSelectedFile(i:number):void{
     this.fileService.setCurrentIndex(i);
     this.selectedFile=this.files[i];
@@ -39,8 +39,10 @@ export class ProjectComponent implements OnInit {
 
 
   ngOnInit() {
+    
     this.activatedRoute.params.forEach((params: Params) => { 
       this.pid = this.activatedRoute.snapshot.params['pid'];
+      this.navigateTo='projectconfigure/'+this.pid
       this._pid=parseInt(this.pid);
       this.fileService.getMenus(this.parent_node,this._pid);
       this.files=this.fileService.getMenusToProject();

@@ -17,6 +17,7 @@ import { ListService } from 'src/app/services/list/list.service';
 })
 export class SettingComponent implements OnInit {
   avatar = this.store.get(AVATAR_CODE);
+  switchValue:string;
   user:Person=
   {
     user_name:this.store.get(USERNAME),

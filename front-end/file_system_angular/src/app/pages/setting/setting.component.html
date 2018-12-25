@@ -8,7 +8,7 @@
     <div class="body">
       <img class="avatar" src="./assets/img/default-avatar.png">
       <nz-divider nzType="horizontal" nzText="用户信息"></nz-divider>
-      <nz-input-group  [nzPrefix]="user">
+      <nz-input-group  [nzPrefix]="users">
       <input nz-input  [(ngModel)]="user.user_name" #usernameInput  (ngModelChange)="change()" [nzSize]="'large'" placeholder="用户名" (blur)="validateUsername(usernameInput.value)">
       </nz-input-group>
       <nz-input-group  [nzPrefix]="email">
@@ -36,7 +36,7 @@
       <button (click)="click_button()" nz-button  nzType="primary" nzBlock>提交</button>
   </div>
 </div>
-<ng-template #user><i nz-icon type="user" theme="outline"></i></ng-template>
+<ng-template #users><i nz-icon type="user" theme="outline"></i></ng-template>
 <ng-template #location><i nz-icon type="environment" theme="outline"></i></ng-template>
 <ng-template #email ><i nz-icon type="mail" theme="outline"></i></ng-template>
 <ng-template #company ><i nz-icon type="printer" theme="outline"></i></ng-template>

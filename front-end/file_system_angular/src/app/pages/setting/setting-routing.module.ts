@@ -6,9 +6,10 @@ import { ProjectSettingComponent } from './project-setting.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'setting',
     component: SettingComponent
   },
+  { path:'projectconfigure/:pid',component:ProjectSettingComponent},
 ];
 
 @NgModule({

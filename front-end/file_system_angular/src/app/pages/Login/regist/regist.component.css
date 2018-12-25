@@ -16,7 +16,7 @@ canvas{
     width: 100%;
       height: 100%;
       background-color: #F7FAFC;
-      background-image: url('./bg.jpg');
+      background-image: url('./WechatIMG4.jpeg');
       background-size: cover;
       background-position: 50% 50%;
       background-repeat: no-repeat;
@@ -115,7 +115,7 @@ canvas{
 }
 .form .group{
     padding: 1px 0;
-    border: 1px solid #d5d5d5;
+    border: 1px solid #a7a7a7;
     border-radius: 3px;
 }
 .form .group .group-ipt{
@@ -130,13 +130,13 @@ canvas{
     border: 0;
     border-radius: 0;
     box-shadow: none;
-    background: rgba(255,255,255,0.5);
+    background-color:transparent;
     font-family: 'Microsoft Yahei';
     color: #666;
     position: relative;
 }
 #password,#verify,#user,#password1{
-    border-top: 1px solid #e8e8e8;
+    border-top: 1px solid #d8d8d8;
 }
 .imgcode{
     width: 95px;
