@@ -4,16 +4,60 @@
     </nz-header>
   </nz-layout>
 <nz-content>
-<div>{{pid}}</div>
-
 <div>
-    <div (click)="back()"><button >返回上级</button></div>
-    <div><a routerLink="/create-folder">新建文件夹</a></div>
-    <div><a routerLink='/create-file'>新建文件</a></div>
+    <button nz-button nzType="default" (click)="openCreateFolderModel()" ><i nz-icon type="folder"></i>新建文件夹</button>
+    <button nz-button nzType="default" (click)="openCreateFileModel()"  ><i nz-icon type="file"></i>新建文件</button>
+    <div  style="font-size:25px;" [hidden]="parent_node=='root'" (click)="back()">...</div>
   <div *ngFor="let file of files; let i=index" (click)="clickSelectedFile(i)">
     <div>{{file.file_fname}}</div>
     <div>{{file.file_property}}</div>
   </div> 
 </div>
 
+
+<nz-modal [(nzVisible)]="createFileModelVisible"
+          [nzTitle]="'新建文件'"
+          [nzClosable]="true"
+          [nzWidth]="420"
+          [nzOkText]="'新建'"
+          [nzCancelText]="'取消'"
+          [nzMaskClosable]="true"
+          (nzOnCancel)="closeCreateFileModel()"
+          (nzOnOk)="createFile(fileNameInput.value,fileTextInput.value); fileNameInput.value = '';fileTextInput.value=''">
+  <form nz-form>
+    <nz-form-item>
+      <nz-form-control>
+        <input nz-input
+               #fileNameInput
+               placeholder="文件名"
+               >
+        <input nz-input
+               #fileTextInput
+               placeholder="文件内容"
+               >      
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>
+<nz-modal [(nzVisible)]="createFolderModelVisible"
+          [nzTitle]="'新建文件夹'"
+          [nzClosable]="true"
+          [nzWidth]="420"
+          [nzOkText]="'新建'"
+          [nzCancelText]="'取消'"
+          [nzMaskClosable]="true"
+          (nzOnCancel)="closeCreateFolderModel()"
+          (nzOnOk)="createFolder(folderNameInput.value); folderNameInput.value = ''">
+  <form nz-form>
+    <nz-form-item>
+      <nz-form-control>
+        <input nz-input
+               #folderNameInput
+               placeholder="文件夹名"
+               >
+        
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>
 </nz-content>
