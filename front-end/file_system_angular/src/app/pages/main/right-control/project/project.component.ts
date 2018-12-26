@@ -23,6 +23,7 @@ export class ProjectComponent implements OnInit {
   @ViewChild('fileNameInput') private fileNameInput: ElementRef;
   @ViewChild('fileTextInput') private fileTextInput: ElementRef;
   @ViewChild('folderNameInput') private folderNameInput: ElementRef;
+  @ViewChild('renameInput') private renameInput:ElementRef;
   constructor(
     private activatedRoute: ActivatedRoute,
     private fileService: FileService,
@@ -39,8 +40,13 @@ export class ProjectComponent implements OnInit {
   parent_node = 'root';
   createFileModelVisible = false;
   createFolderModelVisible = false;
+  renameModelVisible = false;
   private destroy$ = new Subject();
   private slashIndex;
+  private oldName;
+  private file_text;
+  
+
   
   createFileHolder: CreateFileHolder = {
     file_property: 0,
@@ -86,6 +92,21 @@ export class ProjectComponent implements OnInit {
       this.folderNameInput.nativeElement.focus();
     });
   }
+
+  openRenameModel(i:number):void{
+    this.fileService.setCurrentIndex(i);
+    this.renameModelVisible= true;
+    this.oldName=this.fileService.returnFile(i).file_fname;
+    setTimeout(()=>{
+      const name = this.fileService.returnFile(i).file_fname;
+      this.renameInput.nativeElement.value = name;
+      this.renameInput.nativeElement.focus();
+    });
+  }
+  closeRenameModel():void{
+    this.renameModelVisible = false;
+  }
+
   closeCreateFileModel():void{
     this.createFileModelVisible = false;
   }
@@ -101,6 +122,15 @@ export class ProjectComponent implements OnInit {
   createFolder(name:string):void{
     this.fileService.createFile(this.createFolderHolder,name,this._pid,this.parent_node);
     this.closeCreateFolderModel();
+  }
+
+  rename(name:string):void{
+    this.fileService.renameFile(this.fileService.getCurrentIndex(),name,this.oldName);
+    this.closeRenameModel();
+  }
+
+  delete(i:number):void{
+    this.fileService.deleteFile(i);
   }
 
 

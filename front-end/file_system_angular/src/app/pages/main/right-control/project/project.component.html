@@ -1,63 +1,81 @@
 <nz-layout class="right-control">
-    <nz-header class="header-wrapper">
-      <app-header [suggetContent]=page [listTitle]=listitle></app-header>
-    </nz-header>
-  </nz-layout>
+  <nz-header class="header-wrapper">
+    <app-header [suggetContent]=page [listTitle]=listitle></app-header>
+  </nz-header>
+</nz-layout>
 <nz-content>
-<div>
-    <button nz-button nzType="default" (click)="openCreateFolderModel()" ><i nz-icon type="folder"></i>新建文件夹</button>
-    <button nz-button nzType="default" (click)="openCreateFileModel()"  ><i nz-icon type="file"></i>新建文件</button>
-    <div  style="font-size:25px;" [hidden]="parent_node=='root'" (click)="back()">...</div>
-  <div *ngFor="let file of files; let i=index" (click)="clickSelectedFile(i)">
-    <div>{{file.file_fname}}</div>
-    <div>{{file.file_property}}</div>
-  </div> 
-</div>
+  <div class="content">
+    <button class="newFile" nz-button nzType="default" (click)="openCreateFolderModel()"><i nz-icon type="folder"></i>新建文件夹</button>
+    <button class="newFolder" nz-button nzType="default" (click)="openCreateFileModel()"><i nz-icon type="file"></i>新建文件</button>
+
+    <div class="fileContent">
+      <div style="font-size:25px;" [hidden]="parent_node=='root'" (click)="back()">...</div>
+      <div *ngFor="let file of files; let i=index" >
+        <div  *ngIf="file.file_property==0">
+          <div style="margin-top:50px;clear: both;" >
+            <div style="float:left;height: 40px;width: 30px;"><img  style="height: 100%;width: auto;vertical-align: middle;" src="./assets/img/file.png" /></div>
+            <div (click)="clickSelectedFile(i)" style="float:left; cursor: pointer; font-size: 30px;height: 70px; margin-left: 100px;">{{file.file_fname}}</div>
+            <div (click)="openRenameModel(i)" style="float:left; cursor: pointer; height: 30px;width: 30px;position: fixed; margin-left: 400px;padding-top: 6px;"><img  style="max-height: 100%;width: auto;vertical-align: middle;" src="./assets/img/rename.png" /></div>
+            <div (click)="delete(i)" style="float:left; cursor: pointer; height: 30px;width: 30px;position: fixed; margin-left: 500px;padding-top: 6px;"><img  style="max-height: 100%;width: auto;vertical-align: middle;" src="./assets/img/delete.png" /></div>
+          </div>
+        </div>
+        <div  *ngIf="file.file_property==1">
+          <div style="margin-top:50px;clear: both;" >
+            <div style="float:left;height: 40px;width: 30px;"><img  style="height: 100%;width: auto;vertical-align: middle;" src="./assets/img/folder.png" /></div>
+            <div (click)="clickSelectedFile(i)" style="float:left;cursor: pointer; font-size: 30px;height: 70px; margin-left: 100px;">{{file.file_fname}}</div>
+            <div (click)="openRenameModel(i)" style="float:left;cursor:pointer;  height: 30px;width: 30px;position: fixed;margin-left: 400px;padding-top: 6px;"><img  style="max-height: 100%;width: auto;vertical-align: middle;" src="./assets/img/rename.png" /></div>
+            <div (click)="delete(i)" style="float:left; cursor: pointer; height: 30px;width: 30px;position: fixed; margin-left: 500px;padding-top: 6px;"><img  style="max-height: 100%;width: auto;vertical-align: middle;" src="./assets/img/delete.png" /></div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
 
 
-<nz-modal [(nzVisible)]="createFileModelVisible"
-          [nzTitle]="'新建文件'"
-          [nzClosable]="true"
-          [nzWidth]="420"
-          [nzOkText]="'新建'"
-          [nzCancelText]="'取消'"
-          [nzMaskClosable]="true"
-          (nzOnCancel)="closeCreateFileModel()"
-          (nzOnOk)="createFile(fileNameInput.value,fileTextInput.value); fileNameInput.value = '';fileTextInput.value=''">
+  
+  <!-- <nz-modal [(nzVisible)]="editModelVisible">
+      <textarea nz-input placeholder="Autosize height with minimum and maximum number of lines" [(ngModel)]="file_text" [nzAutosize]="{ minRows: 3 }"></textarea>
+  </nz-modal> -->
+    
+  
+
+
+  <nz-modal [(nzVisible)]="createFileModelVisible" [nzTitle]="'新建文件'" [nzClosable]="true" [nzWidth]="420" [nzOkText]="'新建'"
+    [nzCancelText]="'取消'" [nzMaskClosable]="true" (nzOnCancel)="closeCreateFileModel()" (nzOnOk)="createFile(fileNameInput.value,fileTextInput.value); fileNameInput.value = '';fileTextInput.value=''">
+    <form nz-form>
+      <nz-form-item>
+        <nz-form-control>
+          <input nz-input #fileNameInput placeholder="文件名">
+          <input nz-input #fileTextInput placeholder="文件内容">
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </nz-modal>
+
+
+  <nz-modal [(nzVisible)]="createFolderModelVisible" [nzTitle]="'新建文件夹'" [nzClosable]="true" [nzWidth]="420" [nzOkText]="'新建'"
+    [nzCancelText]="'取消'" [nzMaskClosable]="true" (nzOnCancel)="closeCreateFolderModel()" (nzOnOk)="createFolder(folderNameInput.value); folderNameInput.value = ''">
+    <form nz-form>
+      <nz-form-item>
+        <nz-form-control>
+          <input nz-input #folderNameInput placeholder="文件夹名">
+
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </nz-modal>
+
+  <nz-modal [(nzVisible)]="renameModelVisible" [nzTitle]="'重命名'" [nzClosable]="true" [nzWidth]="420" [nzOkText]="'确定'"
+  [nzCancelText]="'取消'" [nzMaskClosable]="true" (nzOnCancel)="closeRenameModel()" (nzOnOk)="rename(renameInput.value); renameInput.value = ''">
   <form nz-form>
     <nz-form-item>
       <nz-form-control>
-        <input nz-input
-               #fileNameInput
-               placeholder="文件名"
-               >
-        <input nz-input
-               #fileTextInput
-               placeholder="文件内容"
-               >      
+        <input nz-input #renameInput placeholder="名称">
+
       </nz-form-control>
     </nz-form-item>
   </form>
 </nz-modal>
-<nz-modal [(nzVisible)]="createFolderModelVisible"
-          [nzTitle]="'新建文件夹'"
-          [nzClosable]="true"
-          [nzWidth]="420"
-          [nzOkText]="'新建'"
-          [nzCancelText]="'取消'"
-          [nzMaskClosable]="true"
-          (nzOnCancel)="closeCreateFolderModel()"
-          (nzOnOk)="createFolder(folderNameInput.value); folderNameInput.value = ''">
-  <form nz-form>
-    <nz-form-item>
-      <nz-form-control>
-        <input nz-input
-               #folderNameInput
-               placeholder="文件夹名"
-               >
-        
-      </nz-form-control>
-    </nz-form-item>
-  </form>
-</nz-modal>
+
+
 </nz-content>
