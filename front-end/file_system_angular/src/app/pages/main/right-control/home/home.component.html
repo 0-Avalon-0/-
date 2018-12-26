@@ -12,16 +12,16 @@
     <nz-step nzTitle="file" nzDescription="文档管理" nzIcon="file"></nz-step>
   </nz-steps>
   <div class="steps-content">
-  <div class="home" *ngIf="current==1">
-    213
+  <div class="home" *ngIf="current==0">
+    主页面显示，包括网页主页，项目管理，用户信息，文件管理，可通过点击左侧导航键进行相关操作：
   </div>
-  <div class="project" *ngIf="current==2">
+  <div class="project" *ngIf="current==1">
     123
     </div>
-  <div class="user" *ngIf="current==3">
+  <div class="user" *ngIf="current==2">
     123
     </div>
-  <div class="file" *ngIf="current==4">
+  <div class="file" *ngIf="current==3">
     445
      </div>
   </div>

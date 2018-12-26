@@ -26,7 +26,7 @@ export class AllprojectComponent implements OnInit {
     private modal: NzModalService,) { 
   }
   navigateTo="/main/home"
-  page="allproject建议"
+  page="通过系统主页面导航栏最下方的新建项目创建新的项目 /n 已有项目可通过左侧导航栏的查看所有项目和我的项目进入项目："
   renameListModalVisible = false;
   private destroy$ = new Subject();
   listitle="查看所有工程"

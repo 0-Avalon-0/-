@@ -24,11 +24,11 @@ export class Files {
         this.file_property = file_property;
     }
 }
-export class allFile {
+export class AllFile {
     path: string;
     pid: number;
-    files: Files[];
-    constructor(path: string, pid: number, files: Files[]) {
+    files: File[];
+    constructor(path: string, pid: number, files:File[]) {
         this.path = path;
         this.pid = pid;
         this.files = files;
@@ -61,12 +61,26 @@ export class GetFileHolder{
     }
 }
 export class ReNameFileHolder{
-    name:string;
+    fname:string;
     path:string;
     pid:number;
     constructor(name:string,path:string,pid:number){
-        this.name=name;
+        this.fname=name;
         this.path=path;
         this.pid=pid;
+    }
+}
+export class CreateHolder{
+    pid: number;
+    path: string;
+    file_fname: string;
+    file_property: number;
+    file_text: string;
+    constructor(pid: number, parent_node: string, file_fname: string, file_property: number, file_text: string) {
+        this.pid = pid;
+        this.path = parent_node;
+        this.file_fname = file_fname;
+        this.file_property = file_property;
+        this.file_text = file_text;
     }
 }

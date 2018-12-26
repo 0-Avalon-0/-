@@ -19,7 +19,7 @@ export class ListService {
   current$ = new Subject<List>();
   lists$ = new Subject<List[]>();
 
-  constructor(
+  constructor(  
     private store: LocalStorageService,
     private httpservice:HttpServiceService
   ) { 
