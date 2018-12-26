@@ -3,8 +3,8 @@
 用户命令处理接口：
 定义status类为返回类型，包含状态码，路由的url和异常说明
 登录：
-请求（GET / account / {name}）
-Get请求报文：
+请求（Post / accounts / {name}）
+Post请求报文：
 {"user_password":"  "}
            响应报文：
 若成功，则返回：
@@ -20,7 +20,7 @@ Get请求报文：
 data里跟错误附加信息
 以上错误报文以下接口均一样，以下不再赘述，只描述成功时data里具体的数据内容与特殊功能下的错误状态码
 注册：
-请求（POST / account）
+请求（POST / accounts）
 Post请求报文：
 	{"user_name":""
 	,"user_password":""
