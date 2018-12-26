@@ -107,6 +107,7 @@ get请求报文：无
 		,project_authority="  "}….]}
 	失败 则返回错误的状态码及错误原因
 		404：项目不存在
+		403：无权限
 	4.3工程配置更改PATCH / projectsettings / {pid} 
 			patch请求报文：若不需要更改某一项更改为空即可
 				{"project_pname"="  "
@@ -123,6 +124,7 @@ get请求报文：无
 		,"content":[{"project_member"="   "	
 		,project_authority="  "}….]}
 	失败则返回错误的状态码及错误原因
+		403：无权限
 		404：项目不存在
 		406：格式不正确
 	4.4查看用户参与的所有工程：GET / projectsettings /user
@@ -154,6 +156,7 @@ data为
     "project_authority":""
 }
 失败则返回错误的状态码及错误原因
+		403：无权限
 		406：格式不正确
 	4.6删除工程
 	DELETE/ projectsettings /{pid}
