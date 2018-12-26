@@ -3,8 +3,8 @@
 用户命令处理接口：
 定义status类为返回类型，包含状态码，路由的url和异常说明
 登录：
-请求（GET / accounts / {name}）
-Get请求报文：
+请求（Post / accounts / {name}）
+Post请求报文：
 {"user_password":"  "}
            响应报文：
 若成功，则返回：
