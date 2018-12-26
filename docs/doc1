@@ -74,7 +74,6 @@ PATCH / datamanagers / {name}
 		,"user_company":""
 		,"user_location":""}
 	失败则返回错误的状态码及错误原因		
-		404：请求修改的用户信息不存在
 		422：更改后用户名重复,
 文档存储数据库访问接口：
 4.工程管理：
