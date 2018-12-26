@@ -195,7 +195,7 @@ GET响应报文：
 	404：数据库中无该项目
 	403：无权限
 	406：格式不正确
-5.2修改文档： PUT / filemanagers / {fname} / project / {pid} / file?path=...
+5.2修改文档： PATCH / filemanagers / {fname} / project / {pid} / file?path=...
 
 PATCH请求报文：
 	{"file_text":" "}
