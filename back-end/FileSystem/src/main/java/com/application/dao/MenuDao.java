@@ -116,6 +116,7 @@ public class MenuDao implements Imenu{
 		return status;
 	}
 
+	
 	@Override
 	public Status renameFile(String filename, String path, int pid, AcceptFileName acceptFileName,HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
@@ -123,7 +124,7 @@ public class MenuDao implements Imenu{
 		
 		StringBuffer filenode = new StringBuffer();
 		filenode.append(path);
-		filenode.append("\\");
+		filenode.append('/');
 		filenode.append(filename);
 		
 		
@@ -134,8 +135,6 @@ public class MenuDao implements Imenu{
 				String projectQuery = "select * from project where pid = ?";
 				List<Project> projectsList = jdbcTemplate.query(projectQuery, new Object[] {pid},new BeanPropertyRowMapper(Project.class));
 				if(projectsList!=null&&projectsList.size()>0) {
-					int projectproperty = projectsList.get(0).getproject_property();
-					
 					boolean isAble = false;//是否有权限
 					
 					//除了查看文档以外都不需要分公私有项目
@@ -156,11 +155,11 @@ public class MenuDao implements Imenu{
 						String getMenu = "select * from menu where pid = ? and file_node = ?";
 						
 						
-						String sql = "update menu set file_fname = ?, file_parentnode = ?,file_property=?,file_text = ? where pid = ? and file_node = ?";
+						String sql = "update menu set file_fname = ?, file_node = ?, file_parentnode = ?,file_property=?,file_text = ? where pid = ? and file_node = ?";
 						List<Menu> menus = jdbcTemplate.query(getMenu, new Object[] {pid,filenode.toString()},new BeanPropertyRowMapper(Menu.class));
 						if(menus!=null && menus.size()>0) {
 							Menu currentMenu = menus.get(0);
-							int result = jdbcTemplate.update(sql,acceptFileName.getfile_fname(),currentMenu.getfile_parentnode(),currentMenu.getfile_property(),currentMenu.getfile_text(),pid,filenode.toString());
+							int result = jdbcTemplate.update(sql,acceptFileName.getfile_fname(),filenode.toString(),currentMenu.getfile_parentnode(),currentMenu.getfile_property(),currentMenu.getfile_text(),pid,filenode.toString());
 							if(result>=0) {
 								status.setCode(201);
 								httpServletResponse.setStatus(201);
@@ -214,5 +213,4 @@ public class MenuDao implements Imenu{
 		
 		return status;
 	}
-
 }
