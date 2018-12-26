@@ -12,7 +12,7 @@ import { HttpServiceService } from 'src/app/services/http-service.service';
 export class PersonComponent implements OnInit {
 
   constructor(private store:LocalStorageService,private httpservice:HttpServiceService,) { }
-  page="查看个人信息，包括用户名，用户简介，性别，地址，邮箱等基本信息显示\n 点击右上角设置，可更改用户个人信息"
+  page="可通过设置键更改个人信息"
   listitle="个人信息"
   navigateTo="/setting"
   user:Person=

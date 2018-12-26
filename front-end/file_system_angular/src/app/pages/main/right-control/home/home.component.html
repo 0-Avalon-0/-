@@ -8,18 +8,31 @@
   <nz-steps [nzCurrent]="current">
     <nz-step nzTitle="home" nzDescription="查看您的工程与信息" nzIcon="home"></nz-step>
     <nz-step nzTitle="project" nzDescription="工程管理" nzIcon="setting"></nz-step>
-    <nz-step nzTitle="user" nzDescription="文档管理" nzIcon="user"></nz-step>
+    <nz-step nzTitle="user" nzDescription="个人管理" nzIcon="user"></nz-step>
     <nz-step nzTitle="file" nzDescription="文档管理" nzIcon="file"></nz-step>
   </nz-steps>
   <div class="steps-content">
   <div class="home" *ngIf="current==0">
-    主页面显示，包括网页主页，项目管理，用户信息，文件管理，可通过点击左侧导航键进行相关操作：
+    <p>主页面显示，包括网页主页，项目管理，用户信息，文件管理，可通过点击左侧导航键进行相关操作：</p>
+    <img style="height:470px;width:900px" src='../../../../../assets/home.png'>
   </div>
-  <div class="project" *ngIf="current==1">
-    123
-    </div>
-  <div class="user" *ngIf="current==2">
-    123
+  <div class="user" *ngIf="current==1">
+      <p>可通过系统主页面导航栏最下方的新建项目创建新的项目，可自主选择项目属性（公有、私有）：</p>
+    <p>主页面显示，包括网页主页，项目管理，用户信息，文件管理，可通过点击左侧导航键进行相关操作：</p>
+    <img style="height: 200px;width:450px" src='../../../../../assets/home.png'>
+    <p>可通过上图中具体项目的设置按钮更改项目的属性和权限：</p>
+    <img style="height: 200px;width:450px" src='../../../../../assets/projectsetting.png'>
+    <p>为项目成员添加相应属性:</p>
+    <img style="height: 200px;width:450px" src='../../../../../assets/setproperty.png'>
+  </div>
+  <div class="project" *ngIf="current==2">
+    <p>查看个人信息，包括用户名，用户简介，性别，地址，邮箱等基本信息显示；</p>
+    <img style="height: 200px;width:450px" src='../../../../../assets/person.png'>
+    <br/>
+    在个人信息页面点击右上角设置，可更改用户个人信息 
+    包括验证邮箱的更改，密码更改，地址等信息更改：
+    <br>
+    <img style="height: 200px;width:450px" src='../../../../../assets/setting.png'>
     </div>
   <div class="file" *ngIf="current==3">
     445

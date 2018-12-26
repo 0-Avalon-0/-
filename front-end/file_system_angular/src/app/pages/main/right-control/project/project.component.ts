@@ -30,7 +30,7 @@ export class ProjectComponent implements OnInit {
     private router: Router,
     private location:Location
   ) { }
-  page = "project建议";
+  page = "可对项目文件进行进一步编辑，注意：您对部分文件的操作可能受到限制";
   listitle = "工程"
   pid: string;
   _pid: number;

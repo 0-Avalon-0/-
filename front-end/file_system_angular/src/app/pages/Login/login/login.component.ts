@@ -23,6 +23,10 @@ export class LoginComponent implements OnInit {
   onLogin(): void {
     if (this.thislog.user_password=="")
     {
+      this.message.error("密码不能为空")
+    }
+    else if (this.name=="")
+    {
       this.message.error("用户名不能为空")
     }
     else{

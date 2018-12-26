@@ -8,13 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   constructor() { }
-  page="主页面显示，包括网页主页，项目管理，用户信息，文件管理，可通过点击左侧导航键进行相关操作";
+  page="您可以左侧导航栏切换选项";
   listitle="Get Started!"
   navigateTo="/setting"
   ngOnInit() {
   }
   current = 0;
-
   index = 'First-content';
 
   pre(): void {
