@@ -41,11 +41,12 @@ export class ProjectComponent implements OnInit {
   createFileModelVisible = false;
   createFolderModelVisible = false;
   renameModelVisible = false;
+  editModelVisible = false;
   private destroy$ = new Subject();
   private slashIndex;
   private oldName;
-  private file_text;
-  
+  private file_text='';
+
 
   
   createFileHolder: CreateFileHolder = {
@@ -60,8 +61,11 @@ export class ProjectComponent implements OnInit {
   clickSelectedFile(i: number): void {
     this.fileService.setCurrentIndex(i);
     this.selectedFile = this.files[i];
+    if(this.editModelVisible==true){
+      this.editModelVisible=false;
+    }
     if (this.selectedFile.file_property == 0) {
-      this.router.navigate(['file']);
+      this.editFile(i);
     }
     else if (this.selectedFile.file_property == 1) {
       this.parent_node += '%2F';
@@ -72,6 +76,9 @@ export class ProjectComponent implements OnInit {
   }
 
   back():void{
+    if(this.editModelVisible==true){
+      this.editModelVisible=false;
+    }
     this.slashIndex = this.parent_node.lastIndexOf('%');
     if(this.slashIndex!=-1){
       this.parent_node=this.parent_node.substring(0,this.slashIndex);
@@ -132,6 +139,16 @@ export class ProjectComponent implements OnInit {
   delete(i:number):void{
     this.fileService.deleteFile(i);
   }
+ 
+  editFile(i:number):void{
+ this.fileService.getFile(i);
+ this.file_text=this.files[i].file_text;
+this.editModelVisible=true;  
+}
+  saveFile():void{
+this.fileService.changeFile(this.fileService.getCurrentIndex(),this.file_text);
+this.editModelVisible=false;  
+}
 
 
 
