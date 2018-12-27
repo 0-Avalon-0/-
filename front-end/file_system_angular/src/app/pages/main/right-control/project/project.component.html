@@ -7,7 +7,6 @@
   <div class="content">
     <button class="newFile" nz-button nzType="default" (click)="openCreateFolderModel()"><i nz-icon type="folder"></i>新建文件夹</button>
     <button class="newFolder" nz-button nzType="default" (click)="openCreateFileModel()"><i nz-icon type="file"></i>新建文件</button>
-
     <div class="fileContent">
       <div style="font-size:25px;" [hidden]="parent_node=='root'" (click)="back()">...</div>
       <div *ngFor="let file of files; let i=index" >
@@ -30,9 +29,6 @@
       </div>
     </div>
   </div>
-
-
-  
    <div  *ngIf="editModelVisible">
       <textarea class="edit" nz-input placeholder="文件内容" [(ngModel)]="file_text" [nzAutosize]="{ minRows: 3 }"></textarea>
   <div>

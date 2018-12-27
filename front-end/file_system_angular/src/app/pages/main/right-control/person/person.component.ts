@@ -12,7 +12,7 @@ import { HttpServiceService } from 'src/app/services/http-service.service';
 export class PersonComponent implements OnInit {
 
   constructor(private store:LocalStorageService,private httpservice:HttpServiceService,) { }
-  page="person建议"
+  page="可通过设置键更改个人信息"
   listitle="个人信息"
   navigateTo="/setting"
   user:Person=

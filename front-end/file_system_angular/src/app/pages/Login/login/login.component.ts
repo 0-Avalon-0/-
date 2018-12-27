@@ -4,6 +4,7 @@ import { login, message } from 'src/domain/person';
 import { HttpServiceService } from 'src/app/services/http-service.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { USERNAME } from '../../../services/local-storage/local-storage.namespace';
+import { NzMessageService } from 'ng-zorro-antd';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,7 +12,8 @@ import { USERNAME } from '../../../services/local-storage/local-storage.namespac
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private _router: Router,private httpservice:HttpServiceService,private store: LocalStorageService,) { }
+  constructor(private _router: Router,private httpservice:HttpServiceService,private store: LocalStorageService,
+    private message: NzMessageService,) { }
   thislog: login = {
     user_password:"",
   }
@@ -19,7 +21,17 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
   onLogin(): void {
-    this.httpservice.login(this.thislog,this.name).subscribe(message=>this.successLog(message));
+    if (this.thislog.user_password=="")
+    {
+      this.message.error("密码不能为空")
+    }
+    else if (this.name=="")
+    {
+      this.message.error("用户名不能为空")
+    }
+    else{
+      this.httpservice.login(this.thislog,this.name).subscribe(message=>this.successLog(message));
+    }
   }
   successLog(mes :message)
   {

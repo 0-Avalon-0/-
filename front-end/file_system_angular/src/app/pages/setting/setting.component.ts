@@ -17,6 +17,7 @@ import { ListService } from 'src/app/services/list/list.service';
 })
 export class SettingComponent implements OnInit {
   avatar = this.store.get(AVATAR_CODE);
+  switchValue:string;
   user:Person=
   {
     user_name:this.store.get(USERNAME),
@@ -102,7 +103,22 @@ export class SettingComponent implements OnInit {
     }
   }
   click_button():void{
+    var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+    if(!myreg.test(this.user.user_email))
+    {
+      this.message.error("邮箱格式不正确")
+    }
+    else if (this.user.user_password=="")
+    {
+      this.message.error("密码不能为空")
+    }
+    else if (this.user.user_name=="")
+    {
+      this.message.error("用户名不能为空")
+    }
+    else{
     this.httpservice.setPersonMessage(this.user,this.user.user_name).subscribe(message=>this.successset(message));
+    }
   }
   successset(mes:message):void{
     this.user=<Person>JSON.parse(mes.data)

@@ -26,7 +26,7 @@ export class AllprojectComponent implements OnInit {
     private modal: NzModalService,) { 
   }
   navigateTo="/main/home"
-  page="allproject建议"
+  page="可通过各项目下方的设置、编辑、删除按钮对项目内容及项目成员权限 \n 注意：若您非项目所有者，对项目的部分操作会受到限制。"
   renameListModalVisible = false;
   private destroy$ = new Subject();
   listitle="查看所有工程"

@@ -30,7 +30,7 @@ export class ProjectComponent implements OnInit {
     private router: Router,
     private location:Location
   ) { }
-  page = "project建议";
+  page = "可对项目文件进行进一步编辑，注意：您对部分文件的操作可能受到限制";
   listitle = "工程"
   pid: string;
   _pid: number;
@@ -46,7 +46,7 @@ export class ProjectComponent implements OnInit {
   private slashIndex;
   private oldName;
   private file_text='';
-
+  navigateTo="";
 
   
   createFileHolder: CreateFileHolder = {
@@ -165,10 +165,13 @@ this.editModelVisible=false;
 
 
   ngOnInit() {
-    this.activatedRoute.params.forEach((params: Params) => {
+    
+    this.activatedRoute.params.forEach((params: Params) => { 
       this.parent_node='root';
       this.pid = this.activatedRoute.snapshot.params['pid'];
-      this._pid = parseInt(this.pid);
+      this.navigateTo='projectconfigure/'+this.pid
+      this._pid=parseInt(this.pid);
+      this.fileService.getMenus(this.parent_node,this._pid);
       this.fileService.setPid(this._pid);
       this.fileService.setParentNode(this.parent_node);
       this.fileService.getMenus(this.parent_node, this._pid);

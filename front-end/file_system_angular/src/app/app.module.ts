@@ -21,7 +21,7 @@ import { RegistComponent } from './pages/Login/regist/regist.component';
 import { RouterModule } from '@angular/router'
 import { ApiService } from './services/api.service';
 import { LoginComponent } from './pages/Login/login/login.component';
-import { ProjectSettingComponent } from './pages/setting/project-setting.component';
+import { SettingModule } from './pages/setting/setting.module';
 registerLocaleData(zh);
 
 @NgModule({
@@ -29,7 +29,6 @@ registerLocaleData(zh);
     AppComponent,
     RegistComponent,
     LoginComponent,
-    ProjectSettingComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +38,8 @@ registerLocaleData(zh);
     NgZorroAntdModule,
     AppRoutingModule,
     MainModule,
-    RouterModule
+    RouterModule,
+    SettingModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'zh-Hans' },

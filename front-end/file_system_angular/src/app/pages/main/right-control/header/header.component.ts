@@ -61,7 +61,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
   goto():void{
-    alert(123)
+    if(this.routerNavigate=="/main/home")
+    {
+      this.listService.setCurrentUuid("home")
+    }
+    else if(this.routerNavigate=="/main/home")
+    {
+      this.listService.setCurrentUuid("home")
+    }
     this._router.navigate([this.routerNavigate]);
   }
 }

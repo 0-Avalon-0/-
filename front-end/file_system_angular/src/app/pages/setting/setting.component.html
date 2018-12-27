@@ -8,23 +8,23 @@
     <div class="body">
       <img class="avatar" src="./assets/img/default-avatar.png">
       <nz-divider nzType="horizontal" nzText="用户信息"></nz-divider>
-      <nz-input-group  [nzPrefix]="user">
-      <input nz-input  [(ngModel)]="user.user_name" #usernameInput  (ngModelChange)="change()" [nzSize]="'large'" placeholder="用户名" (blur)="validateUsername(usernameInput.value)">
+      <nz-input-group  [nzPrefix]="users">
+      <input nz-input  [(ngModel)]="user.user_name" #usernameInput  (ngModelChange)="change()" [nzSize]="'large'" placeholder="用户名" >
       </nz-input-group>
       <nz-input-group  [nzPrefix]="email">
-      <input nz-input [(ngModel)]="user.user_email" #userHomeInput  (ngModelChange)="change()"  [nzSize]="'large'" placeholder="地址" (blur)="validatePassword(userpasswordInput.value)">
+      <input nz-input [(ngModel)]="user.user_email" #userHomeInput  (ngModelChange)="change()"  [nzSize]="'large'" placeholder="地址" >
     </nz-input-group>
       <nz-input-group  [nzPrefix]="company">
-      <input nz-input [(ngModel)]="user.user_company" #userCompanyInput  (ngModelChange)="change()"  [nzSize]="'large'" placeholder="公司" (blur)="validateUsername(userpasswordInput.value)">
+      <input nz-input [(ngModel)]="user.user_company" #userCompanyInput  (ngModelChange)="change()"  [nzSize]="'large'" placeholder="公司" >
     </nz-input-group>
       <nz-input-group  [nzPrefix]="tags">
-      <input nz-input [(ngModel)]="user.user_signature" #userDescribeInput  (ngModelChange)="change()"  [nzSize]="'large'" placeholder="描述" (blur)="validateUsername(userpasswordInput.value)">
+      <input nz-input [(ngModel)]="user.user_signature" #userDescribeInput  (ngModelChange)="change()"  [nzSize]="'large'" placeholder="描述" >
     </nz-input-group>
       <nz-input-group  [nzPrefix]="location">
-      <input nz-input [(ngModel)]="user.user_location" #userHomeInput (ngModelChange)="change()"  [nzSize]="'large'" placeholder="地址" (blur)="validateUsername(userpasswordInput.value)">
+      <input nz-input [(ngModel)]="user.user_location" #userHomeInput (ngModelChange)="change()"  [nzSize]="'large'" placeholder="地址" >
     </nz-input-group>
       <nz-input-group  [nzPrefix]="password">
-      <input nz-input [(ngModel)]="user.user_password"#userpasswordInput (ngModelChange)="change()"   [nzSize]="'large'" type="password" placeholder="密码" (blur)="validateUsername(userpasswordInput.value)">
+      <input nz-input [(ngModel)]="user.user_password"#userpasswordInput (ngModelChange)="change()"   [nzSize]="'large'" type="password" placeholder="密码" >
     </nz-input-group>
     </div>
         <nz-radio-group [(ngModel)]="user.user_gender" nzName="test">
@@ -36,7 +36,7 @@
       <button (click)="click_button()" nz-button  nzType="primary" nzBlock>提交</button>
   </div>
 </div>
-<ng-template #user><i nz-icon type="user" theme="outline"></i></ng-template>
+<ng-template #users><i nz-icon type="user" theme="outline"></i></ng-template>
 <ng-template #location><i nz-icon type="environment" theme="outline"></i></ng-template>
 <ng-template #email ><i nz-icon type="mail" theme="outline"></i></ng-template>
 <ng-template #company ><i nz-icon type="printer" theme="outline"></i></ng-template>
