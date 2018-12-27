@@ -44,6 +44,7 @@ export class ProjectComponent implements OnInit {
   createFolderModelVisible = false;
   renameModelVisible = false;
   editModelVisible = false;
+  deleteModelVisible = false;
   private destroy$ = new Subject();
   private slashIndex;
   private oldName;
@@ -145,10 +146,20 @@ export class ProjectComponent implements OnInit {
     this.closeRenameModel();
   }
 
-  delete(i: number): void {
+  openDeleteModel(i:number):void{
     this.fileService.setCurrentIndex(i);
-    this.fileService.deleteFile(i);
+    this.deleteModelVisible = true;
+  }
+  closeDeleteModel():void{
+    this.deleteModelVisible = false;
     this.fileService.getMenus(this.parent_node, this._pid);
+  }
+
+  delete(): void {
+    const deleteI = this.fileService.getCurrentIndex();
+    this.fileService.deleteFile(deleteI);
+    this.fileService.getMenus(this.parent_node, this._pid);
+    this.closeDeleteModel();
   }
 
   editFile(i: number): void {
