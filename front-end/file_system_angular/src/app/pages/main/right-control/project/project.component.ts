@@ -112,41 +112,51 @@ export class ProjectComponent implements OnInit {
   }
   closeRenameModel():void{
     this.renameModelVisible = false;
+    this.fileService.getMenus(this.parent_node, this._pid);
   }
 
   closeCreateFileModel():void{
     this.createFileModelVisible = false;
+    this.fileService.getMenus(this.parent_node, this._pid);
   }
   closeCreateFolderModel():void{
     this.createFolderModelVisible = false;
+    this.fileService.getMenus(this.parent_node, this._pid);
   }
 
   createFile(name:string,text:string):void{
     this.createFileHolder.file_text=text;
     this.fileService.createFile(this.createFileHolder,name,this._pid,this.parent_node);
+    this.fileService.getMenus(this.parent_node, this._pid);
     this.closeCreateFileModel();
   }
   createFolder(name:string):void{
     this.fileService.createFile(this.createFolderHolder,name,this._pid,this.parent_node);
+    this.fileService.getMenus(this.parent_node, this._pid);
     this.closeCreateFolderModel();
   }
 
   rename(name:string):void{
     this.fileService.renameFile(this.fileService.getCurrentIndex(),name,this.oldName);
+    this.fileService.getMenus(this.parent_node, this._pid);
     this.closeRenameModel();
   }
 
   delete(i:number):void{
+    this.fileService.setCurrentIndex(i);
     this.fileService.deleteFile(i);
+    this.fileService.getMenus(this.parent_node, this._pid);
   }
  
   editFile(i:number):void{
+    this.fileService.setCurrentIndex(i);
  this.fileService.getFile(i);
  this.file_text=this.files[i].file_text;
 this.editModelVisible=true;  
 }
   saveFile():void{
 this.fileService.changeFile(this.fileService.getCurrentIndex(),this.file_text);
+this.fileService.getMenus(this.parent_node, this._pid);
 this.editModelVisible=false;  
 }
 
