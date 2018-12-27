@@ -30,7 +30,7 @@
     </div>
   </div>
    <div  *ngIf="editModelVisible">
-      <textarea class="edit" nz-input placeholder="文件内容" [(ngModel)]="file_text" [nzAutosize]="{ minRows: 3 }"></textarea>
+      <textarea class="edit" nz-input placeholder="文件内容" [(ngModel)]="this.files[this.e].file_text" [nzAutosize]="{ minRows: 3 }"></textarea>
   <div>
     <button style="margin-left:150px;margin-top:60px;" (click)="saveFile()" nz-button nzType="primary">确定</button>
   </div>

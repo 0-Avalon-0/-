@@ -73,9 +73,10 @@ export class FileService {
     this.httpService.changeFile(this.files[i].file_fname, this.files[i].pid, this.files[i].parent_node, changeFileHolder).subscribe(message => this.successChangeFile(message));
   }
   successChangeFile(mes: message) {
-    this.currentFile = <GetFileHolder>JSON.parse(mes.data);
-    this.files[this.currentIndex].file_text = this.currentFile.file_text;
-    alert("保存成功！");
+    // this.currentFile = <GetFileHolder>JSON.parse(mes.data);
+    // this.files[this.currentIndex].file_text = this.currentFile.file_text;
+    // alert("保存成功！");
+    this.getMenus(this.parent_node,this.pid);
     this.broadCast();
   }
 
@@ -85,13 +86,16 @@ export class FileService {
     this.httpService.createFile(createFileHolder, file_fname, pid, parent_node).subscribe(message => this.successCreateFile(message));
   }
   successCreateFile(mes: message): void {
-    this.currentFile = <CreateHolder>JSON.parse(mes.data);
-    this.files[this.total].pid = this.currentFile.pid;
-    this.files[this.total].parent_node=this.currentFile.path;
-    this.files[this.total].file_fname=this.currentFile.file_fname;
-    this.files[this.total].file_property=this.currentFile.file_property;
-    this.files[this.total].file_text=this.currentFile.file_text;
-    this.total++;
+    this.getMenus(this.parent_node,this.pid);
+    // this.files.length++;
+    // this.currentFile = <CreateHolder>JSON.parse(mes.data);
+    // this.files[this.total].pid = this.currentFile.pid;
+    // this.files[this.total].parent_node=this.currentFile.path;
+    // this.files[this.total].file_fname=this.currentFile.file_fname;
+    // this.files[this.total].file_property=this.currentFile.file_property;
+    // this.files[this.total].file_text=this.currentFile.file_text;
+    // this.total++;
+    // alert(this.files.length);
     this.broadCast();
   }
 
@@ -100,13 +104,16 @@ export class FileService {
     this.httpService.deleteFile(this.files[i].file_fname, this.files[i].pid, this.files[i].parent_node).subscribe(message => this.successDeleteFile(i));
   }
   successDeleteFile(i: number) {//i是数组下标,被删除文件直接被覆盖
-    if (i == this.total - 1) {
-      this.total--;
-    }
-    for (var j = i; j < this.total - 1; ++j) {
-      this.files[j + 1] = this.files[j];
-    }
-    this.total--;
+    this.getMenus(this.parent_node,this.pid);
+    // alert('delete: this.total:  '+this.total);
+    // if (i == this.total - 1) {
+    //   this.total--;
+    // }
+    // for (var j = i; j < this.total - 1; ++j) {
+    //   this.files[j] = this.files[j+1];
+    // }
+    // this.total--;
+    // this.files.length--;
     this.broadCast();
   }
 
@@ -132,8 +139,9 @@ export class FileService {
     this.httpService.renameFile(renameFileHolder, oldFileName, this.files[i].pid, this.files[i].parent_node).subscribe(message => this.successRenameFile(message));
   }
   successRenameFile(mes: message) {
-    this.currentFile = <ReNameFileHolder>JSON.parse(mes.data);
-    this.files[this.currentIndex].file_fname = this.currentFile.fname;
+    this.getMenus(this.parent_node,this.pid);
+    // this.currentFile = <ReNameFileHolder>JSON.parse(mes.data);
+    // this.files[this.currentIndex].file_fname = this.currentFile.fname;
     this.broadCast();
   }
 
