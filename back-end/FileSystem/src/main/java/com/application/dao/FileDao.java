@@ -300,6 +300,7 @@ public class FileDao implements IFile{
 	public Status deleteFile(int pid, String filename, String path,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
 		Status status = new Status();
 		String sql = "delete from menu where pid = ? and file_node like ?";
+		String delsql = "delete from menu where pid = ? and file_node = ?";
 		StringBuffer filenode = new StringBuffer();
 		filenode.append(path);
 		filenode.append('/');
@@ -333,12 +334,16 @@ public class FileDao implements IFile{
 					
 					if(isAble) {
 						//删除所有路径包含父路径的文件，排除文件夹套文件夹删不干净的错误
+						//避免文件名字互相包含的错误，如123123和123
+						//所以删两遍
 						StringBuffer likedelete = new StringBuffer();
 						likedelete.append('%');
 						likedelete.append(filenode.toString());
+						likedelete.append('/');
 						likedelete.append('%');
 						int result = jdbcTemplate.update(sql,pid,likedelete.toString());
-						if(result>0) {
+						int result2 = jdbcTemplate.update(delsql,pid,filenode.toString());
+						if(result>0||result2>0) {
 							status.setCode(204);
 							httpServletResponse.setStatus(204);
 							AcceptText acceptText = new AcceptText();
@@ -382,7 +387,9 @@ public class FileDao implements IFile{
 		}
 		
 		return status;
-	}				
+	}
+					
+	
 						
 	
 
